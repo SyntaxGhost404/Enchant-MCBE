@@ -23,7 +23,7 @@
 * @link [https://discord.com/invite/NKy9A9RAe8]
 */
 {
-    "format_version": "1.20.30",
+    "format_version": "1.26.50",
     "minecraft:item": {
         "description": {
             "identifier": "da:enchant_essence",
@@ -32,10 +32,9 @@
         "components": {
             "minecraft:max_stack_size": 64,
 			"minecraft:hand_equipped": false,
-			"minecraft:icon": {"texture": "enchant_essence"},
+			"minecraft:icon": {"textures": {"default": "enchant_essence"}},
             "minecraft:glint": false,
             "minecraft:can_destroy_in_creative": false
-        },
-        "events": {}
+        }
     }
 }

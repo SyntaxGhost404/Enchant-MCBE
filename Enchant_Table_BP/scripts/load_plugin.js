@@ -19,7 +19,7 @@
 
 /**
 * @made_by Death_Aruban
-* @version [1.0.5]
+* @version [1.1.0]
 * @link [https://discord.com/invite/NKy9A9RAe8]
 */
 
@@ -44,7 +44,7 @@ const plugin_list = {
     1: {
         name: "Enchant Plus +",
         description: "A very special enchantment table that allows you to enchant your items, disenchant them, and even transfer the enchantments.",
-        version: "1.0.5"
+        version: "1.1.0"
     }
 };
 

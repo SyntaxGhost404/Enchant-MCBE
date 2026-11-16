@@ -23,7 +23,7 @@
 * @link [https://discord.com/invite/NKy9A9RAe8]
 */  
 {
-    "format_version": "1.20.20",
+    "format_version": "1.26.60",
     "minecraft:block": {
         "description": {
             "identifier": "da:enchant_table_plus",
@@ -36,8 +36,10 @@
             "minecraft:material_instances": {"*": {"texture": "enchant_table_plus","render_method": "alpha_test"}},
             "minecraft:destructible_by_mining": {"seconds_to_destroy": 1},
 			"minecraft:destructible_by_explosion": {"explosion_resistance": 30},
-            "minecraft:collision_box": {"origin": [-7, 0, -7],"size": [14, 12, 14]},
-            "minecraft:selection_box": {"origin": [-7, 0, -7],"size": [14, 12, 14]}
+            "minecraft:collision_box": [{"origin": [-7, 0, -7],"size": [14, 12, 14]}],
+            "minecraft:selection_box": {"origin": [-7, 0, -7],"size": [14, 12, 14]},
+            "minecraft:movable": {"movement_type": "immovable"},
+            "da:enchant_table": {}
         },
 		"permutations": [
 			{"condition": "q.block_state('minecraft:cardinal_direction') == 'north' ","components": {"minecraft:transformation": {"rotation": [0, 180, 0]}}},

@@ -19,7 +19,7 @@
 
 /**
 * @made_by Death_Aruban
-* @version [1.0.5]
+* @version [1.1.0]
 * @link [https://discord.com/invite/NKy9A9RAe8]
 */
 

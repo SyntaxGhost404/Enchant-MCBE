@@ -2,7 +2,7 @@
      <a href="https://github.com/DeathAruban/Enchant-MCBE">
 		<img src="https://github.com/DeathAruban/Enchant-MCBE/blob/main/img/enchant+.png" loading="eager" />
 	</a><br>
-    <b>Addon Enchant + for Minecraft: Bedrock Edition written in Json and javascript MC (API 1.21.50 )</b>
+    <b>Addon Enchant + for Minecraft: Bedrock Edition written in Json and javascript MC (Bedrock 26.60+ · Script API @minecraft/server 2.11.0 · @minecraft/server-ui 2.3.0)</b>
 <p align="center">
 	<a href="https://github.com/DeathAruban/Enchant-MCBE/releases/latest"><img alt="GitHub release (latest SemVer)" src="https://img.shields.io/github/v/release/DeathAruban/Enchant-MCBE?label=release&sort=semver"></a>
 	<a href="https://github.com/DeathAruban/Enchant-MCBE/releases/latest"><img alt="GitHub release (latest by SemVer)" src="https://img.shields.io/github/downloads/DeathAruban/Enchant-MCBE/latest/total?sort=semver"></a>
@@ -23,6 +23,19 @@ This behavior adds a new enchantment table to your world, allowing for maximum c
 - if you find errors or your language is missing, send me a message, if you provide me with a correct translation I will add credits for support 🤝
 
 # Check if the version or where you are using the addon is compatible
+
+### Enchant+ 1.1.0 (this version)
+
+Requires **Minecraft: Bedrock Edition 26.60 or newer** (packs use `min_engine_version` 1.26.60 and the scripts use `@minecraft/server` 2.11.0 / `@minecraft/server-ui` 2.3.0, which are only available from 26.60). Built and checked for the latest stable releases **26.60, 26.62 and 26.63**.
+
+| Supported | World | Realms |Server Dedicated | Custom servers | Windows | Mobile | PS4/PS5 | Xbox | Nintendo Switch |
+| ------- | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
+| 26.60 – 26.63   |:white_check_mark: | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| 1.21.130 and older   | :x:  | :x: | :x: | :x: | :x: | :x: | :x: | :x: | :x: |
+
+> The 1.1.0 update was validated against Mojang's official 26.60 resources (vanilla UI files, JSON schemas and Script API type definitions), but it has not yet been play-tested on every platform listed above. Please report any issue you find in-game.
+
+### Enchant+ 1.0.5 (previous release, for older game versions)
 
 | Supported | World | Realms |Server Dedicated | Custom servers | Windows | Mobile | PS4/PS5 | Xbox | Nintendo Switch |
 | ------- | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
@@ -57,12 +70,36 @@ Once you have added the enchantments you desire, confirm with the button below w
 Instead, if you want to change the price to enchant your items, just go to:
 
 ```json5
-scripts/config.js
+Enchant_Table_BP/scripts/enchant_table/config.js
 ```
-Open the config file and change the value on xp which is 5 by default.
+Open the config file and change the values. Each payment method can be turned on or off with `state`:
 ```json5
- xp:5
+ items:{ state:true, id:'da:enchant_essence', amount:3 },   // items taken per operation
+ scores:{ state:false, score_name:'money', score_remove:10, refund:0.6 },   // scoreboard cost per enchantment level
+ xp:{ state:true, xp_remove:3, refund:0.5 }   // XP levels per enchantment level
 ```
+
+# What's new in 1.1.0 (update for Minecraft: Bedrock Edition 26.60+)
+- Updated for the latest stable Minecraft: Bedrock Edition (26.60 / 26.62 / 26.63): manifests now target engine version 1.26.60 and the latest stable Script API (`@minecraft/server` 2.11.0, `@minecraft/server-ui` 2.3.0).
+- Scripts migrated to the Script API 2.x: `runCommandAsync()` (removed by Mojang) was replaced and the menu sliders use the new `slider()` options.
+- The table is now a block with a custom component (`da:enchant_table`, Minecraft 1.21.90+): the game treats it like a vanilla crafting table, so using it opens the menu and a held block is only placed on it while sneaking. Its floating sphere is added and removed together with the block, however the block is placed or destroyed.
+- Custom menus updated for the current server form UI: the button list binding follows vanilla (`#form_button_contents`, used since 1.21.70) and the fallback form layout matches vanilla 26.60.
+- Block, item and entity files moved to the current format versions (block 1.26.60, item 1.26.50, entity 1.26.60), validated against Mojang's official schemas.
+- Menu icons added for the new enchantable items: copper tools and armor, and all spears.
+- The scripts are now readable source code (with type annotations for editors); the existing gameplay, menus, prices and messages are unchanged.
+
+### Bug fixes
+- Enchantments that the game refuses to combine (for example Infinity and Mending on a bow, Loyalty or Channeling with Riptide, Depth Strider and Frost Walker) are now listed in chat as not compatible, like Breach and Density, instead of a generic error. The add-on also asks the game directly, so pairs added in future versions are caught too. An enchantment that conflicts with one the item already has is no longer offered, and a transfer is checked against the receiving item's enchantments.
+- The table's glow particles never ended: each table created 20 new particle emitters per second that stayed forever. After a few hours this used up the game's memory, which could make the sphere invisible and scramble block textures. The particles now disappear normally.
+- A table destroyed by an explosion (or in any other way) now removes its floating sphere. Spheres left behind by older versions are removed automatically within a few seconds, and pistons can no longer move the table away from its sphere (like the vanilla enchanting table).
+- Using the table while holding a block no longer shows that block on the table for a moment.
+- Fixed the two menu errors in the content log on the transfer screens (`'image'` could not be resolved, unsolvable layout for `panel_name` / `item_text_scroll`). Long player names now wrap inside the Profile panel instead of running past its edge.
+- The protection against double clicks is now per player, so one player opening the menu no longer blocks other players for half a second.
+- Transferring enchantments to a stack of books with a full inventory crashed after taking the XP/items, the enchantments and a book. The transfer is now refused before anything is taken.
+- Transferring an enchantment onto an item that already had it replaced the existing level instead of adding to it (Sharpness I + II became Sharpness II). Levels now add up as shown on the confirmation screen.
+- If the game refuses an enchantment, nothing is charged any more (the result is prepared before the cost is taken).
+- The golden sword now shows its icon in the menus.
+- The crafting recipe of the table now uses the correct `minecraft:enchanting_table` item id.
 
 # How to install
 

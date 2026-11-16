@@ -10,9 +10,9 @@
 	"header": {
 	  "name": "pack.name",
 	  "description": "pack.description",
-	  "min_engine_version": [1,20,60],
+	  "min_engine_version": [1,26,60],
 	  "uuid": "2252a380-edfc-408d-ac4f-118a1128d251",
-	  "version": [1,0,5]
+	  "version": [1,1,0]
 	},
 	"modules": [
 	  {
@@ -29,9 +29,9 @@
 	  }
 	],
 	"dependencies": [
-	  { "uuid": "edeb2cdc-791e-4edb-b279-0a53f4fae3d5", "version": [1,0,5] },
-	  { "module_name": "@minecraft/server", "version": "1.15.0" },
-	  { "module_name": "@minecraft/server-ui", "version": "1.1.0" }
+	  { "uuid": "edeb2cdc-791e-4edb-b279-0a53f4fae3d5", "version": [1,1,0] },
+	  { "module_name": "@minecraft/server", "version": "2.11.0" },
+	  { "module_name": "@minecraft/server-ui", "version": "2.3.0" }
 	]
   }
   

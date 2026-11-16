@@ -12,10 +12,7 @@
 			"minecraft:emitter_rate_instant": {
 				"num_particles": 1
 			},
-			"minecraft:emitter_lifetime_looping": {
-				"active_time": 1,
-				"sleep_time": 0.8
-			},
+			"minecraft:emitter_lifetime_once": {},
 			"minecraft:emitter_shape_sphere": {
 				"radius": 0.3,
 				"direction": "outwards"

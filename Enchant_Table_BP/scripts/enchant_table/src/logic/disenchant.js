@@ -19,17 +19,21 @@
 
 /**
 * @made_by Death_Aruban
-* @version [1.0.5]
+* @version [1.1.0]
 * @link [https://discord.com/invite/NKy9A9RAe8]
+* @upgrade Updated for Minecraft: Bedrock Edition 26.60+ (@minecraft/server 2.11.0, @minecraft/server-ui 2.3.0).
 */
-
 
 import { ActionFormData, ModalFormData } from "@minecraft/server-ui";
 import { EnchantmentTypes, ItemEnchantableComponent, ItemStack } from "@minecraft/server";
-import { see_xp } from "../item_list";
-import { getComponent, translateItemName, getScore, getItemCount, getItemIcon } from "../function";
+import { buildResourceSummary, getComponent, getItemIcon, translateEnchantmentName, translateItemName } from "../function";
 import { config } from "../../config";
 
+/**
+ * @param {import("@minecraft/server").Player} player
+ * @param {import("@minecraft/server").ItemStack} item
+ * @param {number} slot
+ */
 export async function prepareDisenchantments(player, item, slot) {
   const enchantable = getComponent(item, ItemEnchantableComponent.componentId);
   if (!enchantable) {
@@ -44,50 +48,49 @@ export async function prepareDisenchantments(player, item, slot) {
   showDisenchantOptions(player, item, slot, enchantments);
 }
 
+/**
+ * "Item Info" button text used by the disenchant screens.
+ * @param {import("@minecraft/server").ItemStack} item
+ * @param {number} slot
+ * @returns {string}
+ */
+function buildItemInfo(item, slot) {
+  const itemName = item.nameTag ?? translateItemName(item.typeId);
+  const description = item.getLore().join("\n") || "No description";
+  const enchantable = getComponent(item, ItemEnchantableComponent.componentId);
+  const enchantments = enchantable ? enchantable.getEnchantments() : [];
+  const enchantmentsText =
+    enchantments.length > 0
+      ? enchantments
+          .map((enchantment) => "\n- " + translateEnchantmentName(enchantment.type.id) + ": §a" + enchantment.level + "§f")
+          .join("")
+      : "None";
+  return (
+    "Item Info:\n§aName:§f " +
+    itemName +
+    "\n§aDescription:§f " +
+    description +
+    "\n§aSlot:§f " +
+    slot +
+    "\n§dEnchantments:§f " +
+    enchantmentsText
+  );
+}
+
+/**
+ * @param {import("@minecraft/server").Player} player
+ * @param {import("@minecraft/server").ItemStack} item
+ * @param {number} slot
+ * @param {import("@minecraft/server").Enchantment[]} enchantments
+ */
 function showDisenchantOptions(player, item, slot, enchantments) {
   const form = new ActionFormData();
   form.title("arucube.enchant.disenchant");
   form.body(
     "§aALL :§f\nRemoves all enchantments present on the item and \npartially refunds the resources used to enchant the item.\n\n§aSingle :\n§fOpens a menu where you can remove enchantments individually and \nprecisely, adjusting the correct values accordingly.\n\n§cWarning:\n§6Once removed, whether individually or all at once, \nthe enchantments will be permanently deleted.\nSo, think carefully before proceeding.\n\n"
   );
-  let summary = "";
-  if (config.scores.state) {
-    const score = getScore(player, config.scores.score_name);
-    summary += "§b" + config.scores.name + " : §a" + score + "\n";
-  }
-  if (config.items.state) {
-    const itemCount = getItemCount(player.getComponent("minecraft:inventory").container, config.items.id);
-    summary += "§b" + config.items.name + " : §a" + itemCount + "\n";
-  }
-  if (config.xp.state) {
-    const level = see_xp(player);
-    summary += "§b" + config.xp.name + " : §a" + level + "\n";
-  }
-  summary += "§bPlayer : §a" + player.name;
-  form.button("" + summary);
-  const itemName = item.nameTag ?? translateItemName(item.typeId);
-  const description = item.getLore().join("\n") || "No description";
-  const slotNumber = slot;
-  const itemEnchantable = getComponent(item, ItemEnchantableComponent.componentId);
-  const itemEnchantments = itemEnchantable ? itemEnchantable.getEnchantments() : [];
-  let enchantmentsText =
-    itemEnchantments.length > 0
-      ? itemEnchantments
-          .map((enchantment) => "\n- " + translateEnchantmentName(enchantment.type.id) + ": §a" + enchantment.level + "§f")
-          .join("")
-      : "None";
-  const icon = getItemIcon(item);
-  form.button(
-    "Item Info:\n§aName:§f " +
-      itemName +
-      "\n§aDescription:§f " +
-      description +
-      "\n§aSlot:§f " +
-      slotNumber +
-      "\n§dEnchantments:§f " +
-      enchantmentsText,
-    icon
-  );
+  form.button("" + buildResourceSummary(player));
+  form.button(buildItemInfo(item, slot), getItemIcon(item));
   form.button("§6Remove All Enchantments");
   form.button("§6Single Remove Enchantment");
   form
@@ -107,6 +110,12 @@ function showDisenchantOptions(player, item, slot, enchantments) {
     });
 }
 
+/**
+ * @param {import("@minecraft/server").Player} player
+ * @param {import("@minecraft/server").ItemStack} item
+ * @param {number} slot
+ * @param {import("@minecraft/server").Enchantment[]} enchantments
+ */
 async function showRemoveEnchantConfirm(player, item, slot, enchantments) {
   const { container } = player.getComponent("minecraft:inventory");
   const form = new ActionFormData();
@@ -123,53 +132,15 @@ async function showRemoveEnchantConfirm(player, item, slot, enchantments) {
   });
   body += "\n§f---------------------";
   if (config.xp.state) {
-    const xpRefund = Math.floor(xpValue * config.xp.refund);
-    body += "\n§bTotal XP refund: §6" + xpRefund;
+    body += "\n§bTotal XP refund: §6" + Math.floor(xpValue * config.xp.refund);
   }
   if (config.scores.state) {
-    const scoreRefund = Math.floor(scoreValue * config.scores.refund);
-    body += "\n§bTotal " + config.scores.display_name + " refund: §6" + scoreRefund;
+    body += "\n§bTotal " + config.scores.display_name + " refund: §6" + Math.floor(scoreValue * config.scores.refund);
   }
   body += "\n§f---------------------\n§6If you are sure of your choice, click confirm.\n\n§cOtherwise, click cancel.";
   form.body(body);
-  let summary = "";
-  if (config.scores.state) {
-    const score = getScore(player, config.scores.score_name);
-    summary += "§b" + config.scores.name + " : §a" + score + "\n";
-  }
-  if (config.items.state) {
-    const itemCount = getItemCount(player.getComponent("minecraft:inventory").container, config.items.id);
-    summary += "§b" + config.items.name + " : §a" + itemCount + "\n";
-  }
-  if (config.xp.state) {
-    const xpLevel = see_xp(player);
-    summary += "§b" + config.xp.name + " : §a" + xpLevel + "\n";
-  }
-  summary += "§bPlayer : §a" + player.name;
-  form.button("" + summary);
-  const itemName = item.nameTag ?? translateItemName(item.typeId);
-  const description = item.getLore().join("\n") || "No description";
-  const slotNumber = slot;
-  const itemEnchantable = getComponent(item, ItemEnchantableComponent.componentId);
-  const itemEnchantments = itemEnchantable ? itemEnchantable.getEnchantments() : [];
-  let enchantmentsText =
-    itemEnchantments.length > 0
-      ? itemEnchantments
-          .map((itemEnchantment) => "\n- " + translateEnchantmentName(itemEnchantment.type.id) + ": §a" + itemEnchantment.level + "§f")
-          .join("")
-      : "None";
-  const icon = getItemIcon(item);
-  form.button(
-    "Item Info:\n§aName:§f " +
-      itemName +
-      "\n§aDescription:§f " +
-      description +
-      "\n§aSlot:§f " +
-      slotNumber +
-      "\n§dEnchantments:§f " +
-      enchantmentsText,
-    icon
-  );
+  form.button("" + buildResourceSummary(player));
+  form.button(buildItemInfo(item, slot), getItemIcon(item));
   form.button(
     "§aConfirm : \n§fYou will proceed to remove the enchantments from your item.\nThe required resources will be refunded before proceeding."
   );
@@ -187,7 +158,7 @@ async function showRemoveEnchantConfirm(player, item, slot, enchantments) {
         case 1:
           player.sendMessage("\ue0f3 §8>> §aOperation canceled.");
           break;
-        case 2:
+        case 2: {
           let xpRefund = 0;
           let scoreRefund = 0;
           if (config.xp.state) {
@@ -201,40 +172,17 @@ async function showRemoveEnchantConfirm(player, item, slot, enchantments) {
           }
           const enchantable = item.getComponent("minecraft:enchantable");
           if (enchantable) {
-            enchantments.forEach((itemEnchantment) => {
-              enchantable.removeEnchantment(itemEnchantment.type);
+            enchantments.forEach((enchantment) => {
+              enchantable.removeEnchantment(enchantment.type);
             });
             container.setItem(slot, item);
             player.sendMessage("\ue0f3 §8>> §aEnchantments removed and resources refunded!");
           }
           if (item.typeId === "minecraft:enchanted_book") {
-            let bookSlot = findItemSlot(container, "minecraft:book", 64);
-            if (bookSlot === -1) {
-              if (item.amount > 1) {
-                const emptySlot = findEmptySlot(container);
-                if (emptySlot !== -1) {
-                  item.amount -= 1;
-                  container.setItem(slot, item);
-                  container.setItem(emptySlot, new ItemStack("minecraft:book", 1));
-                } else {
-                  container.setItem(slot, new ItemStack("minecraft:book", 1));
-                }
-              } else {
-                container.setItem(slot, new ItemStack("minecraft:book", 1));
-              }
-            } else {
-              let books = container.getItem(bookSlot);
-              books.amount += 1;
-              container.setItem(bookSlot, books);
-              if (item.amount > 1) {
-                item.amount -= 1;
-                container.setItem(slot, item);
-              } else {
-                container.setItem(slot, null);
-              }
-            }
+            convertEmptyEnchantedBook(container, item, slot);
           }
           break;
+        }
         case 3:
           player.sendMessage("\ue0f3 §8>> §aOperation canceled.");
           break;
@@ -247,6 +195,44 @@ async function showRemoveEnchantConfirm(player, item, slot, enchantments) {
     });
 }
 
+/**
+ * Turns an enchanted book that has no enchantments left back into a regular book.
+ * @param {import("@minecraft/server").Container} container
+ * @param {import("@minecraft/server").ItemStack} book
+ * @param {number} slot
+ */
+function convertEmptyEnchantedBook(container, book, slot) {
+  const bookSlot = findItemSlot(container, "minecraft:book", 64);
+  if (bookSlot === -1) {
+    if (book.amount > 1) {
+      const emptySlot = findEmptySlot(container);
+      if (emptySlot !== -1) {
+        book.amount -= 1;
+        container.setItem(slot, book);
+        container.setItem(emptySlot, new ItemStack("minecraft:book", 1));
+      } else {
+        container.setItem(slot, new ItemStack("minecraft:book", 1));
+      }
+    } else {
+      container.setItem(slot, new ItemStack("minecraft:book", 1));
+    }
+  } else {
+    const books = container.getItem(bookSlot);
+    books.amount += 1;
+    container.setItem(bookSlot, books);
+    if (book.amount > 1) {
+      book.amount -= 1;
+      container.setItem(slot, book);
+    } else {
+      container.setItem(slot, undefined);
+    }
+  }
+}
+
+/**
+ * @param {import("@minecraft/server").Container} container
+ * @returns {number}
+ */
 function findEmptySlot(container) {
   for (let slot = 0; slot < container.size; slot++) {
     if (!container.getItem(slot)) {
@@ -256,6 +242,12 @@ function findEmptySlot(container) {
   return -1;
 }
 
+/**
+ * @param {import("@minecraft/server").Container} container
+ * @param {string} typeId
+ * @param {number} maxAmount
+ * @returns {number}
+ */
 function findItemSlot(container, typeId, maxAmount) {
   for (let slot = 0; slot < container.size; slot++) {
     const item = container.getItem(slot);
@@ -266,18 +258,24 @@ function findItemSlot(container, typeId, maxAmount) {
   return -1;
 }
 
+/**
+ * @param {import("@minecraft/server").Player} player
+ * @param {import("@minecraft/server").ItemStack} item
+ * @param {number} slot
+ * @param {import("@minecraft/server").Enchantment[]} enchantments
+ */
 async function showSingleRemoveForm(player, item, slot, enchantments) {
   const form = new ModalFormData();
   form.title("arucube.enchant.remove");
-  let entries = [];
+  const entries = [];
   enchantments.forEach((enchantment) => {
     const enchantmentName = translateEnchantmentName(enchantment.type.id);
-    entries.push({
-      enchantName: enchantmentName,
-      level: enchantment.level,
-      type: enchantment.type.id
+    entries.push({ enchantName: enchantmentName, level: enchantment.level, type: enchantment.type.id });
+    // @minecraft/server-ui 2.x: slider(label, min, max, { valueStep, defaultValue })
+    form.slider("§f§l " + enchantmentName + " §a" + enchantment.level + "§c ", 0, enchantment.level, {
+      valueStep: 1,
+      defaultValue: enchantment.level
     });
-    form.slider("§f§l " + enchantmentName + " §a" + enchantment.level + "§c ", 0, enchantment.level, 1, enchantment.level);
   });
   form
     .show(player)
@@ -285,10 +283,11 @@ async function showSingleRemoveForm(player, item, slot, enchantments) {
       if (response.canceled) {
         return;
       }
-      let levelsToRemove = {};
+      const levelsToRemove = {};
       let xpValue = 0;
       let scoreValue = 0;
-      response.formValues.forEach((value, index) => {
+      response.formValues.forEach((sliderValue, index) => {
+        const value = /** @type {number} */ (sliderValue);
         const level = entries[index].level;
         if (value < level) {
           levelsToRemove[entries[index].type] = level - value;
@@ -306,57 +305,20 @@ async function showSingleRemoveForm(player, item, slot, enchantments) {
       Object.keys(levelsToRemove).forEach((enchantmentId) => {
         const enchantmentName = translateEnchantmentName(enchantmentId);
         const currentLevel = enchantments.find((enchantment) => enchantment.type.id === enchantmentId).level;
-        const removedLevels = levelsToRemove[enchantmentId];
-        body += "\n§d- " + enchantmentName + " §6 " + currentLevel + " §c-" + removedLevels;
+        body += "\n§d- " + enchantmentName + " §6 " + currentLevel + " §c-" + levelsToRemove[enchantmentId];
       });
       if (config.xp.state) {
-        const xpRefund = Math.floor(xpValue * config.xp.refund);
-        body += "\n§bTotal XP refund: §6" + xpRefund;
+        body += "\n§bTotal XP refund: §6" + Math.floor(xpValue * config.xp.refund);
       }
       if (config.scores.state) {
-        const scoreRefund = Math.floor(scoreValue * config.scores.refund);
-        body += "\n§bTotal " + config.scores.display_name + " refund: §6" + scoreRefund;
+        body += "\n§bTotal " + config.scores.display_name + " refund: §6" + Math.floor(scoreValue * config.scores.refund);
       }
       body += "\n§f---------------------\n§6If you are sure of your choice, click confirm.\n\n§cOtherwise, click cancel.";
       confirmForm.body(body);
-      let resourceSummary = "";
-      if (config.scores.state) {
-        const score = getScore(player, config.scores.score_name);
-        resourceSummary += "§b" + config.scores.name + " : §a" + score + "\n";
-      }
-      if (config.items.state) {
-        const itemCount = getItemCount(player.getComponent("minecraft:inventory").container, config.items.id);
-        resourceSummary += "§b" + config.items.name + " : §a" + itemCount + "\n";
-      }
-      if (config.xp.state) {
-        const xpLevel = see_xp(player);
-        resourceSummary += "§b" + config.xp.name + " : §a" + xpLevel + "\n";
-      }
-      resourceSummary += "§bPlayer : §a" + player.name;
+      const resourceSummary = buildResourceSummary(player);
       confirmForm.button("" + resourceSummary);
-      const itemName = item.nameTag ?? translateItemName(item.typeId);
-      const description = item.getLore().join("\n") || "No description";
-      const slotNumber = slot;
-      const itemEnchantable = getComponent(item, ItemEnchantableComponent.componentId);
-      const itemEnchantments = itemEnchantable ? itemEnchantable.getEnchantments() : [];
-      let enchantmentsText =
-        itemEnchantments.length > 0
-          ? itemEnchantments
-              .map((itemEnchantment) => "\n- " + translateEnchantmentName(itemEnchantment.type.id) + ": §a" + itemEnchantment.level + "§f")
-              .join("")
-          : "None";
-      const icon = getItemIcon(item);
-      confirmForm.button(
-        "Item Info:\n§aName:§f " +
-          itemName +
-          "\n§aDescription:§f " +
-          description +
-          "\n§aSlot:§f " +
-          slotNumber +
-          "\n§dEnchantments:§f " +
-          enchantmentsText,
-        icon
-      );
+      const itemInfo = buildItemInfo(item, slot);
+      confirmForm.button(itemInfo, getItemIcon(item));
       confirmForm.button(
         "§aConfirm :\n§fYou will proceed to remove the enchantments from your item.\nThe required resources will be refunded before proceeding."
       );
@@ -372,18 +334,9 @@ async function showSingleRemoveForm(player, item, slot, enchantments) {
               player.sendMessage("XP, Score, Item Info:\n" + resourceSummary);
               break;
             case 1:
-              player.sendMessage(
-                "Item Info:\n§aName:§f " +
-                  itemName +
-                  "\n§aDescription:§f " +
-                  description +
-                  "\n§aSlot:§f " +
-                  slotNumber +
-                  "\n§dEnchantments:§f " +
-                  enchantmentsText
-              );
+              player.sendMessage(itemInfo);
               break;
-            case 2:
+            case 2: {
               let xpRefund = 0;
               let scoreRefund = 0;
               if (config.xp.state) {
@@ -398,55 +351,29 @@ async function showSingleRemoveForm(player, item, slot, enchantments) {
               const enchantable = item.getComponent("minecraft:enchantable");
               if (enchantable) {
                 const { container } = player.getComponent("minecraft:inventory");
-                enchantments.forEach((itemEnchantment) => {
-                  const enchantmentId = itemEnchantment.type.id;
-                  const removedLevels = levelsToRemove[enchantmentId];
-                  if (removedLevels > 0) {
-                    const currentLevel = itemEnchantment.level;
-                    if (currentLevel > removedLevels) {
-                      enchantable.removeEnchantment(itemEnchantment.type);
-                      enchantable.addEnchantment({
-                        type: EnchantmentTypes.get(enchantmentId),
-                        level: currentLevel - removedLevels
-                      });
+                enchantments.forEach((enchantment) => {
+                  const enchantmentId = enchantment.type.id;
+                  const removed = levelsToRemove[enchantmentId];
+                  if (removed > 0) {
+                    const level = enchantment.level;
+                    if (level > removed) {
+                      enchantable.removeEnchantment(enchantment.type);
+                      enchantable.addEnchantment({ type: EnchantmentTypes.get(enchantmentId), level: level - removed });
                     } else {
-                      enchantable.removeEnchantment(itemEnchantment.type);
+                      enchantable.removeEnchantment(enchantment.type);
                     }
                   }
                 });
-                const remainingEnchantments = enchantable.getEnchantments();
-                if (remainingEnchantments.length === 0 && item.typeId === "minecraft:enchanted_book") {
-                  let bookSlot = findItemSlot(container, "minecraft:book", 64);
-                  if (bookSlot === -1) {
-                    if (item.amount > 1) {
-                      const emptySlot = findEmptySlot(container);
-                      if (emptySlot !== -1) {
-                        item.amount -= 1;
-                        container.setItem(slot, item);
-                        container.setItem(emptySlot, new ItemStack("minecraft:book", 1));
-                      } else {
-                        container.setItem(slot, new ItemStack("minecraft:book", 1));
-                      }
-                    } else {
-                      container.setItem(slot, new ItemStack("minecraft:book", 1));
-                    }
-                  } else {
-                    let books = container.getItem(bookSlot);
-                    books.amount += 1;
-                    container.setItem(bookSlot, books);
-                    if (item.amount > 1) {
-                      item.amount -= 1;
-                      container.setItem(slot, item);
-                    } else {
-                      container.setItem(slot, null);
-                    }
-                  }
+                const remaining = enchantable.getEnchantments();
+                if (remaining.length === 0 && item.typeId === "minecraft:enchanted_book") {
+                  convertEmptyEnchantedBook(container, item, slot);
                 } else {
                   container.setItem(slot, item);
                 }
                 player.sendMessage("\ue0f3 §8>> §aSelected enchantments removed and resources refunded!");
               }
               break;
+            }
             case 3:
               player.sendMessage("\ue0f3 §8>> §aOperation canceled.");
               break;
@@ -463,19 +390,19 @@ async function showSingleRemoveForm(player, item, slot, enchantments) {
     });
 }
 
-function translateEnchantmentName(enchantmentId) {
-  return enchantmentId
-    .split("_")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-}
-
+/**
+ * @param {import("@minecraft/server").Player} player
+ * @param {number} xpRefund
+ * @param {number} scoreRefund
+ * @returns {boolean}
+ */
 function refund_resources(player, xpRefund, scoreRefund) {
   if (xpRefund > 0) {
-    player.runCommand("/xp " + xpRefund + "L @s");
+    // Same effect as the previous "/xp <refund>L @s" command.
+    player.addLevels(xpRefund);
   }
   if (scoreRefund > 0) {
-    player.runCommand("/scoreboard players add @s " + config.scores.score_name + " " + scoreRefund);
+    player.runCommand("scoreboard players add @s " + config.scores.score_name + " " + scoreRefund);
   }
   return true;
 }

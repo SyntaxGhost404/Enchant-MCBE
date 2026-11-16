@@ -19,13 +19,19 @@
 
 /**
 * @made_by Death_Aruban
-* @version [1.0.5]
+* @version [1.1.0]
 * @link [https://discord.com/invite/NKy9A9RAe8]
+* @upgrade Updated for Minecraft: Bedrock Edition 26.60+ (@minecraft/server 2.11.0).
 */
 
 import { world } from "@minecraft/server";
 import { config } from "../config";
 
+/**
+ * Icons shown next to items in the Enchant+ menus.
+ * Paths are vanilla texture paths (Minecraft: Bedrock Edition 26.60 resource pack) or textures shipped in this add-on.
+ * Items that are not listed use the "unknown" icon.
+ */
 export const item_texture_list = {
   unknown_icon: {
     no_icon: "arucube/enchant_table/resources/icon/unknown_icon"
@@ -39,6 +45,10 @@ export const item_texture_list = {
     "minecraft:chainmail_chestplate": "textures/items/chainmail_chestplate",
     "minecraft:chainmail_leggings": "textures/items/chainmail_leggings",
     "minecraft:chainmail_boots": "textures/items/chainmail_boots",
+    "minecraft:copper_helmet": "textures/items/copper_helmet",
+    "minecraft:copper_chestplate": "textures/items/copper_chestplate",
+    "minecraft:copper_leggings": "textures/items/copper_leggings",
+    "minecraft:copper_boots": "textures/items/copper_boots",
     "minecraft:iron_helmet": "textures/items/iron_helmet",
     "minecraft:iron_chestplate": "textures/items/iron_chestplate",
     "minecraft:iron_leggings": "textures/items/iron_leggings",
@@ -68,6 +78,10 @@ export const item_texture_list = {
     "minecraft:stone_axe": "textures/items/stone_axe",
     "minecraft:stone_shovel": "textures/items/stone_shovel",
     "minecraft:stone_hoe": "textures/items/stone_hoe",
+    "minecraft:copper_pickaxe": "textures/items/copper_pickaxe",
+    "minecraft:copper_axe": "textures/items/copper_axe",
+    "minecraft:copper_shovel": "textures/items/copper_shovel",
+    "minecraft:copper_hoe": "textures/items/copper_hoe",
     "minecraft:iron_pickaxe": "textures/items/iron_pickaxe",
     "minecraft:iron_axe": "textures/items/iron_axe",
     "minecraft:iron_shovel": "textures/items/iron_shovel",
@@ -82,10 +96,18 @@ export const item_texture_list = {
     "minecraft:golden_hoe": "textures/items/gold_hoe",
     "minecraft:wooden_sword": "textures/items/wood_sword",
     "minecraft:stone_sword": "textures/items/stone_sword",
+    "minecraft:copper_sword": "textures/items/copper_sword",
     "minecraft:iron_sword": "textures/items/iron_sword",
-    "minecraft:golden_sword": "textures/items/golden_sword",
+    "minecraft:golden_sword": "textures/items/gold_sword",
     "minecraft:diamond_sword": "textures/items/diamond_sword",
     "minecraft:netherite_sword": "textures/items/netherite_sword",
+    "minecraft:wooden_spear": "textures/items/spear/wood_spear",
+    "minecraft:stone_spear": "textures/items/spear/stone_spear",
+    "minecraft:copper_spear": "textures/items/spear/copper_spear",
+    "minecraft:iron_spear": "textures/items/spear/iron_spear",
+    "minecraft:golden_spear": "textures/items/spear/gold_spear",
+    "minecraft:diamond_spear": "textures/items/spear/diamond_spear",
+    "minecraft:netherite_spear": "textures/items/spear/netherite_spear",
     "minecraft:bow": "textures/items/bow_standby",
     "minecraft:crossbow": "textures/items/crossbow_standby",
     "minecraft:trident": "textures/items/trident",
@@ -107,6 +129,10 @@ export const item_texture_list = {
   }
 };
 
+/**
+ * Enchantments that cannot be combined on the same item (keys/values are ids without the "minecraft:" namespace).
+ * The game is also asked directly (see findIncompatibleEnchantments in function.js), so a pair missing here is still caught.
+ */
 export const enchant_incompatible = {
   protection: ["fire_protection", "blast_protection", "projectile_protection"],
   fire_protection: ["protection", "blast_protection", "projectile_protection"],
@@ -120,13 +146,29 @@ export const enchant_incompatible = {
   multishot: ["piercing"],
   piercing: ["multishot"],
   density: ["breach", "smite", "bane_of_arthropods"],
-  breach: ["density", "smite", "bane_of_arthropods"]
+  breach: ["density", "smite", "bane_of_arthropods"],
+  infinity: ["mending"],
+  mending: ["infinity"],
+  riptide: ["loyalty", "channeling"],
+  loyalty: ["riptide"],
+  channeling: ["riptide"],
+  depth_strider: ["frost_walker"],
+  frost_walker: ["depth_strider"]
 };
 
+/**
+ * Checks that the player can pay every enabled cost, then removes them.
+ * Returns false (and lists what is missing) without removing anything if a cost cannot be paid.
+ * @param {import("@minecraft/server").Player} player
+ * @param {number} xpCost
+ * @param {number} scoreCost
+ * @param {number} itemCost
+ * @returns {boolean}
+ */
 export function remove_resources(player, xpCost, scoreCost, itemCost) {
-  let missing = [];
+  const missing = [];
   if (config.items.state) {
-    const container = player.getComponent("inventory").container;
+    const container = player.getComponent("minecraft:inventory").container;
     let owned = 0;
     for (let slot = 0; slot < container.size; slot++) {
       const item = container.getItem(slot);
@@ -162,7 +204,7 @@ export function remove_resources(player, xpCost, scoreCost, itemCost) {
     return false;
   }
   if (config.items.state) {
-    const container = player.getComponent("inventory").container;
+    const container = player.getComponent("minecraft:inventory").container;
     let remaining = itemCost;
     for (let slot = 0; slot < container.size; slot++) {
       const item = container.getItem(slot);
@@ -179,34 +221,30 @@ export function remove_resources(player, xpCost, scoreCost, itemCost) {
     }
   }
   if (config.scores.state) {
-    player.runCommandAsync("scoreboard players remove @s " + config.scores.score_name + " " + scoreCost);
+    // runCommandAsync() was removed in @minecraft/server 2.0.0; runCommand() runs the same command synchronously.
+    player.runCommand("scoreboard players remove @s " + config.scores.score_name + " " + scoreCost);
   }
   if (config.xp.state) {
-    player.runCommandAsync("xp -" + xpCost + "L @s");
+    // Same effect as the previous "xp -<cost>L @s" command.
+    player.addLevels(-xpCost);
   }
   return true;
 }
 
+/**
+ * Current experience level of the player.
+ * @param {import("@minecraft/server").Player} player
+ * @returns {number}
+ */
 export function see_xp(player) {
-  let low = 0;
-  let high = 24791;
-  while (low < high) {
-    let middle = Math.floor((low + high) / 2);
-    let players = [
-      ...world.getPlayers({
-        minLevel: low,
-        maxLevel: middle
-      })
-    ];
-    if (players.includes(player)) {
-      high = middle;
-    } else {
-      low = middle + 1;
-    }
-  }
-  return low;
+  return player.level;
 }
 
+/**
+ * @param {string} objectiveId
+ * @param {string} [displayName]
+ * @returns {import("@minecraft/server").ScoreboardObjective}
+ */
 function getObjective(objectiveId, displayName) {
   const scoreboard = world.scoreboard;
   return scoreboard.getObjective(objectiveId) ?? scoreboard.addObjective(objectiveId, displayName ?? objectiveId);

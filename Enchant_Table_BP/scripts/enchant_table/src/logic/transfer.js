@@ -19,16 +19,31 @@
 
 /**
 * @made_by Death_Aruban
-* @version [1.0.5]
+* @version [1.1.0]
 * @link [https://discord.com/invite/NKy9A9RAe8]
+* @upgrade Updated for Minecraft: Bedrock Edition 26.60+ (@minecraft/server 2.11.0, @minecraft/server-ui 2.3.0).
 */
 
 import { ActionFormData, ModalFormData } from "@minecraft/server-ui";
 import { EnchantmentTypes, ItemEnchantableComponent, ItemStack } from "@minecraft/server";
-import { getComponent, getScore, getItemCount, translateItemName } from "../function";
+import {
+  buildResourceSummary,
+  enchantedTypeId,
+  findIncompatibleEnchantments,
+  getComponent,
+  getItemIcon,
+  sendIncompatibleMessage,
+  translateEnchantmentName,
+  translateItemName
+} from "../function";
 import { config } from "../../config";
-import { item_texture_list, remove_resources, see_xp, enchant_incompatible } from "../item_list";
+import { remove_resources } from "../item_list";
 
+/**
+ * @param {import("@minecraft/server").Player} player
+ * @param {import("@minecraft/server").ItemStack} item
+ * @param {number} slot
+ */
 export async function prepareEnchantmentTransfer(player, item, slot) {
   const enchantable = getComponent(item, ItemEnchantableComponent.componentId);
   if (!enchantable) {
@@ -43,18 +58,33 @@ export async function prepareEnchantmentTransfer(player, item, slot) {
   showItemSelection(player, item, slot, enchantments);
 }
 
+/**
+ * "\n- Name: §aLevel§f" lines used by the item description buttons.
+ * @param {import("@minecraft/server").ItemStack} item
+ * @returns {string}
+ */
+function formatEnchantmentList(item) {
+  const enchantments = item.getComponent(ItemEnchantableComponent.componentId)?.getEnchantments() || [];
+  return enchantments.length > 0
+    ? enchantments.map((enchantment) => "\n- " + translateEnchantmentName(enchantment.type.id) + ": §a" + enchantment.level + "§f").join("")
+    : "None";
+}
+
+/**
+ * Step 1: choose the item that will receive the enchantments.
+ * @param {import("@minecraft/server").Player} player
+ * @param {import("@minecraft/server").ItemStack} firstItem
+ * @param {number} firstSlot
+ * @param {import("@minecraft/server").Enchantment[]} enchantments
+ */
 async function showItemSelection(player, firstItem, firstSlot, enchantments) {
   const container = player.getComponent("minecraft:inventory").container;
   const candidates = [];
   for (let slot = 0; slot < container.size; slot++) {
     const item = container.getItem(slot);
     if (item && slot !== firstSlot) {
-      const enchantable = getComponent(item, ItemEnchantableComponent.componentId);
-      if (enchantable) {
-        candidates.push({
-          item,
-          index: slot
-        });
+      if (getComponent(item, ItemEnchantableComponent.componentId)) {
+        candidates.push({ item: item, index: slot });
       }
     }
   }
@@ -65,31 +95,11 @@ async function showItemSelection(player, firstItem, firstSlot, enchantments) {
   const form = new ActionFormData();
   form.title("arucube.enchant.trasfer_second");
   form.body("§fList of Enchantable Items:§a " + candidates.length + "\n§8");
-  let summary = "";
-  if (config.scores.state) {
-    const score = getScore(player, config.scores.score_name);
-    summary += "§b" + config.scores.name + " : §a" + score + "\n";
-  }
-  if (config.items.state) {
-    const itemCount = getItemCount(player.getComponent("minecraft:inventory").container, config.items.id);
-    summary += "§b" + config.items.name + " : §a" + itemCount + "\n";
-  }
-  if (config.xp.state) {
-    const level = see_xp(player);
-    summary += "§b" + config.xp.name + " : §a" + level + "\n";
-  }
-  summary += "§bPlayer : §a" + player.name;
-  form.button("" + summary);
+  form.button("" + buildResourceSummary(player));
   const firstName = firstItem.nameTag ?? translateItemName(firstItem.typeId);
   const firstDescription = firstItem.getLore().join("\n") || "No description";
   const firstSlotText = firstSlot;
-  const firstEnchantments = firstItem.getComponent(ItemEnchantableComponent.componentId)?.getEnchantments() || [];
-  let firstEnchantmentsText =
-    firstEnchantments.length > 0
-      ? firstEnchantments
-          .map((enchantment) => "\n- " + translateEnchantmentName(enchantment.type.id) + ": §a" + enchantment.level + "§f")
-          .join("")
-      : "None";
+  const firstEnchantmentsText = formatEnchantmentList(firstItem);
   const firstIcon = getItemIcon(firstItem);
   form.button(
     "\n§bFirst Item :\n§aName:§f " +
@@ -125,7 +135,8 @@ async function showItemSelection(player, firstItem, firstSlot, enchantments) {
       if (selection === 1) {
         return;
       }
-      const secondItem = buttonTargets[selection].item;
+      const target = buttonTargets[selection];
+      const secondItem = target?.item;
       if (!secondItem) {
         player.sendMessage("\ue0f3 Invalid selection.");
         return;
@@ -135,7 +146,7 @@ async function showItemSelection(player, firstItem, firstSlot, enchantments) {
         firstItem,
         firstSlot,
         secondItem,
-        buttonTargets[selection].index,
+        target.index,
         enchantments,
         firstName,
         firstDescription,
@@ -149,6 +160,20 @@ async function showItemSelection(player, firstItem, firstSlot, enchantments) {
     });
 }
 
+/**
+ * Step 2: review both items (or pick another receiving item) and continue.
+ * @param {import("@minecraft/server").Player} player
+ * @param {import("@minecraft/server").ItemStack} firstItem
+ * @param {number} firstSlot
+ * @param {import("@minecraft/server").ItemStack} secondItem
+ * @param {number} secondSlot
+ * @param {import("@minecraft/server").Enchantment[]} enchantments
+ * @param {string} firstName
+ * @param {string} firstDescription
+ * @param {number} firstSlotText
+ * @param {string} firstEnchantmentsText
+ * @param {string} firstIcon
+ */
 async function showSecondItemSelectionForm(
   player,
   firstItem,
@@ -167,43 +192,19 @@ async function showSecondItemSelectionForm(
   for (let slot = 0; slot < container.size; slot++) {
     const item = container.getItem(slot);
     if (item && slot !== firstSlot && slot !== secondSlot) {
-      const enchantable = getComponent(item, ItemEnchantableComponent.componentId);
-      if (enchantable) {
-        candidates.push({
-          item,
-          index: slot
-        });
+      if (getComponent(item, ItemEnchantableComponent.componentId)) {
+        candidates.push({ item: item, index: slot });
       }
     }
   }
   const form = new ActionFormData();
   form.title("arucube.enchant.trasfer_second_item");
   form.body("§fList of Enchantable Items:§a " + candidates.length + "\n§8");
-  let summary = "";
-  if (config.scores.state) {
-    const score = getScore(player, config.scores.score_name);
-    summary += "§b" + config.scores.name + " : §a" + score + "\n";
-  }
-  if (config.items.state) {
-    const itemCount = getItemCount(player.getComponent("minecraft:inventory").container, config.items.id);
-    summary += "§b" + config.items.name + " : §a" + itemCount + "\n";
-  }
-  if (config.xp.state) {
-    const level = see_xp(player);
-    summary += "§b" + config.xp.name + " : §a" + level + "\n";
-  }
-  summary += "§bPlayer : §a" + player.name;
-  form.button("" + summary);
+  form.button("" + buildResourceSummary(player));
   const secondName = secondItem.nameTag ?? translateItemName(secondItem.typeId);
   const secondDescription = secondItem.getLore().join("\n") || "No description";
   const secondSlotText = secondSlot;
-  const secondEnchantments = secondItem.getComponent(ItemEnchantableComponent.componentId)?.getEnchantments() || [];
-  let secondEnchantmentsText =
-    secondEnchantments.length > 0
-      ? secondEnchantments
-          .map((enchantment) => "\n- " + translateEnchantmentName(enchantment.type.id) + ": §a" + enchantment.level + "§f")
-          .join("")
-      : "None";
+  const secondEnchantmentsText = formatEnchantmentList(secondItem);
   const secondIcon = getItemIcon(secondItem);
   form.button(
     "\n§bFirst Item :\n\n§aName:§f " +
@@ -254,7 +255,7 @@ async function showSecondItemSelectionForm(
         case 3:
           prepareCompatibleEnchantments(player, firstItem, firstSlot, secondItem, secondSlot);
           break;
-        default:
+        default: {
           const target = buttonTargets[selection];
           if (target) {
             showSecondItemSelectionForm(
@@ -273,6 +274,7 @@ async function showSecondItemSelectionForm(
           } else {
             player.sendMessage("\ue0f3 Invalid selection.");
           }
+        }
       }
     })
     .catch((error) => {
@@ -280,6 +282,15 @@ async function showSecondItemSelectionForm(
     });
 }
 
+/**
+ * Step 3: choose how many levels of each compatible enchantment to move.
+ * @param {import("@minecraft/server").Player} player
+ * @param {import("@minecraft/server").ItemStack} firstItem
+ * @param {number} firstSlot
+ * @param {import("@minecraft/server").ItemStack} secondItem
+ * @param {number} secondSlot
+ * @param {{ type: string, level: number, maxLevel: number }[]} transferable
+ */
 async function showEnchantmentTransferForm(player, firstItem, firstSlot, secondItem, secondSlot, transferable) {
   const form = new ModalFormData();
   form.title("arucube.enchant.transfer");
@@ -291,13 +302,14 @@ async function showEnchantmentTransferForm(player, firstItem, firstSlot, secondI
       console.error("\ue0f3 Source item does not have an enchantable component: " + firstItem.typeId);
       return;
     }
-    let enchantment = sourceEnchantable.getEnchantment(EnchantmentTypes.get(enchantmentId));
+    const enchantment = sourceEnchantable.getEnchantment(EnchantmentTypes.get(enchantmentId));
     const level = enchantment ? enchantment.level : 0;
     if (isNaN(level)) {
       console.error("\ue0f3 Invalid level for enchantment " + enchantmentId + ": level=" + level);
       return;
     }
-    form.slider("§f§l " + enchantmentName + " §6", 0, level, 1, level);
+    // @minecraft/server-ui 2.x: slider(label, min, max, { valueStep, defaultValue })
+    form.slider("§f§l " + enchantmentName + " §6", 0, level, { valueStep: 1, defaultValue: level });
   });
   form
     .show(player)
@@ -305,9 +317,10 @@ async function showEnchantmentTransferForm(player, firstItem, firstSlot, secondI
       if (response.canceled) {
         return;
       }
-      let levelsToTransfer = {};
+      /** @type {Record<string, number>} */
+      const levelsToTransfer = {};
       transferable.forEach((entry, index) => {
-        const keptLevel = response.formValues[index];
+        const keptLevel = /** @type {number} */ (response.formValues[index]);
         const level = entry.level;
         if (keptLevel < level) {
           levelsToTransfer[entry.type] = level - keptLevel;
@@ -317,6 +330,16 @@ async function showEnchantmentTransferForm(player, firstItem, firstSlot, secondI
         player.sendMessage("\ue0f3 §8>> §cNo enchantments selected for transfer.");
         return;
       }
+      // The receiving item keeps its own enchantments: refuse pairs that cannot be combined (e.g. Smite onto a Sharpness sword).
+      const conflicts = findIncompatibleEnchantments(
+        enchantedTypeId(secondItem.typeId),
+        Object.keys(levelsToTransfer),
+        getEnchantmentsFromItem(secondItem).map((enchantment) => enchantment.type.id)
+      );
+      if (conflicts.length > 0) {
+        sendIncompatibleMessage(player, conflicts);
+        return;
+      }
       confirmEnchantmentTransfer(player, firstItem, firstSlot, secondItem, secondSlot, levelsToTransfer);
     })
     .catch((error) => {
@@ -324,22 +347,26 @@ async function showEnchantmentTransferForm(player, firstItem, firstSlot, secondI
     });
 }
 
+/**
+ * Step 4: summary of what is removed/added and the total cost.
+ * @param {import("@minecraft/server").Player} player
+ * @param {import("@minecraft/server").ItemStack} firstItem
+ * @param {number} firstSlot
+ * @param {import("@minecraft/server").ItemStack} secondItem
+ * @param {number} secondSlot
+ * @param {Record<string, number>} levelsToTransfer
+ */
 async function confirmEnchantmentTransfer(player, firstItem, firstSlot, secondItem, secondSlot, levelsToTransfer) {
   try {
-    const container = player.getComponent("minecraft:inventory").container;
     const form = new ActionFormData();
     form.title("arucube.enchant.trasfer_second_item_confirm");
     let body = "§cRemove from\n§bItem: " + (firstItem.nameTag ?? translateItemName(firstItem.typeId)) + "\n§dEnchant:\n";
     Object.keys(levelsToTransfer).forEach((enchantmentId) => {
-      const enchantmentName = translateEnchantmentName(enchantmentId);
-      const levels = levelsToTransfer[enchantmentId];
-      body += "§6- " + enchantmentName + " -" + levels + "\n";
+      body += "§6- " + translateEnchantmentName(enchantmentId) + " -" + levelsToTransfer[enchantmentId] + "\n";
     });
     body += "\n§aAdd on\n§bItem: " + (secondItem.nameTag ?? translateItemName(secondItem.typeId)) + "\n§dEnchant:\n";
     Object.keys(levelsToTransfer).forEach((enchantmentId) => {
-      const enchantmentName = translateEnchantmentName(enchantmentId);
-      const levels = levelsToTransfer[enchantmentId];
-      body += "§6- " + enchantmentName + " +" + levels + "\n";
+      body += "§6- " + translateEnchantmentName(enchantmentId) + " +" + levelsToTransfer[enchantmentId] + "\n";
     });
     let xpCost = 0;
     let scoreCost = 0;
@@ -365,21 +392,7 @@ async function confirmEnchantmentTransfer(player, firstItem, firstSlot, secondIt
     }
     body += "\n§f---------------------\n§6If you are sure of your choice, click confirm.\n\n§cOtherwise, click cancel.";
     form.body(body);
-    let summary = "";
-    if (config.scores.state) {
-      const score = getScore(player, config.scores.score_name);
-      summary += "§b" + config.scores.name + " : §a" + score + "\n";
-    }
-    if (config.items.state) {
-      const itemCount = getItemCount(container, config.items.id);
-      summary += "§b" + config.items.name + " : §a" + itemCount + "\n";
-    }
-    if (config.xp.state) {
-      const level = see_xp(player);
-      summary += "§b" + config.xp.name + " : §a" + level + "\n";
-    }
-    summary += "§bPlayer : §a" + player.name;
-    form.button("" + summary);
+    form.button("" + buildResourceSummary(player));
     const firstName = firstItem.nameTag ?? translateItemName(firstItem.typeId);
     const firstDescription = firstItem.getLore().join("\n") || "No description";
     const firstEnchantments =
@@ -442,14 +455,24 @@ async function confirmEnchantmentTransfer(player, firstItem, firstSlot, secondIt
   }
 }
 
+/**
+ * @param {import("@minecraft/server").Player} player
+ * @param {import("@minecraft/server").ItemStack} firstItem
+ * @param {number} firstSlot
+ * @param {import("@minecraft/server").ItemStack} secondItem
+ * @param {number} secondSlot
+ * @param {Record<string, number>} levelsToTransfer
+ * @param {number} xpCost
+ * @param {number} scoreCost
+ * @param {number} itemCost
+ */
 function transferEnchantments(player, firstItem, firstSlot, secondItem, secondSlot, levelsToTransfer, xpCost, scoreCost, itemCost) {
   try {
     const container = player.getComponent("minecraft:inventory").container;
-    const sourceEnchantable = firstItem.getComponent("minecraft:enchantable");
     const targetEnchantable = secondItem.getComponent("minecraft:enchantable");
     let exceedsMaxLevel = false;
     for (const enchantmentId in levelsToTransfer) {
-      const levels = parseInt(levelsToTransfer[enchantmentId], 10);
+      const levels = parseInt(String(levelsToTransfer[enchantmentId]), 10);
       const type = EnchantmentTypes.get(enchantmentId);
       const existing = targetEnchantable.getEnchantment(type);
       const total = (existing ? existing.level : 0) + levels;
@@ -462,42 +485,53 @@ function transferEnchantments(player, firstItem, firstSlot, secondItem, secondSl
       player.sendMessage("\ue0f3 §8>> §cEnchantment level exceeds maximum allowed for the item.");
       return;
     }
+    // A stack of books needs a free slot for the new enchanted book. Check it before anything is paid or changed.
+    let enchantedBookSlot = secondSlot;
+    if (secondItem.typeId === "minecraft:book" && secondItem.amount > 1) {
+      enchantedBookSlot = findEmptySlot(container);
+      if (enchantedBookSlot === -1) {
+        player.sendMessage("\ue0f3 §8>> §cNo empty slot available for enchanted book.");
+        return;
+      }
+    }
+    // Build both results on copies first, so an enchantment rejected by the game never costs resources or enchantments.
+    let newFirstItem;
+    let newSecondItem;
+    try {
+      newFirstItem = firstItem.clone();
+      removeEnchantmentLevels(newFirstItem.getComponent("minecraft:enchantable"), levelsToTransfer);
+      if (secondItem.typeId === "minecraft:book") {
+        newSecondItem = createEnchantedBook(levelsToTransfer);
+      } else {
+        newSecondItem = secondItem.clone();
+        addEnchantmentsToItem(newSecondItem.getComponent("minecraft:enchantable"), levelsToTransfer);
+      }
+    } catch (error) {
+      console.warn("[Enchant+] Could not transfer enchantments: " + error);
+      player.sendMessage("\ue0f3 §8>> §cThese enchantments cannot be transferred to this item.");
+      return;
+    }
     if (!remove_resources(player, xpCost, scoreCost, itemCost)) {
       player.sendMessage("\ue0f3 §8>> §cFailed to transfer enchantments due to insufficient resources.");
       return;
     }
-    for (const enchantmentId in levelsToTransfer) {
-      const levels = parseInt(levelsToTransfer[enchantmentId], 10);
-      const type = EnchantmentTypes.get(enchantmentId);
-      let existing = sourceEnchantable.getEnchantment(type);
-      if (existing) {
-        const remaining = existing.level - levels;
-        sourceEnchantable.removeEnchantment(type);
-        if (remaining > 0) {
-          sourceEnchantable.addEnchantment({
-            type,
-            level: remaining
-          });
-        }
-      }
-    }
-    if (firstItem.typeId === "minecraft:enchanted_book" && sourceEnchantable.getEnchantments().length === 0) {
-      handleEmptyEnchantedBook(container, firstItem, firstSlot);
-    } else {
-      container.setItem(firstSlot, firstItem);
-    }
+    // Receiving item first, then the source item (an emptied enchanted book may merge into a book stack).
     if (secondItem.typeId === "minecraft:book") {
-      const bookSlot = handleBookToEnchantedBook(container, secondItem, secondSlot, levelsToTransfer);
-      if (bookSlot !== -1) {
-        const enchantedBook = createEnchantedBook(levelsToTransfer);
-        container.setItem(bookSlot, enchantedBook);
+      if (secondItem.amount > 1) {
+        secondItem.amount -= 1;
+        container.setItem(secondSlot, secondItem);
       }
-    } else if (secondItem.typeId === "minecraft:enchanted_book") {
-      addEnchantmentsToItem(targetEnchantable, levelsToTransfer);
-      container.setItem(secondSlot, secondItem);
+      container.setItem(enchantedBookSlot, newSecondItem);
     } else {
-      addEnchantmentsToItem(targetEnchantable, levelsToTransfer);
-      container.setItem(secondSlot, secondItem);
+      container.setItem(secondSlot, newSecondItem);
+    }
+    if (
+      newFirstItem.typeId === "minecraft:enchanted_book" &&
+      newFirstItem.getComponent("minecraft:enchantable").getEnchantments().length === 0
+    ) {
+      handleEmptyEnchantedBook(container, newFirstItem, firstSlot);
+    } else {
+      container.setItem(firstSlot, newFirstItem);
     }
     player.sendMessage("\ue0f3 §8>> §aEnchantments transferred successfully.");
   } catch (error) {
@@ -506,8 +540,14 @@ function transferEnchantments(player, firstItem, firstSlot, secondItem, secondSl
   }
 }
 
+/**
+ * Turns an enchanted book that has no enchantments left back into a regular book.
+ * @param {import("@minecraft/server").Container} container
+ * @param {import("@minecraft/server").ItemStack} book
+ * @param {number} slot
+ */
 function handleEmptyEnchantedBook(container, book, slot) {
-  let bookSlot = findItemSlot(container, "minecraft:book", 64);
+  const bookSlot = findItemSlot(container, "minecraft:book", 64);
   if (bookSlot === -1) {
     if (book.amount > 1) {
       const emptySlot = findEmptySlot(container);
@@ -522,44 +562,59 @@ function handleEmptyEnchantedBook(container, book, slot) {
       container.setItem(slot, new ItemStack("minecraft:book", 1));
     }
   } else {
-    let books = container.getItem(bookSlot);
+    const books = container.getItem(bookSlot);
     books.amount += 1;
     container.setItem(bookSlot, books);
     if (book.amount > 1) {
       book.amount -= 1;
       container.setItem(slot, book);
     } else {
-      container.setItem(slot, null);
+      container.setItem(slot, undefined);
     }
   }
 }
 
-function handleBookToEnchantedBook(container, book, slot, levelsToTransfer) {
-  if (book.amount > 1) {
-    book.amount -= 1;
-    container.setItem(slot, book);
-    const emptySlot = findEmptySlot(container);
-    if (emptySlot !== -1) {
-      return emptySlot;
-    } else {
-      player.sendMessage("\ue0f3 §8>> §cNo empty slot available for enchanted book.");
-      return -1;
+/**
+ * Lowers (or removes) each enchantment on the source item by the transferred number of levels.
+ * @param {import("@minecraft/server").ItemEnchantableComponent} enchantable
+ * @param {Record<string, number>} levelsToTransfer
+ */
+function removeEnchantmentLevels(enchantable, levelsToTransfer) {
+  for (const enchantmentId in levelsToTransfer) {
+    const levels = parseInt(String(levelsToTransfer[enchantmentId]), 10);
+    const type = EnchantmentTypes.get(enchantmentId);
+    const existing = enchantable.getEnchantment(type);
+    if (existing) {
+      const remaining = existing.level - levels;
+      enchantable.removeEnchantment(type);
+      if (remaining > 0) {
+        enchantable.addEnchantment({ type: type, level: remaining });
+      }
     }
-  } else {
-    return slot;
   }
 }
 
+/**
+ * Adds the transferred levels on top of the levels the receiving item already has.
+ * @param {import("@minecraft/server").ItemEnchantableComponent} enchantable
+ * @param {Record<string, number>} levelsToTransfer
+ */
 function addEnchantmentsToItem(enchantable, levelsToTransfer) {
   for (const enchantmentId in levelsToTransfer) {
     const type = EnchantmentTypes.get(enchantmentId);
-    enchantable.addEnchantment({
-      type,
-      level: levelsToTransfer[enchantmentId]
-    });
+    const existing = enchantable.getEnchantment(type);
+    const newLevel = (existing ? existing.level : 0) + parseInt(String(levelsToTransfer[enchantmentId]), 10);
+    if (existing) {
+      enchantable.removeEnchantment(type);
+    }
+    enchantable.addEnchantment({ type: type, level: newLevel });
   }
 }
 
+/**
+ * @param {import("@minecraft/server").Container} container
+ * @returns {number}
+ */
 function findEmptySlot(container) {
   for (let slot = 0; slot < container.size; slot++) {
     if (!container.getItem(slot)) {
@@ -569,6 +624,12 @@ function findEmptySlot(container) {
   return -1;
 }
 
+/**
+ * @param {import("@minecraft/server").Container} container
+ * @param {string} typeId
+ * @param {number} maxAmount
+ * @returns {number}
+ */
 function findItemSlot(container, typeId, maxAmount) {
   for (let slot = 0; slot < container.size; slot++) {
     const item = container.getItem(slot);
@@ -579,33 +640,26 @@ function findItemSlot(container, typeId, maxAmount) {
   return -1;
 }
 
+/**
+ * @param {Record<string, number>} levels
+ * @returns {import("@minecraft/server").ItemStack}
+ */
 function createEnchantedBook(levels) {
   const book = new ItemStack("minecraft:enchanted_book", 1);
   const enchantable = book.getComponent("minecraft:enchantable");
   if (enchantable) {
-    for (let enchantmentId in levels) {
-      enchantable.addEnchantment({
-        type: EnchantmentTypes.get(enchantmentId),
-        level: levels[enchantmentId]
-      });
+    for (const enchantmentId in levels) {
+      enchantable.addEnchantment({ type: EnchantmentTypes.get(enchantmentId), level: levels[enchantmentId] });
     }
   }
   return book;
 }
 
-function translateEnchantmentName(enchantmentId) {
-  return enchantmentId
-    .split("_")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-}
-
-function getItemIcon(item) {
-  const typeId = item.typeId;
-  const icon = item_texture_list.vanilla_icon[typeId];
-  return icon || item_texture_list.unknown_icon.no_icon;
-}
-
+/**
+ * Every enchantment type that can be applied to a fresh item of this type.
+ * @param {import("@minecraft/server").ItemType | string} itemType
+ * @returns {{ name: string, maxLevel: number }[]}
+ */
 function getApplicableEnchantments(itemType) {
   const sample = new ItemStack(itemType);
   const enchantable = getComponent(sample, "minecraft:enchantable");
@@ -613,25 +667,28 @@ function getApplicableEnchantments(itemType) {
     return [];
   }
   return EnchantmentTypes.getAll()
-    .filter((type) =>
-      enchantable.canAddEnchantment({
-        type,
-        level: 1
-      })
-    )
-    .map((type) => ({
-      name: type.id,
-      maxLevel: type.maxLevel
-    }));
+    .filter((type) => enchantable.canAddEnchantment({ type: type, level: 1 }))
+    .map((type) => ({ name: type.id, maxLevel: type.maxLevel }));
 }
 
+/**
+ * Enchantment types that both items can hold.
+ * @param {import("@minecraft/server").ItemStack} firstItem
+ * @param {import("@minecraft/server").ItemStack} secondItem
+ * @returns {{ name: string, maxLevel: number }[]}
+ */
 function getBaseEnchantmentList(firstItem, secondItem) {
   const firstApplicable = getApplicableEnchantments(firstItem.type);
   const secondApplicable = getApplicableEnchantments(secondItem.type);
-  const common = firstApplicable.filter((enchantment) => secondApplicable.some((other) => other.name === enchantment.name));
-  return common;
+  return firstApplicable.filter((enchantment) => secondApplicable.some((other) => other.name === enchantment.name));
 }
 
+/**
+ * @param {import("@minecraft/server").Enchantment[]} enchantments
+ * @param {{ name: string, maxLevel: number }[]} baseList
+ * @param {boolean} checkMaxLevel
+ * @returns {import("@minecraft/server").Enchantment[]}
+ */
 function filterEnchantments(enchantments, baseList, checkMaxLevel) {
   return enchantments.filter(
     (enchantment) =>
@@ -640,6 +697,11 @@ function filterEnchantments(enchantments, baseList, checkMaxLevel) {
   );
 }
 
+/**
+ * @param {import("@minecraft/server").ItemStack} firstItem
+ * @param {import("@minecraft/server").ItemStack} secondItem
+ * @returns {{ type: string, level: number, maxLevel: number }[]}
+ */
 function mergeEnchantments(firstItem, secondItem) {
   const baseList = getBaseEnchantmentList(firstItem, secondItem);
   const firstEnchantments = getEnchantmentsFromItem(firstItem);
@@ -655,13 +717,24 @@ function mergeEnchantments(firstItem, secondItem) {
   return Array.from(merged.values());
 }
 
+/**
+ * @param {import("@minecraft/server").ItemStack} firstItem
+ * @param {import("@minecraft/server").ItemStack} secondItem
+ * @returns {{ type: string, level: number, maxLevel: number }[]}
+ */
 function generateDefinitiveEnchantmentList(firstItem, secondItem) {
   const merged = mergeEnchantments(firstItem, secondItem);
   const baseList = getBaseEnchantmentList(firstItem, secondItem);
-  const definitive = merged.filter((enchantment) => baseList.some((base) => base.name === enchantment.type));
-  return definitive;
+  return merged.filter((enchantment) => baseList.some((base) => base.name === enchantment.type));
 }
 
+/**
+ * @param {import("@minecraft/server").Player} player
+ * @param {import("@minecraft/server").ItemStack} firstItem
+ * @param {number} firstSlot
+ * @param {import("@minecraft/server").ItemStack} secondItem
+ * @param {number} secondSlot
+ */
 async function prepareCompatibleEnchantments(player, firstItem, firstSlot, secondItem, secondSlot) {
   try {
     const transferable = generateDefinitiveEnchantmentList(firstItem, secondItem);
@@ -676,22 +749,18 @@ async function prepareCompatibleEnchantments(player, firstItem, firstSlot, secon
   }
 }
 
+/**
+ * @param {import("@minecraft/server").ItemStack} item
+ * @returns {import("@minecraft/server").Enchantment[]}
+ */
 function getEnchantmentsFromItem(item) {
   const enchantable = item.getComponent(ItemEnchantableComponent.componentId);
   if (!enchantable) {
     throw new Error("\ue0f3 The item is not enchantable.");
   }
-  const enchantments = enchantable.enchantments || enchantable.getEnchantments();
+  const enchantments = enchantable.getEnchantments();
   if (!enchantments || typeof enchantments !== "object") {
     throw new Error("\ue0f3 Enchantment data is not valid.");
   }
   return enchantments;
-}
-
-function filterIncompatibleEnchantments(enchantments, existingEnchantments) {
-  return enchantments.filter((enchantment) =>
-    existingEnchantments.every(
-      (existing) => !enchant_incompatible[enchantment.type.id] || !enchant_incompatible[enchantment.type.id].includes(existing.type.id)
-    )
-  );
 }
