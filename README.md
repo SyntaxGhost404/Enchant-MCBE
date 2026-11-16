@@ -1,7 +1,7 @@
 # Enchant+ 1.1.0
 
 <p align="center">
-  <img src="img/enchant_table_3d.png" width="220" alt="The Enchant+ table: an obsidian block with emerald corners and an open book on top" />
+  <img src="img/enchant+.png" width="640" alt="Enchant+" />
 </p>
 
 Enchant+ is an enchanting table for Minecraft: Bedrock Edition where nothing is left to chance. You choose which enchantments an item gets and at which level, take enchantments off again, and move them from one item to another. Every price is shown before you confirm, and you pay with XP levels and Enchant Essence.
