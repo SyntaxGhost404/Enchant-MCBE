@@ -23,4 +23,191 @@
 * @link [https://discord.com/invite/NKy9A9RAe8]
 */
 
-const AruCube_Death_Aruban_0x2bf1c0=AruCube_Death_Aruban_0xc631;function AruCube_Death_Aruban_0xc631(_0x4ed620,_0x130b78){const _0x129908=AruCube_Death_Aruban_0x1299();return AruCube_Death_Aruban_0xc631=function(_0xc63117,_0x1acb30){_0xc63117=_0xc63117-0x12f;let _0x29c30f=_0x129908[_0xc63117];return _0x29c30f;},AruCube_Death_Aruban_0xc631(_0x4ed620,_0x130b78);}(function(_0x3bcaf9,_0x381cb1){const _0x8c1f38=AruCube_Death_Aruban_0xc631,_0x4f34ca=_0x3bcaf9();while(!![]){try{const _0x5a58fb=-parseInt(_0x8c1f38(0x178))/0x1+-parseInt(_0x8c1f38(0x199))/0x2+parseInt(_0x8c1f38(0x197))/0x3*(-parseInt(_0x8c1f38(0x157))/0x4)+parseInt(_0x8c1f38(0x19a))/0x5+-parseInt(_0x8c1f38(0x16c))/0x6*(parseInt(_0x8c1f38(0x174))/0x7)+-parseInt(_0x8c1f38(0x132))/0x8+parseInt(_0x8c1f38(0x161))/0x9;if(_0x5a58fb===_0x381cb1)break;else _0x4f34ca['push'](_0x4f34ca['shift']());}catch(_0x11f1c1){_0x4f34ca['push'](_0x4f34ca['shift']());}}}(AruCube_Death_Aruban_0x1299,0x6decf));import{world}from'@minecraft/server';import{config}from'../config';export const item_texture_list={'unknown_icon':{'no_icon':AruCube_Death_Aruban_0x2bf1c0(0x130)},'vanilla_icon':{'minecraft:leather_helmet':AruCube_Death_Aruban_0x2bf1c0(0x191),'minecraft:leather_chestplate':AruCube_Death_Aruban_0x2bf1c0(0x190),'minecraft:leather_leggings':AruCube_Death_Aruban_0x2bf1c0(0x17d),'minecraft:leather_boots':AruCube_Death_Aruban_0x2bf1c0(0x15f),'minecraft:chainmail_helmet':AruCube_Death_Aruban_0x2bf1c0(0x136),'minecraft:chainmail_chestplate':AruCube_Death_Aruban_0x2bf1c0(0x18f),'minecraft:chainmail_leggings':AruCube_Death_Aruban_0x2bf1c0(0x138),'minecraft:chainmail_boots':AruCube_Death_Aruban_0x2bf1c0(0x195),'minecraft:iron_helmet':AruCube_Death_Aruban_0x2bf1c0(0x163),'minecraft:iron_chestplate':'textures/items/iron_chestplate','minecraft:iron_leggings':'textures/items/iron_leggings','minecraft:iron_boots':AruCube_Death_Aruban_0x2bf1c0(0x18a),'minecraft:diamond_helmet':AruCube_Death_Aruban_0x2bf1c0(0x15b),'minecraft:diamond_chestplate':AruCube_Death_Aruban_0x2bf1c0(0x14a),'minecraft:diamond_leggings':AruCube_Death_Aruban_0x2bf1c0(0x160),'minecraft:diamond_boots':AruCube_Death_Aruban_0x2bf1c0(0x19c),'minecraft:golden_helmet':'textures/items/gold_helmet','minecraft:golden_chestplate':AruCube_Death_Aruban_0x2bf1c0(0x169),'minecraft:golden_leggings':'textures/items/gold_leggings','minecraft:golden_boots':'textures/items/gold_boots','minecraft:turtle_helmet':'textures/items/turtle_helmet','minecraft:netherite_helmet':AruCube_Death_Aruban_0x2bf1c0(0x173),'minecraft:netherite_chestplate':AruCube_Death_Aruban_0x2bf1c0(0x155),'minecraft:netherite_leggings':AruCube_Death_Aruban_0x2bf1c0(0x133),'minecraft:netherite_boots':AruCube_Death_Aruban_0x2bf1c0(0x183),'minecraft:netherite_pickaxe':AruCube_Death_Aruban_0x2bf1c0(0x149),'minecraft:netherite_axe':AruCube_Death_Aruban_0x2bf1c0(0x194),'minecraft:netherite_shovel':AruCube_Death_Aruban_0x2bf1c0(0x168),'minecraft:netherite_hoe':AruCube_Death_Aruban_0x2bf1c0(0x175),'minecraft:wooden_pickaxe':'textures/items/wood_pickaxe','minecraft:wooden_axe':AruCube_Death_Aruban_0x2bf1c0(0x13f),'minecraft:wooden_shovel':'textures/items/wood_shovel','minecraft:wooden_hoe':AruCube_Death_Aruban_0x2bf1c0(0x145),'minecraft:stone_pickaxe':AruCube_Death_Aruban_0x2bf1c0(0x147),'minecraft:stone_axe':AruCube_Death_Aruban_0x2bf1c0(0x17c),'minecraft:stone_shovel':AruCube_Death_Aruban_0x2bf1c0(0x171),'minecraft:stone_hoe':AruCube_Death_Aruban_0x2bf1c0(0x16b),'minecraft:iron_pickaxe':'textures/items/iron_pickaxe','minecraft:iron_axe':AruCube_Death_Aruban_0x2bf1c0(0x150),'minecraft:iron_shovel':'textures/items/iron_shovel','minecraft:iron_hoe':AruCube_Death_Aruban_0x2bf1c0(0x184),'minecraft:diamond_pickaxe':'textures/items/diamond_pickaxe','minecraft:diamond_axe':AruCube_Death_Aruban_0x2bf1c0(0x188),'minecraft:diamond_shovel':'textures/items/diamond_shovel','minecraft:diamond_hoe':AruCube_Death_Aruban_0x2bf1c0(0x164),'minecraft:golden_pickaxe':AruCube_Death_Aruban_0x2bf1c0(0x17f),'minecraft:golden_axe':AruCube_Death_Aruban_0x2bf1c0(0x154),'minecraft:golden_shovel':AruCube_Death_Aruban_0x2bf1c0(0x13d),'minecraft:golden_hoe':'textures/items/gold_hoe','minecraft:wooden_sword':AruCube_Death_Aruban_0x2bf1c0(0x14c),'minecraft:stone_sword':AruCube_Death_Aruban_0x2bf1c0(0x180),'minecraft:iron_sword':AruCube_Death_Aruban_0x2bf1c0(0x13b),'minecraft:golden_sword':AruCube_Death_Aruban_0x2bf1c0(0x14b),'minecraft:diamond_sword':AruCube_Death_Aruban_0x2bf1c0(0x156),'minecraft:netherite_sword':'textures/items/netherite_sword','minecraft:bow':AruCube_Death_Aruban_0x2bf1c0(0x153),'minecraft:crossbow':AruCube_Death_Aruban_0x2bf1c0(0x187),'minecraft:trident':AruCube_Death_Aruban_0x2bf1c0(0x18d),'minecraft:shears':'textures/items/shears','minecraft:carrot_on_a_stick':AruCube_Death_Aruban_0x2bf1c0(0x193),'minecraft:warped_fungus_on_a_stick':'textures/items/warped_fungus_on_a_stick','minecraft:fishing_rod':AruCube_Death_Aruban_0x2bf1c0(0x139),'minecraft:elytra':AruCube_Death_Aruban_0x2bf1c0(0x142),'minecraft:shield':AruCube_Death_Aruban_0x2bf1c0(0x185),'minecraft:brush':AruCube_Death_Aruban_0x2bf1c0(0x167),'minecraft:flint_and_steel':AruCube_Death_Aruban_0x2bf1c0(0x17e),'minecraft:mace':AruCube_Death_Aruban_0x2bf1c0(0x16f),'minecraft:book':'textures/items/book_normal','minecraft:enchanted_book':AruCube_Death_Aruban_0x2bf1c0(0x166),'minecraft:compass':AruCube_Death_Aruban_0x2bf1c0(0x16e),'minecraft:lodestone_compass':'textures/items/compass_item','minecraft:recovery_compass':'textures/items/recovery_compass_item','minecraft:carved_pumpkin':AruCube_Death_Aruban_0x2bf1c0(0x182)}};export const enchant_incompatible={'protection':[AruCube_Death_Aruban_0x2bf1c0(0x15c),AruCube_Death_Aruban_0x2bf1c0(0x17b),'projectile_protection'],'fire_protection':[AruCube_Death_Aruban_0x2bf1c0(0x170),'blast_protection',AruCube_Death_Aruban_0x2bf1c0(0x18c)],'blast_protection':[AruCube_Death_Aruban_0x2bf1c0(0x170),'fire_protection',AruCube_Death_Aruban_0x2bf1c0(0x18c)],'projectile_protection':[AruCube_Death_Aruban_0x2bf1c0(0x170),'fire_protection','blast_protection'],'sharpness':['smite',AruCube_Death_Aruban_0x2bf1c0(0x14e),AruCube_Death_Aruban_0x2bf1c0(0x196),AruCube_Death_Aruban_0x2bf1c0(0x131)],'smite':['sharpness',AruCube_Death_Aruban_0x2bf1c0(0x14e),AruCube_Death_Aruban_0x2bf1c0(0x196),'breach'],'bane_of_arthropods':[AruCube_Death_Aruban_0x2bf1c0(0x137),AruCube_Death_Aruban_0x2bf1c0(0x186),'density',AruCube_Death_Aruban_0x2bf1c0(0x131)],'silk_touch':['fortune'],'fortune':[AruCube_Death_Aruban_0x2bf1c0(0x177)],'multishot':['piercing'],'piercing':[AruCube_Death_Aruban_0x2bf1c0(0x17a)],'density':[AruCube_Death_Aruban_0x2bf1c0(0x131),AruCube_Death_Aruban_0x2bf1c0(0x186),AruCube_Death_Aruban_0x2bf1c0(0x14e)],'breach':[AruCube_Death_Aruban_0x2bf1c0(0x196),AruCube_Death_Aruban_0x2bf1c0(0x186),AruCube_Death_Aruban_0x2bf1c0(0x14e)]};export function remove_resources(_0x59cb7b,_0x2bd46d,_0x6eed4f,_0x172326){const _0xb6c097=AruCube_Death_Aruban_0x2bf1c0;let _0x2e9c3d=[];if(config[_0xb6c097(0x152)][_0xb6c097(0x13a)]){const _0x4c1e80=_0x59cb7b[_0xb6c097(0x18b)](_0xb6c097(0x19b))[_0xb6c097(0x135)];let _0xc30685=0x0;for(let _0x404813=0x0;_0x404813<_0x4c1e80[_0xb6c097(0x148)];_0x404813++){const _0x2acca0=_0x4c1e80[_0xb6c097(0x159)](_0x404813);_0x2acca0&&_0x2acca0[_0xb6c097(0x158)]===config['items']['id']&&(_0xc30685+=_0x2acca0[_0xb6c097(0x151)]);}if(_0xc30685<_0x172326){let _0x3fe2b7=config['items']['id'][_0xb6c097(0x12f)](':')['pop']();_0x3fe2b7=_0x3fe2b7['replace'](/_/g,'\x20'),_0x3fe2b7=_0x3fe2b7[_0xb6c097(0x12f)]('\x20')[_0xb6c097(0x146)](_0x185b7f=>_0x185b7f[_0xb6c097(0x15d)](0x0)[_0xb6c097(0x15a)]()+_0x185b7f[_0xb6c097(0x189)](0x1))[_0xb6c097(0x14d)]('\x20'),_0x2e9c3d[_0xb6c097(0x13c)](_0xb6c097(0x15e)+_0x3fe2b7+'\x20x\x20'+_0x172326);}}if(config[_0xb6c097(0x16d)][_0xb6c097(0x13a)]){const _0x41a23a=getObjective(config['scores'][_0xb6c097(0x141)]),_0x31fabb=_0x41a23a[_0xb6c097(0x143)](_0x59cb7b)??0x0;_0x31fabb<_0x6eed4f&&_0x2e9c3d[_0xb6c097(0x13c)]('§b'+config['scores'][_0xb6c097(0x16a)]+'\x20:§f\x20'+(_0x6eed4f-_0x31fabb));}if(config['xp']['state']){const _0x14ef5e=see_xp(_0x59cb7b);_0x14ef5e<_0x2bd46d&&_0x2e9c3d[_0xb6c097(0x13c)](_0xb6c097(0x134)+(_0x2bd46d-_0x14ef5e));}if(_0x2e9c3d[_0xb6c097(0x172)]>0x0)return _0x59cb7b[_0xb6c097(0x176)](_0xb6c097(0x14f)+_0x2e9c3d[_0xb6c097(0x14d)]('\x0a')),![];if(config[_0xb6c097(0x152)][_0xb6c097(0x13a)]){const _0xe1c61d=_0x59cb7b[_0xb6c097(0x18b)](_0xb6c097(0x19b))[_0xb6c097(0x135)];let _0x50770a=_0x172326;for(let _0x413bc6=0x0;_0x413bc6<_0xe1c61d[_0xb6c097(0x148)];_0x413bc6++){const _0x3b79d3=_0xe1c61d[_0xb6c097(0x159)](_0x413bc6);if(_0x3b79d3&&_0x3b79d3[_0xb6c097(0x158)]===config[_0xb6c097(0x152)]['id']){if(_0x3b79d3['amount']>_0x50770a){_0x3b79d3[_0xb6c097(0x151)]-=_0x50770a,_0xe1c61d[_0xb6c097(0x165)](_0x413bc6,_0x3b79d3);break;}else _0x50770a-=_0x3b79d3['amount'],_0xe1c61d['setItem'](_0x413bc6,undefined);}}}return config[_0xb6c097(0x16d)][_0xb6c097(0x13a)]&&_0x59cb7b[_0xb6c097(0x13e)](_0xb6c097(0x162)+config[_0xb6c097(0x16d)][_0xb6c097(0x141)]+'\x20'+_0x6eed4f),config['xp'][_0xb6c097(0x13a)]&&_0x59cb7b['runCommandAsync'](_0xb6c097(0x140)+_0x2bd46d+_0xb6c097(0x179)),!![];}export function see_xp(_0x287bdc){const _0x3f5e9e=AruCube_Death_Aruban_0x2bf1c0;let _0x35c100=0x0,_0x4771ad=0x60d7;while(_0x35c100<_0x4771ad){let _0x2faba9=Math[_0x3f5e9e(0x192)]((_0x35c100+_0x4771ad)/0x2),_0x5bb76f=[...world['getPlayers']({'minLevel':_0x35c100,'maxLevel':_0x2faba9})];_0x5bb76f[_0x3f5e9e(0x18e)](_0x287bdc)?_0x4771ad=_0x2faba9:_0x35c100=_0x2faba9+0x1;}return _0x35c100;}function AruCube_Death_Aruban_0x1299(){const _0x555564=['textures/items/carrot_on_a_stick','textures/items/netherite_axe','textures/items/chainmail_boots','density','111IEcgOq','scoreboard','1794060eijfKE','205640mxinHb','inventory','textures/items/diamond_boots','split','arucube/enchant_table/resources/icon/unknown_icon','breach','3221656XtRfZy','textures/items/netherite_leggings','§bXP\x20:§f\x20','container','textures/items/chainmail_helmet','sharpness','textures/items/chainmail_leggings','textures/items/fishing_rod_uncast','state','textures/items/iron_sword','push','textures/items/gold_shovel','runCommandAsync','textures/items/wood_axe','xp\x20-','score_name','textures/items/elytra','getScore','getObjective','textures/items/wood_hoe','map','textures/items/stone_pickaxe','size','textures/items/netherite_pickaxe','textures/items/diamond_chestplate','textures/items/golden_sword','textures/items/wood_sword','join','bane_of_arthropods','You\x20miss\x20the\x20following\x20resources:\x0a','textures/items/iron_axe','amount','items','textures/items/bow_standby','textures/items/gold_axe','textures/items/netherite_chestplate','textures/items/diamond_sword','9032ntdmtO','typeId','getItem','toUpperCase','textures/items/diamond_helmet','fire_protection','charAt','§bItem\x20:§f\x20','textures/items/leather_boots','textures/items/diamond_leggings','23590926XNXHnf','scoreboard\x20players\x20remove\x20@s\x20','textures/items/iron_helmet','textures/items/diamond_hoe','setItem','textures/items/book_enchanted','textures/items/brush','textures/items/netherite_shovel','textures/items/gold_chestplate','display_name','textures/items/stone_hoe','3312468tBZsmq','scores','textures/items/compass_item','textures/items/mace','protection','textures/items/stone_shovel','length','textures/items/netherite_helmet','7RGnFON','textures/items/netherite_hoe','sendMessage','silk_touch','276726xZhyKu','L\x20@s','multishot','blast_protection','textures/items/stone_axe','textures/items/leather_leggings','textures/items/flint_and_steel','textures/items/gold_pickaxe','textures/items/stone_sword','addObjective','textures/blocks/pumpkin_face_off','textures/items/netherite_boots','textures/items/iron_hoe','arucube/enchant_table/resources/items/shield','smite','textures/items/crossbow_standby','textures/items/diamond_axe','slice','textures/items/iron_boots','getComponent','projectile_protection','textures/items/trident','includes','textures/items/chainmail_chestplate','textures/items/leather_chestplate','textures/items/leather_helmet','floor'];AruCube_Death_Aruban_0x1299=function(){return _0x555564;};return AruCube_Death_Aruban_0x1299();}function getObjective(_0x58a34f,_0x23c118){const _0x204eb3=AruCube_Death_Aruban_0x2bf1c0,_0x3bc544=world[_0x204eb3(0x198)];return _0x3bc544[_0x204eb3(0x144)](_0x58a34f)??_0x3bc544[_0x204eb3(0x181)](_0x58a34f,_0x23c118??_0x58a34f);}
+import { world } from "@minecraft/server";
+import { config } from "../config";
+
+export const item_texture_list = {
+  unknown_icon: {
+    no_icon: "arucube/enchant_table/resources/icon/unknown_icon"
+  },
+  vanilla_icon: {
+    "minecraft:leather_helmet": "textures/items/leather_helmet",
+    "minecraft:leather_chestplate": "textures/items/leather_chestplate",
+    "minecraft:leather_leggings": "textures/items/leather_leggings",
+    "minecraft:leather_boots": "textures/items/leather_boots",
+    "minecraft:chainmail_helmet": "textures/items/chainmail_helmet",
+    "minecraft:chainmail_chestplate": "textures/items/chainmail_chestplate",
+    "minecraft:chainmail_leggings": "textures/items/chainmail_leggings",
+    "minecraft:chainmail_boots": "textures/items/chainmail_boots",
+    "minecraft:iron_helmet": "textures/items/iron_helmet",
+    "minecraft:iron_chestplate": "textures/items/iron_chestplate",
+    "minecraft:iron_leggings": "textures/items/iron_leggings",
+    "minecraft:iron_boots": "textures/items/iron_boots",
+    "minecraft:diamond_helmet": "textures/items/diamond_helmet",
+    "minecraft:diamond_chestplate": "textures/items/diamond_chestplate",
+    "minecraft:diamond_leggings": "textures/items/diamond_leggings",
+    "minecraft:diamond_boots": "textures/items/diamond_boots",
+    "minecraft:golden_helmet": "textures/items/gold_helmet",
+    "minecraft:golden_chestplate": "textures/items/gold_chestplate",
+    "minecraft:golden_leggings": "textures/items/gold_leggings",
+    "minecraft:golden_boots": "textures/items/gold_boots",
+    "minecraft:turtle_helmet": "textures/items/turtle_helmet",
+    "minecraft:netherite_helmet": "textures/items/netherite_helmet",
+    "minecraft:netherite_chestplate": "textures/items/netherite_chestplate",
+    "minecraft:netherite_leggings": "textures/items/netherite_leggings",
+    "minecraft:netherite_boots": "textures/items/netherite_boots",
+    "minecraft:netherite_pickaxe": "textures/items/netherite_pickaxe",
+    "minecraft:netherite_axe": "textures/items/netherite_axe",
+    "minecraft:netherite_shovel": "textures/items/netherite_shovel",
+    "minecraft:netherite_hoe": "textures/items/netherite_hoe",
+    "minecraft:wooden_pickaxe": "textures/items/wood_pickaxe",
+    "minecraft:wooden_axe": "textures/items/wood_axe",
+    "minecraft:wooden_shovel": "textures/items/wood_shovel",
+    "minecraft:wooden_hoe": "textures/items/wood_hoe",
+    "minecraft:stone_pickaxe": "textures/items/stone_pickaxe",
+    "minecraft:stone_axe": "textures/items/stone_axe",
+    "minecraft:stone_shovel": "textures/items/stone_shovel",
+    "minecraft:stone_hoe": "textures/items/stone_hoe",
+    "minecraft:iron_pickaxe": "textures/items/iron_pickaxe",
+    "minecraft:iron_axe": "textures/items/iron_axe",
+    "minecraft:iron_shovel": "textures/items/iron_shovel",
+    "minecraft:iron_hoe": "textures/items/iron_hoe",
+    "minecraft:diamond_pickaxe": "textures/items/diamond_pickaxe",
+    "minecraft:diamond_axe": "textures/items/diamond_axe",
+    "minecraft:diamond_shovel": "textures/items/diamond_shovel",
+    "minecraft:diamond_hoe": "textures/items/diamond_hoe",
+    "minecraft:golden_pickaxe": "textures/items/gold_pickaxe",
+    "minecraft:golden_axe": "textures/items/gold_axe",
+    "minecraft:golden_shovel": "textures/items/gold_shovel",
+    "minecraft:golden_hoe": "textures/items/gold_hoe",
+    "minecraft:wooden_sword": "textures/items/wood_sword",
+    "minecraft:stone_sword": "textures/items/stone_sword",
+    "minecraft:iron_sword": "textures/items/iron_sword",
+    "minecraft:golden_sword": "textures/items/golden_sword",
+    "minecraft:diamond_sword": "textures/items/diamond_sword",
+    "minecraft:netherite_sword": "textures/items/netherite_sword",
+    "minecraft:bow": "textures/items/bow_standby",
+    "minecraft:crossbow": "textures/items/crossbow_standby",
+    "minecraft:trident": "textures/items/trident",
+    "minecraft:shears": "textures/items/shears",
+    "minecraft:carrot_on_a_stick": "textures/items/carrot_on_a_stick",
+    "minecraft:warped_fungus_on_a_stick": "textures/items/warped_fungus_on_a_stick",
+    "minecraft:fishing_rod": "textures/items/fishing_rod_uncast",
+    "minecraft:elytra": "textures/items/elytra",
+    "minecraft:shield": "arucube/enchant_table/resources/items/shield",
+    "minecraft:brush": "textures/items/brush",
+    "minecraft:flint_and_steel": "textures/items/flint_and_steel",
+    "minecraft:mace": "textures/items/mace",
+    "minecraft:book": "textures/items/book_normal",
+    "minecraft:enchanted_book": "textures/items/book_enchanted",
+    "minecraft:compass": "textures/items/compass_item",
+    "minecraft:lodestone_compass": "textures/items/compass_item",
+    "minecraft:recovery_compass": "textures/items/recovery_compass_item",
+    "minecraft:carved_pumpkin": "textures/blocks/pumpkin_face_off"
+  }
+};
+
+export const enchant_incompatible = {
+  protection: ["fire_protection", "blast_protection", "projectile_protection"],
+  fire_protection: ["protection", "blast_protection", "projectile_protection"],
+  blast_protection: ["protection", "fire_protection", "projectile_protection"],
+  projectile_protection: ["protection", "fire_protection", "blast_protection"],
+  sharpness: ["smite", "bane_of_arthropods", "density", "breach"],
+  smite: ["sharpness", "bane_of_arthropods", "density", "breach"],
+  bane_of_arthropods: ["sharpness", "smite", "density", "breach"],
+  silk_touch: ["fortune"],
+  fortune: ["silk_touch"],
+  multishot: ["piercing"],
+  piercing: ["multishot"],
+  density: ["breach", "smite", "bane_of_arthropods"],
+  breach: ["density", "smite", "bane_of_arthropods"]
+};
+
+export function remove_resources(player, xpCost, scoreCost, itemCost) {
+  let missing = [];
+  if (config.items.state) {
+    const container = player.getComponent("inventory").container;
+    let owned = 0;
+    for (let slot = 0; slot < container.size; slot++) {
+      const item = container.getItem(slot);
+      if (item && item.typeId === config.items.id) {
+        owned += item.amount;
+      }
+    }
+    if (owned < itemCost) {
+      let itemName = config.items.id.split(":").pop();
+      itemName = itemName.replace(/_/g, " ");
+      itemName = itemName
+        .split(" ")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+      missing.push("§bItem :§f " + itemName + " x " + itemCost);
+    }
+  }
+  if (config.scores.state) {
+    const objective = getObjective(config.scores.score_name);
+    const score = objective.getScore(player) ?? 0;
+    if (score < scoreCost) {
+      missing.push("§b" + config.scores.display_name + " :§f " + (scoreCost - score));
+    }
+  }
+  if (config.xp.state) {
+    const level = see_xp(player);
+    if (level < xpCost) {
+      missing.push("§bXP :§f " + (xpCost - level));
+    }
+  }
+  if (missing.length > 0) {
+    player.sendMessage("You miss the following resources:\n" + missing.join("\n"));
+    return false;
+  }
+  if (config.items.state) {
+    const container = player.getComponent("inventory").container;
+    let remaining = itemCost;
+    for (let slot = 0; slot < container.size; slot++) {
+      const item = container.getItem(slot);
+      if (item && item.typeId === config.items.id) {
+        if (item.amount > remaining) {
+          item.amount -= remaining;
+          container.setItem(slot, item);
+          break;
+        } else {
+          remaining -= item.amount;
+          container.setItem(slot, undefined);
+        }
+      }
+    }
+  }
+  if (config.scores.state) {
+    player.runCommandAsync("scoreboard players remove @s " + config.scores.score_name + " " + scoreCost);
+  }
+  if (config.xp.state) {
+    player.runCommandAsync("xp -" + xpCost + "L @s");
+  }
+  return true;
+}
+
+export function see_xp(player) {
+  let low = 0;
+  let high = 24791;
+  while (low < high) {
+    let middle = Math.floor((low + high) / 2);
+    let players = [
+      ...world.getPlayers({
+        minLevel: low,
+        maxLevel: middle
+      })
+    ];
+    if (players.includes(player)) {
+      high = middle;
+    } else {
+      low = middle + 1;
+    }
+  }
+  return low;
+}
+
+function getObjective(objectiveId, displayName) {
+  const scoreboard = world.scoreboard;
+  return scoreboard.getObjective(objectiveId) ?? scoreboard.addObjective(objectiveId, displayName ?? objectiveId);
+}

@@ -23,4 +23,305 @@
 * @link [https://discord.com/invite/NKy9A9RAe8]
 */
 
-(function(_0x54ed69,_0xf0f4cf){const _0x16e961=AruCube_Death_Aruban_0xdff5,_0x5255ef=_0x54ed69();while(!![]){try{const _0x4a4d62=parseInt(_0x16e961(0x200))/0x1+parseInt(_0x16e961(0x228))/0x2*(parseInt(_0x16e961(0x1f7))/0x3)+-parseInt(_0x16e961(0x222))/0x4+parseInt(_0x16e961(0x1e7))/0x5+parseInt(_0x16e961(0x1f9))/0x6+-parseInt(_0x16e961(0x21d))/0x7*(-parseInt(_0x16e961(0x1da))/0x8)+parseInt(_0x16e961(0x214))/0x9;if(_0x4a4d62===_0xf0f4cf)break;else _0x5255ef['push'](_0x5255ef['shift']());}catch(_0x291e48){_0x5255ef['push'](_0x5255ef['shift']());}}}(AruCube_Death_Aruban_0x1dea,0xb6c0e));import{ActionFormData,ModalFormData}from'@minecraft/server-ui';function AruCube_Death_Aruban_0xdff5(_0x4300e1,_0xcec7d8){const _0x1dea6b=AruCube_Death_Aruban_0x1dea();return AruCube_Death_Aruban_0xdff5=function(_0xdff505,_0x1fd6e0){_0xdff505=_0xdff505-0x1d6;let _0x1bd373=_0x1dea6b[_0xdff505];return _0x1bd373;},AruCube_Death_Aruban_0xdff5(_0x4300e1,_0xcec7d8);}import{enchant_incompatible,see_xp}from'../item_list';function AruCube_Death_Aruban_0x1dea(){const _0x4f1bb7=['name','minecraft:enchantable','164888PGYQrx','\x20§cThe\x20following\x20enchantments\x20are\x20not\x20compatible:§f\x0a---------------------------------§6\x0a','arucube.enchant.confirm','\x0a§aName:§f\x20\x0a','formValues','button','slider','map','\x20§a','sendMessage','title','length','\x20§8>>\x20§cNo\x20enchantments\x20selected.','296280Mcoziw','slice','score_name','level','\x20§bcost:\x20§6','\x0a-\x20','display_name','componentId','minecraft:inventory','getAll','\x20§8>>\x20§cNo\x20empty\x20slot\x20available\x20for\x20enchanted\x20book.','join','setItem','\x0a§f---------------------\x0a§6If\x20you\x20are\x20sure\x20of\x20your\x20choice,\x20click\x20confirm.\x0a\x0a§cOtherwise,\x20click\x20cancel.','currentLevel','\x0a§dEnchantments:§f\x20','3SIIiOc','toUpperCase','7409304tfUiXD','error','typeId','amount','arucube.enchant.add','No\x20description','get','116785GIKIYH','\x0a§aDescription:§f\x20\x0a','items',':\x20§a','type','getComponent','catch','\x20§8>>\x20§cNot\x20enough\x20resources.','getItem','§bPlayer\x20:\x20§a','§b\x20cost:\x20§6','sort','addEnchantment','\x20\x20\x20-\x20','pop','\x0a§d-\x20','then','split','canceled','\x0a§bTotal\x20§aXP\x20§bcost:\x20§6','2866347FePcAh','minecraft:book','charAt','state','scores','stack','\x0a§bItem\x20§a','\x20:\x20§a','includes','133yoHdeY','\x20§8>>\x20§aOperation\x20canceled.','score_remove','size','maxLevel','5716968wyCTWA','\x20§8>>\x20§aEnchanted\x20book\x20created\x20and\x20added\x20to\x20inventory!','\x20§8>>\x20§cItem\x20has\x20reached\x20its\x20maximum\x20enchantments.','forEach','\x20and\x20','\x0a§aSlot:§f\x20','113566SDjGDt','\x20Item\x20is\x20not\x20enchantable.','add','§cCancel\x20:\x20\x0a§fThe\x20procedure\x20to\x20add\x20enchantments\x20to\x20the\x20item\x20will\x20be\x20canceled.\x20\x0aNo\x20cost\x20will\x20be\x20incurred\x20for\x20this.','minecraft:enchanted_book','xp_remove','container','show','\x0a§bTotal\x20§6','filter','\x20No\x20item\x20found\x20in\x20the\x20specified\x20slot.','§aConfirm\x20:\x20\x0a§fYou\x20will\x20proceed\x20to\x20apply\x20the\x20enchantments\x20to\x20your\x20item.\x0a\x20The\x20required\x20resources\x20will\x20be\x20removed\x20before\x20proceeding.'];AruCube_Death_Aruban_0x1dea=function(){return _0x4f1bb7;};return AruCube_Death_Aruban_0x1dea();}import{EnchantmentTypes,ItemEnchantableComponent,ItemStack}from'@minecraft/server';import{getComponent,translateItemName,getScore,getItemCount,getItemIcon}from'../function';import{remove_resources}from'../item_list';import{config}from'../../config';export async function prepareEnchantments(_0x27f7eb,_0x3b34c7,_0x3a8a8c){const _0x43f823=AruCube_Death_Aruban_0xdff5,_0x1727ff=_0x3b34c7[_0x43f823(0x1fb)],_0x315e89=getComponent(_0x3b34c7,ItemEnchantableComponent[_0x43f823(0x1ee)]);if(!_0x315e89){_0x27f7eb[_0x43f823(0x1e3)](_0x43f823(0x229));return;}const _0x3b622d=getApplicableEnchantments(_0x1727ff),_0x2e502a=_0x315e89['getEnchantments'](),_0x16c9df={};_0x2e502a[_0x43f823(0x225)](_0x195a27=>{const _0x32e7e7=_0x43f823;_0x16c9df[_0x195a27[_0x32e7e7(0x204)]['id']]=_0x195a27['level'];});const _0x592225=_0x3b622d[_0x43f823(0x231)](_0x3854f9=>{const _0x16c903=_0x43f823,_0x43435d=_0x16c9df[_0x3854f9['name']]||0x0;if(_0x43435d>=_0x3854f9[_0x16c903(0x221)])return![];for(let _0x377c5f in _0x16c9df){if(enchant_incompatible[_0x377c5f]?.[_0x16c903(0x21c)](_0x3854f9[_0x16c903(0x1d8)]))return![];}return!![];})[_0x43f823(0x1e1)](_0xd9384c=>{const _0x466528=_0x43f823,_0x37f57d=_0x16c9df[_0xd9384c[_0x466528(0x1d8)]]||0x0;return{'name':_0xd9384c[_0x466528(0x1d8)],'maxLevel':_0xd9384c[_0x466528(0x221)],'currentLevel':_0x37f57d};});if(_0x592225['length']===0x0){_0x27f7eb[_0x43f823(0x1e3)](_0x43f823(0x224));return;}showItemEditor(_0x27f7eb,_0x3a8a8c,_0x592225);}function getApplicableEnchantments(_0x3abf25){const _0x146f32=AruCube_Death_Aruban_0xdff5,_0x2cbcc=new ItemStack(_0x3abf25),_0x168a23=getComponent(_0x2cbcc,_0x146f32(0x1d9));if(!_0x168a23)return[];return EnchantmentTypes[_0x146f32(0x1f0)]()['filter'](_0x205596=>_0x168a23['canAddEnchantment']({'type':_0x205596,'level':0x1}))[_0x146f32(0x1e1)](_0x1c9da2=>({'name':_0x1c9da2['id'],'maxLevel':_0x1c9da2[_0x146f32(0x221)]}));}async function showItemEditor(_0x4663cf,_0x188183,_0x40d8a8){const _0x3d1370=AruCube_Death_Aruban_0xdff5,{container:_0x269a22}=_0x4663cf['getComponent']('minecraft:inventory'),_0x430c6a=_0x269a22[_0x3d1370(0x208)](_0x188183);if(!_0x430c6a){_0x4663cf[_0x3d1370(0x1e3)](_0x3d1370(0x1d6));return;}const _0x50565d=new ModalFormData();_0x50565d[_0x3d1370(0x1e4)](_0x3d1370(0x1fd)),_0x40d8a8['forEach'](_0x3153f3=>{const _0x17adf8=_0x3d1370;_0x50565d[_0x17adf8(0x1e0)]('§f§l\x20'+translateEnchantmentName(_0x3153f3[_0x17adf8(0x1d8)])+_0x17adf8(0x1e2),_0x3153f3[_0x17adf8(0x1f5)],_0x3153f3[_0x17adf8(0x221)],0x1,_0x3153f3[_0x17adf8(0x1f5)]);}),_0x50565d[_0x3d1370(0x22f)](_0x4663cf)[_0x3d1370(0x210)](_0x4121ff=>{const _0x25caea=_0x3d1370;if(_0x4121ff[_0x25caea(0x212)])return;let _0x2e5d89={},_0xde6ca3=new Set(),_0x3f78de=![],_0x131589=0x0,_0x39d171=0x0;_0x4121ff[_0x25caea(0x1de)][_0x25caea(0x225)]((_0x16a572,_0x162fc4)=>{const _0xee3beb=_0x25caea,_0x2d4b42=_0x40d8a8[_0x162fc4]['currentLevel'];if(_0x16a572!==_0x2d4b42){_0x2e5d89[_0x40d8a8[_0x162fc4][_0xee3beb(0x1d8)]]=_0x16a572,_0x3f78de=!![];const _0x1591d2=_0x16a572-_0x2d4b42;config['xp'][_0xee3beb(0x217)]&&(_0x131589+=_0x1591d2*config['xp'][_0xee3beb(0x22d)]),config[_0xee3beb(0x218)]['state']&&(_0x39d171+=_0x1591d2*config[_0xee3beb(0x218)][_0xee3beb(0x21f)]);}});if(!_0x3f78de){_0x4663cf[_0x25caea(0x1e3)](_0x25caea(0x1e6));return;}for(let _0x5764a6 in _0x2e5d89){for(let _0x47bd50 of enchant_incompatible[_0x5764a6]||[]){if(_0x2e5d89[_0x47bd50]){let _0xd7ff72=[_0x5764a6,_0x47bd50][_0x25caea(0x20b)]()[_0x25caea(0x1f2)](_0x25caea(0x226));_0xde6ca3[_0x25caea(0x22a)](_0xd7ff72);}}}if(_0xde6ca3[_0x25caea(0x220)]>0x0){let _0x257b50=_0x25caea(0x1db);_0xde6ca3[_0x25caea(0x225)](_0x4f1126=>{const _0x22ffc6=_0x25caea;_0x257b50+=_0x22ffc6(0x20d)+_0x4f1126+'\x0a';}),_0x4663cf[_0x25caea(0x1e3)](_0x257b50);return;}const _0x3dc540=config[_0x25caea(0x202)]['id'][_0x25caea(0x211)](':')[_0x25caea(0x20e)]()['replace'](/_/g,'\x20')[_0x25caea(0x211)]('\x20')[_0x25caea(0x1e1)](_0xcef7f4=>_0xcef7f4[_0x25caea(0x216)](0x0)[_0x25caea(0x1f8)]()+_0xcef7f4[_0x25caea(0x1e8)](0x1))['join']('\x20'),_0x47b020=new ActionFormData();_0x47b020[_0x25caea(0x1e4)](_0x25caea(0x1dc));let _0x19790c='';if(config[_0x25caea(0x218)][_0x25caea(0x217)]){const _0x38b805=getScore(_0x4663cf,config['scores'][_0x25caea(0x1e9)]);_0x19790c+='§b'+config['scores'][_0x25caea(0x1d8)]+'\x20:\x20§a'+_0x38b805+'\x0a';}if(config['items'][_0x25caea(0x217)]){const _0x2e5aae=getItemCount(_0x4663cf['getComponent'](_0x25caea(0x1ef))[_0x25caea(0x22e)],config['items']['id']);_0x19790c+='§b'+config[_0x25caea(0x202)]['name']+'\x20:\x20§a'+_0x2e5aae+'\x0a';}if(config['xp'][_0x25caea(0x217)]){const _0x1942ec=see_xp(_0x4663cf);_0x19790c+='§b'+config['xp']['name']+_0x25caea(0x21b)+_0x1942ec+'\x0a';}_0x19790c+=_0x25caea(0x209)+_0x4663cf[_0x25caea(0x1d8)],_0x47b020[_0x25caea(0x1df)](''+_0x19790c);const _0x14339f=_0x430c6a['nameTag']??translateItemName(_0x430c6a[_0x25caea(0x1fb)]),_0x404805=_0x430c6a['getLore']()['join']('\x0a')||_0x25caea(0x1fe),_0x2ad139=_0x188183,_0x32139a=getComponent(_0x430c6a,ItemEnchantableComponent[_0x25caea(0x1ee)]),_0x4b2008=_0x32139a?_0x32139a['getEnchantments']():[];let _0x3cf2e2=_0x4b2008[_0x25caea(0x1e5)]>0x0?_0x4b2008[_0x25caea(0x1e1)](_0x19d1dd=>_0x25caea(0x1ec)+translateEnchantmentName(_0x19d1dd['type']['id'])+_0x25caea(0x203)+_0x19d1dd[_0x25caea(0x1ea)]+'§f')[_0x25caea(0x1f2)](''):'None';const _0x2e214c=getItemIcon(_0x430c6a);_0x47b020[_0x25caea(0x1df)](_0x25caea(0x1dd)+_0x14339f+_0x25caea(0x201)+_0x404805+_0x25caea(0x227)+_0x2ad139+_0x25caea(0x1f6)+_0x3cf2e2,_0x2e214c);let _0x322a8a='§f---------------------';for(let _0x271df6 in _0x2e5d89){const _0x551276=translateEnchantmentName(_0x271df6),_0xaf7f52=_0x2e5d89[_0x271df6];_0x322a8a+=_0x25caea(0x20f)+_0x551276+'\x20'+_0xaf7f52;}_0x322a8a+='\x0a§f---------------------',config['xp'][_0x25caea(0x217)]&&(_0x322a8a+=_0x25caea(0x213)+_0x131589),config['scores'][_0x25caea(0x217)]&&(_0x322a8a+=_0x25caea(0x230)+config[_0x25caea(0x218)][_0x25caea(0x1ed)]+_0x25caea(0x20a)+_0x39d171),config['items'][_0x25caea(0x217)]&&(_0x322a8a+=_0x25caea(0x21a)+_0x3dc540+_0x25caea(0x1eb)+config[_0x25caea(0x202)][_0x25caea(0x1fc)]+'\x20'),_0x322a8a+=_0x25caea(0x1f4),_0x47b020['body'](_0x322a8a),_0x47b020['button'](_0x25caea(0x1d7)),_0x47b020[_0x25caea(0x1df)](_0x25caea(0x22b)),_0x47b020['show'](_0x4663cf)[_0x25caea(0x210)](({selection:_0x522370,canceled:_0x3d0dc3})=>{const _0x46970b=_0x25caea;if(_0x3d0dc3){_0x269a22[_0x46970b(0x1f3)](_0x188183,_0x430c6a);return;}switch(_0x522370){case 0x0:_0x4663cf['sendMessage'](_0x46970b(0x21e)),_0x269a22[_0x46970b(0x1f3)](_0x188183,_0x430c6a);break;case 0x1:_0x4663cf[_0x46970b(0x1e3)](_0x46970b(0x21e)),_0x269a22[_0x46970b(0x1f3)](_0x188183,_0x430c6a);break;case 0x2:const _0x8d7205=findEmptySlot(_0x269a22);if(_0x430c6a[_0x46970b(0x1fb)]===_0x46970b(0x215)&&_0x430c6a[_0x46970b(0x1fc)]>0x1&&_0x8d7205===-0x1){_0x4663cf[_0x46970b(0x1e3)]('\x20§8>>\x20§cNo\x20empty\x20slot\x20available\x20for\x20enchanted\x20book.'),_0x269a22[_0x46970b(0x1f3)](_0x188183,_0x430c6a);return;}if(!remove_resources(_0x4663cf,_0x131589,_0x39d171,config['items']['amount'])){_0x4663cf[_0x46970b(0x1e3)](_0x46970b(0x207)),_0x269a22[_0x46970b(0x1f3)](_0x188183,_0x430c6a);return;}if(_0x430c6a[_0x46970b(0x1fb)]===_0x46970b(0x215)){if(_0x430c6a[_0x46970b(0x1fc)]>0x1){if(_0x8d7205===-0x1){_0x4663cf[_0x46970b(0x1e3)](_0x46970b(0x1f1)),_0x269a22['setItem'](_0x188183,_0x430c6a);return;}_0x430c6a[_0x46970b(0x1fc)]-=0x1,_0x269a22[_0x46970b(0x1f3)](_0x188183,_0x430c6a);const _0x17efb4=createEnchantedBook(_0x2e5d89);_0x269a22[_0x46970b(0x1f3)](_0x8d7205,_0x17efb4);}else{const _0x30d873=createEnchantedBook(_0x2e5d89);_0x269a22[_0x46970b(0x1f3)](_0x188183,_0x30d873);}_0x4663cf[_0x46970b(0x1e3)](_0x46970b(0x223));}else{const _0x3c352c=_0x430c6a[_0x46970b(0x205)](_0x46970b(0x1d9));if(_0x3c352c){for(let _0x12ed1a in _0x2e5d89){_0x3c352c[_0x46970b(0x20c)]({'type':EnchantmentTypes[_0x46970b(0x1ff)](_0x12ed1a),'level':_0x2e5d89[_0x12ed1a]});}_0x269a22[_0x46970b(0x1f3)](_0x188183,_0x430c6a),_0x4663cf[_0x46970b(0x1e3)]('\x20§8>>\x20§aEnchantments\x20applied!');}}break;case 0x3:_0x4663cf[_0x46970b(0x1e3)]('\x20§8>>\x20§aOperation\x20canceled.'),_0x269a22[_0x46970b(0x1f3)](_0x188183,_0x430c6a);break;default:_0x269a22[_0x46970b(0x1f3)](_0x188183,_0x430c6a);break;}})[_0x25caea(0x206)](_0x3910cd=>{const _0x317fb4=_0x25caea;console[_0x317fb4(0x1fa)](_0x3910cd,_0x3910cd['stack']),_0x269a22[_0x317fb4(0x1f3)](_0x188183,_0x430c6a);});})[_0x3d1370(0x206)](_0x4168ea=>{const _0x422350=_0x3d1370;console[_0x422350(0x1fa)](_0x4168ea,_0x4168ea[_0x422350(0x219)]),_0x269a22['setItem'](_0x188183,_0x430c6a);});}function findEmptySlot(_0x16772d){const _0x596391=AruCube_Death_Aruban_0xdff5;for(let _0x2a6eb2=0x0;_0x2a6eb2<_0x16772d[_0x596391(0x220)];_0x2a6eb2++){if(!_0x16772d[_0x596391(0x208)](_0x2a6eb2))return _0x2a6eb2;}return-0x1;}function createEnchantedBook(_0x1ffbc8){const _0x122665=AruCube_Death_Aruban_0xdff5,_0x6a7e2=new ItemStack(_0x122665(0x22c),0x1),_0x1a70e3=_0x6a7e2[_0x122665(0x205)](_0x122665(0x1d9));if(_0x1a70e3)for(let _0x1e832c in _0x1ffbc8){_0x1a70e3[_0x122665(0x20c)]({'type':EnchantmentTypes['get'](_0x1e832c),'level':_0x1ffbc8[_0x1e832c]});}return _0x6a7e2;}function translateEnchantmentName(_0x1089cc){const _0x43f39d=AruCube_Death_Aruban_0xdff5;return _0x1089cc[_0x43f39d(0x211)]('_')[_0x43f39d(0x1e1)](_0x3401f2=>_0x3401f2[_0x43f39d(0x216)](0x0)[_0x43f39d(0x1f8)]()+_0x3401f2[_0x43f39d(0x1e8)](0x1))[_0x43f39d(0x1f2)]('\x20');}
+import { ActionFormData, ModalFormData } from "@minecraft/server-ui";
+import { enchant_incompatible, see_xp } from "../item_list";
+import { EnchantmentTypes, ItemEnchantableComponent, ItemStack } from "@minecraft/server";
+import { getComponent, translateItemName, getScore, getItemCount, getItemIcon } from "../function";
+import { remove_resources } from "../item_list";
+import { config } from "../../config";
+
+export async function prepareEnchantments(player, item, slot) {
+  const typeId = item.typeId;
+  const enchantable = getComponent(item, ItemEnchantableComponent.componentId);
+  if (!enchantable) {
+    player.sendMessage("\ue0f3 Item is not enchantable.");
+    return;
+  }
+  const applicable = getApplicableEnchantments(typeId);
+  const existingEnchantments = enchantable.getEnchantments();
+  const currentLevels = {};
+  existingEnchantments.forEach((enchantment) => {
+    currentLevels[enchantment.type.id] = enchantment.level;
+  });
+  const options = applicable
+    .filter((enchantment) => {
+      const currentLevel = currentLevels[enchantment.name] || 0;
+      if (currentLevel >= enchantment.maxLevel) {
+        return false;
+      }
+      for (let existingId in currentLevels) {
+        if (enchant_incompatible[existingId]?.includes(enchantment.name)) {
+          return false;
+        }
+      }
+      return true;
+    })
+    .map((enchantment) => {
+      const currentLevel = currentLevels[enchantment.name] || 0;
+      return {
+        name: enchantment.name,
+        maxLevel: enchantment.maxLevel,
+        currentLevel
+      };
+    });
+  if (options.length === 0) {
+    player.sendMessage("\ue0f3 §8>> §cItem has reached its maximum enchantments.");
+    return;
+  }
+  showItemEditor(player, slot, options);
+}
+
+function getApplicableEnchantments(typeId) {
+  const sample = new ItemStack(typeId);
+  const enchantable = getComponent(sample, "minecraft:enchantable");
+  if (!enchantable) {
+    return [];
+  }
+  return EnchantmentTypes.getAll()
+    .filter((type) =>
+      enchantable.canAddEnchantment({
+        type,
+        level: 1
+      })
+    )
+    .map((type) => ({
+      name: type.id,
+      maxLevel: type.maxLevel
+    }));
+}
+
+async function showItemEditor(player, slot, options) {
+  const { container } = player.getComponent("minecraft:inventory");
+  const item = container.getItem(slot);
+  if (!item) {
+    player.sendMessage("\ue0f3 No item found in the specified slot.");
+    return;
+  }
+  const form = new ModalFormData();
+  form.title("arucube.enchant.add");
+  options.forEach((option) => {
+    form.slider("§f§l " + translateEnchantmentName(option.name) + " §a", option.currentLevel, option.maxLevel, 1, option.currentLevel);
+  });
+  form
+    .show(player)
+    .then((response) => {
+      if (response.canceled) {
+        return;
+      }
+      let selectedLevels = {};
+      let conflicts = new Set();
+      let changed = false;
+      let xpCost = 0;
+      let scoreCost = 0;
+      response.formValues.forEach((value, index) => {
+        const currentLevel = options[index].currentLevel;
+        if (value !== currentLevel) {
+          selectedLevels[options[index].name] = value;
+          changed = true;
+          const addedLevels = value - currentLevel;
+          if (config.xp.state) {
+            xpCost += addedLevels * config.xp.xp_remove;
+          }
+          if (config.scores.state) {
+            scoreCost += addedLevels * config.scores.score_remove;
+          }
+        }
+      });
+      if (!changed) {
+        player.sendMessage("\ue0f3 §8>> §cNo enchantments selected.");
+        return;
+      }
+      for (let enchantmentId in selectedLevels) {
+        for (let incompatibleId of enchant_incompatible[enchantmentId] || []) {
+          if (selectedLevels[incompatibleId]) {
+            let conflict = [enchantmentId, incompatibleId].sort().join(" and ");
+            conflicts.add(conflict);
+          }
+        }
+      }
+      if (conflicts.size > 0) {
+        let message = "\ue0f3 §cThe following enchantments are not compatible:§f\n---------------------------------§6\n";
+        conflicts.forEach((conflict) => {
+          message += "   - " + conflict + "\n";
+        });
+        player.sendMessage(message);
+        return;
+      }
+      const costItemName = config.items.id
+        .split(":")
+        .pop()
+        .replace(/_/g, " ")
+        .split(" ")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+      const confirmForm = new ActionFormData();
+      confirmForm.title("arucube.enchant.confirm");
+      let summary = "";
+      if (config.scores.state) {
+        const score = getScore(player, config.scores.score_name);
+        summary += "§b" + config.scores.name + " : §a" + score + "\n";
+      }
+      if (config.items.state) {
+        const itemCount = getItemCount(player.getComponent("minecraft:inventory").container, config.items.id);
+        summary += "§b" + config.items.name + " : §a" + itemCount + "\n";
+      }
+      if (config.xp.state) {
+        const level = see_xp(player);
+        summary += "§b" + config.xp.name + " : §a" + level + "\n";
+      }
+      summary += "§bPlayer : §a" + player.name;
+      confirmForm.button("" + summary);
+      const itemName = item.nameTag ?? translateItemName(item.typeId);
+      const description = item.getLore().join("\n") || "No description";
+      const slotNumber = slot;
+      const itemEnchantable = getComponent(item, ItemEnchantableComponent.componentId);
+      const itemEnchantments = itemEnchantable ? itemEnchantable.getEnchantments() : [];
+      let enchantmentsText =
+        itemEnchantments.length > 0
+          ? itemEnchantments
+              .map((enchantment) => "\n- " + translateEnchantmentName(enchantment.type.id) + ": §a" + enchantment.level + "§f")
+              .join("")
+          : "None";
+      const icon = getItemIcon(item);
+      confirmForm.button(
+        "\n§aName:§f \n" +
+          itemName +
+          "\n§aDescription:§f \n" +
+          description +
+          "\n§aSlot:§f " +
+          slotNumber +
+          "\n§dEnchantments:§f " +
+          enchantmentsText,
+        icon
+      );
+      let body = "§f---------------------";
+      for (let enchantmentId in selectedLevels) {
+        const enchantmentName = translateEnchantmentName(enchantmentId);
+        const selectedLevel = selectedLevels[enchantmentId];
+        body += "\n§d- " + enchantmentName + " " + selectedLevel;
+      }
+      body += "\n§f---------------------";
+      if (config.xp.state) {
+        body += "\n§bTotal §aXP §bcost: §6" + xpCost;
+      }
+      if (config.scores.state) {
+        body += "\n§bTotal §6" + config.scores.display_name + "§b cost: §6" + scoreCost;
+      }
+      if (config.items.state) {
+        body += "\n§bItem §a" + costItemName + " §bcost: §6" + config.items.amount + " ";
+      }
+      body += "\n§f---------------------\n§6If you are sure of your choice, click confirm.\n\n§cOtherwise, click cancel.";
+      confirmForm.body(body);
+      confirmForm.button(
+        "§aConfirm : \n§fYou will proceed to apply the enchantments to your item.\n The required resources will be removed before proceeding."
+      );
+      confirmForm.button(
+        "§cCancel : \n§fThe procedure to add enchantments to the item will be canceled. \nNo cost will be incurred for this."
+      );
+      confirmForm
+        .show(player)
+        .then(({ selection, canceled }) => {
+          if (canceled) {
+            container.setItem(slot, item);
+            return;
+          }
+          switch (selection) {
+            case 0:
+              player.sendMessage("\ue0f3 §8>> §aOperation canceled.");
+              container.setItem(slot, item);
+              break;
+            case 1:
+              player.sendMessage("\ue0f3 §8>> §aOperation canceled.");
+              container.setItem(slot, item);
+              break;
+            case 2:
+              const emptySlot = findEmptySlot(container);
+              if (item.typeId === "minecraft:book" && item.amount > 1 && emptySlot === -1) {
+                player.sendMessage("\ue0f3 §8>> §cNo empty slot available for enchanted book.");
+                container.setItem(slot, item);
+                return;
+              }
+              if (!remove_resources(player, xpCost, scoreCost, config.items.amount)) {
+                player.sendMessage("\ue0f3 §8>> §cNot enough resources.");
+                container.setItem(slot, item);
+                return;
+              }
+              if (item.typeId === "minecraft:book") {
+                if (item.amount > 1) {
+                  if (emptySlot === -1) {
+                    player.sendMessage("\ue0f3 §8>> §cNo empty slot available for enchanted book.");
+                    container.setItem(slot, item);
+                    return;
+                  }
+                  item.amount -= 1;
+                  container.setItem(slot, item);
+                  const enchantedBook = createEnchantedBook(selectedLevels);
+                  container.setItem(emptySlot, enchantedBook);
+                } else {
+                  const enchantedBook = createEnchantedBook(selectedLevels);
+                  container.setItem(slot, enchantedBook);
+                }
+                player.sendMessage("\ue0f3 §8>> §aEnchanted book created and added to inventory!");
+              } else {
+                const enchantable = item.getComponent("minecraft:enchantable");
+                if (enchantable) {
+                  for (let enchantmentId in selectedLevels) {
+                    enchantable.addEnchantment({
+                      type: EnchantmentTypes.get(enchantmentId),
+                      level: selectedLevels[enchantmentId]
+                    });
+                  }
+                  container.setItem(slot, item);
+                  player.sendMessage("\ue0f3 §8>> §aEnchantments applied!");
+                }
+              }
+              break;
+            case 3:
+              player.sendMessage("\ue0f3 §8>> §aOperation canceled.");
+              container.setItem(slot, item);
+              break;
+            default:
+              container.setItem(slot, item);
+              break;
+          }
+        })
+        .catch((error) => {
+          console.error(error, error.stack);
+          container.setItem(slot, item);
+        });
+    })
+    .catch((error) => {
+      console.error(error, error.stack);
+      container.setItem(slot, item);
+    });
+}
+
+function findEmptySlot(container) {
+  for (let slot = 0; slot < container.size; slot++) {
+    if (!container.getItem(slot)) {
+      return slot;
+    }
+  }
+  return -1;
+}
+
+function createEnchantedBook(levels) {
+  const book = new ItemStack("minecraft:enchanted_book", 1);
+  const enchantable = book.getComponent("minecraft:enchantable");
+  if (enchantable) {
+    for (let enchantmentId in levels) {
+      enchantable.addEnchantment({
+        type: EnchantmentTypes.get(enchantmentId),
+        level: levels[enchantmentId]
+      });
+    }
+  }
+  return book;
+}
+
+function translateEnchantmentName(enchantmentId) {
+  return enchantmentId
+    .split("_")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
