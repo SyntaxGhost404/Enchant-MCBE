@@ -1,10 +1,13 @@
 /**
- * Enchant+ 1.1.0: what an Enchant, Transfer or Disenchant costs or gives back.
+ * Enchant+ 1.1.0 for Minecraft: Bedrock Edition 26.60+
+ * What an Enchant, Transfer or Disenchant costs or gives back.
  *
  * The amounts are set in config.js (xp.xp_remove, items.amount, scores.score_remove and the refund shares).
  * Whether XP and Enchant Essence are paid for every enchantment level or once per operation is chosen in the
- * world settings: Behavior Packs -> Enchant+ -> Settings (gear icon) -> "Cost scaling". The setting is declared
+ * world settings: Behavior Packs -> Enchant+ [ BP ] -> gear button -> "Cost scaling". The setting is declared
  * in the behavior pack's manifest.json and read every time a price is calculated, so a change applies at once.
+ *
+ * Based on Enchant+ by Death_Aruban: https://github.com/DeathAruban/Enchant-MCBE
  */
 
 import { world } from "@minecraft/server";

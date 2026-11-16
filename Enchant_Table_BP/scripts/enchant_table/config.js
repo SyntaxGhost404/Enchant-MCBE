@@ -1,40 +1,22 @@
 /**
- * ||========================================================================================================================||
- * ||                                                                                                                        ||
- * ||  ________  _______   ________  _________  ___  ___  ________  ________  ___  ___  ________  ________  ________         ||
- * || |\   ___ \|\  ___ \ |\   __  \|\___   ___\\  \|\  \|\   __  \|\   __  \|\  \|\  \|\   __  \|\   __  \|\   ___  \       ||
- * ||  \ \  \_|\ \ \   __/|\ \  \|\  \|___ \  \_\ \  \\\  \ \  \|\  \ \  \|\  \ \  \\\  \ \  \|\ /\ \  \|\  \ \  \\ \  \     ||
- * ||   \ \  \ \\ \ \  \_|/_\ \   __  \   \ \  \ \ \   __  \ \   __  \ \   _  _\ \  \\\  \ \   __  \ \   __  \ \  \\ \  \    ||
- * ||    \ \  \_\\ \ \  \_|\ \ \  \ \  \   \ \  \ \ \  \ \  \ \  \ \  \ \  \\  \\ \  \\\  \ \  \|\  \ \  \ \  \ \  \\ \  \   ||
- * ||     \ \_______\ \_______\ \__\ \__\   \ \__\ \ \__\ \__\ \__\ \__\ \__\\ _\\ \_______\ \_______\ \__\ \__\ \__\\ \__\  ||
- * ||      \|_______|\|_______|\|__|\|__|    \|__|  \|__|\|__|\|__|\|__|\|__|\|__|\|_______|\|_______|\|__|\|__|\|__| \|__|  ||
- * ||                                                                                                                        ||
- * ||========================================================================================================================||
- * ||                                                                                                                        ||  
- * ||                                               ★ Please do not modify this code ★                                      ||  
- * ||                                   ► This Mod was created for Minecraft Bedrock Edition ◄                               || 
- * ||                                                                                                                        ||
- * ||========================================================================================================================||
+ * Enchant+ 1.1.0 for Minecraft: Bedrock Edition 26.60+
+ * Prices and payment methods. Each payment (Enchant Essence, scoreboard money, XP) can be switched
+ * on or off with "state". Whether XP and Enchant Essence are charged per enchantment level or once
+ * per Enchant/Transfer is chosen per world: world settings -> Behavior Packs -> Enchant+ [ BP ] ->
+ * gear button -> "Cost scaling" (default: both per level).
+ *
+ * Based on Enchant+ by Death_Aruban: https://github.com/DeathAruban/Enchant-MCBE
  */
 
-/**
-* @made_by Death_Aruban
-* @version [1.1.0]
-* @link [https://discord.com/invite/NKy9A9RAe8]
-*/
-
-/**
- * "Cost scaling" (per level or flat, for XP and Enchant Essence) is chosen per world:
- * world settings -> Behavior Packs -> Enchant+ -> Settings (gear icon). Default: both per level.
- */
 export const config = {
     items:{
         /**
-         * state : true or false if you want to use to pay with item
-         * id : Id Item
-         * amount : cost to enchant, per enchantment level added or transferred
-         *          (or once per Enchant/Transfer when "Cost scaling" is set to a flat essence cost)
-         * name : Name Item
+         * Payment with an item (Enchant Essence).
+         * state  : true to take the item, false to switch this payment off
+         * id     : identifier of the item that is taken
+         * amount : items taken per enchantment level added or moved
+         *          (once per Enchant/Transfer when "Cost scaling" uses a flat essence cost)
+         * name   : label on the balance panel
          */
         state:true,
         id:'da:enchant_essence',
@@ -44,11 +26,13 @@ export const config = {
 
     scores:{
         /**
-         * state: true or false if you want to use to pay scoreboard
-         * score_name : scoreboard name from which it should take
-         * score_remove : cost to enchant
-         * display_name and name : name that appears in the ui
-         * refund : in case of disenchantment how much it returns to the player
+         * Payment with scoreboard money (switched off by default).
+         * state        : true to take money from a scoreboard objective, false to switch this payment off
+         * score_name   : scoreboard objective the money is taken from
+         * score_remove : money taken per enchantment level added or moved
+         * display_name : name used on the recap screens and in messages
+         * refund       : share given back when disenchanting (0.6 = 60%)
+         * name         : label on the balance panel
          */
         state:false ,
         score_name:'money',
@@ -60,11 +44,12 @@ export const config = {
 
     xp:{
         /**
-         * state: true or false if you want to use to pay XP
-         * xp_remove : cost to enchant, per enchantment level added or transferred
-         *             (or once per Enchant/Transfer when "Cost scaling" is set to a flat XP cost)
-         * refund: in case of disenchantment how much it returns to the player
-         * name: name that appears in the ui
+         * Payment with XP levels.
+         * state     : true to take XP levels, false to switch this payment off
+         * xp_remove : XP levels taken per enchantment level added or moved
+         *             (once per Enchant/Transfer when "Cost scaling" uses a flat XP cost)
+         * refund    : share given back when disenchanting (0.5 = half)
+         * name      : label on the balance panel
          */
         state:true,
         xp_remove:3,

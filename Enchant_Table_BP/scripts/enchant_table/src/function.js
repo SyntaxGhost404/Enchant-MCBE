@@ -1,28 +1,10 @@
 /**
- * ||========================================================================================================================||
- * ||                                                                                                                        ||
- * ||  ________  _______   ________  _________  ___  ___  ________  ________  ___  ___  ________  ________  ________         ||
- * || |\   ___ \|\  ___ \ |\   __  \|\___   ___\\  \|\  \|\   __  \|\   __  \|\  \|\  \|\   __  \|\   __  \|\   ___  \       ||
- * ||  \ \  \_|\ \ \   __/|\ \  \|\  \|___ \  \_\ \  \\\  \ \  \|\  \ \  \|\  \ \  \\\  \ \  \|\ /\ \  \|\  \ \  \\ \  \     ||
- * ||   \ \  \ \\ \ \  \_|/_\ \   __  \   \ \  \ \ \   __  \ \   __  \ \   _  _\ \  \\\  \ \   __  \ \   __  \ \  \\ \  \    ||
- * ||    \ \  \_\\ \ \  \_|\ \ \  \ \  \   \ \  \ \ \  \ \  \ \  \ \  \ \  \\  \\ \  \\\  \ \  \|\  \ \  \ \  \ \  \\ \  \   ||
- * ||     \ \_______\ \_______\ \__\ \__\   \ \__\ \ \__\ \__\ \__\ \__\ \__\\ _\\ \_______\ \_______\ \__\ \__\ \__\\ \__\  ||
- * ||      \|_______|\|_______|\|__|\|__|    \|__|  \|__|\|__|\|__|\|__|\|__|\|__|\|_______|\|_______|\|__|\|__|\|__| \|__|  ||
- * ||                                                                                                                        ||
- * ||========================================================================================================================||
- * ||                                                                                                                        ||  
- * ||                                               ★ Please do not modify this code ★                                      ||  
- * ||                                   ► This Mod was created for Minecraft Bedrock Edition ◄                               || 
- * ||                                                                                                                        ||
- * ||========================================================================================================================||
+ * Enchant+ 1.1.0 for Minecraft: Bedrock Edition 26.60+
+ * Main menu screens and shared helpers: item names and icons, the balance panel and the checks for
+ * enchantments that cannot be combined.
+ *
+ * Based on Enchant+ by Death_Aruban: https://github.com/DeathAruban/Enchant-MCBE
  */
-
-/**
-* @made_by Death_Aruban
-* @version [1.1.0]
-* @link [https://discord.com/invite/NKy9A9RAe8]
-* @upgrade Updated for Minecraft: Bedrock Edition 26.60+ (@minecraft/server 2.11.0, @minecraft/server-ui 2.3.0).
-*/
 
 import { ActionFormData } from "@minecraft/server-ui";
 import { EnchantmentTypes, ItemEnchantableComponent, ItemStack, world } from "@minecraft/server";

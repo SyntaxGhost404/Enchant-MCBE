@@ -1,165 +1,234 @@
+# Enchant+ 1.1.0
+
 <p align="center">
-     <a href="https://github.com/DeathAruban/Enchant-MCBE">
-		<img src="https://github.com/DeathAruban/Enchant-MCBE/blob/main/img/enchant+.png" loading="eager" />
-	</a><br>
-    <b>Addon Enchant + for Minecraft: Bedrock Edition written in Json and javascript MC (Bedrock 26.60+ · Script API @minecraft/server 2.11.0 · @minecraft/server-ui 2.3.0)</b>
-<p align="center">
-	<a href="https://github.com/DeathAruban/Enchant-MCBE/releases/latest"><img alt="GitHub release (latest SemVer)" src="https://img.shields.io/github/v/release/DeathAruban/Enchant-MCBE?label=release&sort=semver"></a>
-	<a href="https://github.com/DeathAruban/Enchant-MCBE/releases/latest"><img alt="GitHub release (latest by SemVer)" src="https://img.shields.io/github/downloads/DeathAruban/Enchant-MCBE/latest/total?sort=semver"></a>
-<img alt="PingPong status" src="https://img.shields.io/pingpong/status/sp_7b7ce509b36c47ee9b20d041d018dc0a">
-<br>
-<a href="https://discord.gg/NKy9A9RAe8"><img src="https://img.shields.io/discord/935017716350320670?label=discord&color=7289DA&logo=discord" alt="Discord" /></a>
-<a href="https://github.com//DeathAruban/Enchant-MCBE/releases"><img alt="GitHub all releases" src="https://img.shields.io/github/downloads/DeathAruban/Enchant-MCBE/total?label=downloads%40total"></a>
-<img alt="YouTube Video Views" src="https://img.shields.io/youtube/views/QoqngsfcNZE?style=social">
-<img alt="GitHub" src="https://img.shields.io/github/license/DeathAruban/Enchant-MCBE">
+  <img src="img/enchant_table_3d.png" width="220" alt="The Enchant+ table: an obsidian block with emerald corners and an open book on top" />
 </p>
 
-# Description
-This behavior adds a new enchantment table to your world, allowing for maximum customization when enchanting your items. Currently, it supports vanilla enchantments. In future updates, support for custom enchantments will also be added.
+Enchant+ is an enchanting table for Minecraft: Bedrock Edition where nothing is left to chance. You choose which enchantments an item gets and at which level, take enchantments off again, and move them from one item to another. Every price is shown before you confirm, and you pay with XP levels and Enchant Essence.
 
-## Language support 🌍
-- English (United States)
-- English (United Kingdom)
-- if you find errors or your language is missing, send me a message, if you provide me with a correct translation I will add credits for support 🤝
+This edition, **1.1.0**, is rebuilt for **Minecraft: Bedrock Edition 26.60 and newer**.
 
-# Check if the version or where you are using the addon is compatible
+## Contents
 
-### Enchant+ 1.1.0 (this version)
+- [Features](#features)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Getting started](#getting-started)
+- [Using the table](#using-the-table)
+- [Prices and the Cost scaling setting](#prices-and-the-cost-scaling-setting)
+- [Configuration file](#configuration-file)
+- [What changed in 1.1.0](#what-changed-in-110)
+- [Known limitations](#known-limitations)
+- [Project layout](#project-layout)
+- [Credits and license](#credits-and-license)
 
-Requires **Minecraft: Bedrock Edition 26.60 or newer** (packs use `min_engine_version` 1.26.60 and the scripts use `@minecraft/server` 2.11.0 / `@minecraft/server-ui` 2.3.0, which are only available from 26.60). Built and checked for the latest stable releases **26.60, 26.62 and 26.63**.
+## Features
 
-| Supported | World | Realms |Server Dedicated | Custom servers | Windows | Mobile | PS4/PS5 | Xbox | Nintendo Switch |
-| ------- | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
-| 26.60 – 26.63   |:white_check_mark: | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| 1.21.130 and older   | :x:  | :x: | :x: | :x: | :x: | :x: | :x: | :x: | :x: |
+- **Enchant** any enchantable item or a book. Each enchantment the item can take gets a slider, from its current level up to the enchantment's maximum.
+- **Disenchant** an item completely or only some levels, and get part of the XP back.
+- **Transfer** enchantment levels from one item to another. Levels add up on the receiving item.
+- **The game's rules apply.** Only enchantments that fit the item are offered. Pairs that can't go together (Infinity and Mending, Sharpness and Smite, Loyalty and Riptide and so on) are listed in chat before anything is charged.
+- **No surprises at checkout.** A recap lists the new levels and the total cost. If you are short of XP or essence, chat says exactly what is missing and nothing is taken.
+- **Per-world prices.** XP and Enchant Essence can each be charged per enchantment level or once per operation, set in the world's Behavior Pack settings.
+- **Custom menus** with item icons, a search box and a profile panel showing your character, balances and name.
+- **A floating sphere** above every table. It disappears with its table, whatever destroys the table.
 
-> The 1.1.0 update was validated against Mojang's official 26.60 resources (vanilla UI files, JSON schemas and Script API type definitions), but it has not yet been play-tested on every platform listed above. Please report any issue you find in-game.
+## Requirements
 
-### Enchant+ 1.0.5 (previous release, for older game versions)
+- Minecraft: Bedrock Edition **26.60 or newer**. The packs do not load on older versions.
+- No experimental toggles are needed.
+- Script API modules: `@minecraft/server` 2.11.0 and `@minecraft/server-ui` 2.3.0 (included in the game).
+- Made for single-player worlds, Realms and dedicated servers. So far it has been play-tested in single-player on Android.
 
-| Supported | World | Realms |Server Dedicated | Custom servers | Windows | Mobile | PS4/PS5 | Xbox | Nintendo Switch |
-| ------- | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
-| 1.21.44   |:white_check_mark: | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| 1.21.0   |:white_check_mark: | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| 1.20.80   |:white_check_mark: | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| 1.20.71   |:white_check_mark: | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| previous versions   | :x:  | :x: | :x: | :x: | :x: | :x: | :x: | :x: | :x: | :x: | 
+Playing on an older version? The original Enchant+ 1.0.5 (for Minecraft up to 1.21.44) is on the `main` branch and in the [original repository](https://github.com/DeathAruban/Enchant-MCBE).
 
-# How does it work (Old Version 1.0.4 ) New guide arrive
-To make it work, the first thing you will need to do is build the enchantment table using this recipe:
-<p align="center">
- <img src="https://github.com/DeathAruban/Enchant-MCBE/blob/main/img/craft.png" loading="eager" />
-</p>
-Now, when you place the created block in the crafting table, it will appear like this:
-<p align="center">
- <img src="https://github.com/DeathAruban/Enchant-MCBE/blob/main/img/enchant_table_3d.png" loading="eager" />
-</p>
-When you interact with the block, obviously you should not have any blocks or items in your hand. This will open a UI which will show the items in your inventory that can be enchanted by the table. Under each item, there will be a slot name with a value. This is to help you understand where in your inventory your item is located. Here, you need to select the item you prefer to enchant
-<p align="center">
- <img src="https://github.com/DeathAruban/Enchant-MCBE/blob/main/img/1.png" loading="eager" />
-</p>
-When you have selected the item to enchant, it will take you to this UI where you select which enchantments you want to apply. Remember, you must respect the principle of enchanting in Minecraft Bedrock, that you cannot put enchantments that cannot be combined, like Protection and Fire Protection. In vanilla, these are not enchantments that you can put together, and the same applies here.
-<p align="center">
- <img src="https://github.com/DeathAruban/Enchant-MCBE/blob/main/img/2.png" loading="eager" />
-</p>
-Once you have added the enchantments you desire, confirm with the button below which will take you to a similar UI. This will give you a summary of the enchantments you are adding and the final price. Obviously, you can either confirm or cancel. If you confirm, the corresponding amount of XP indicated will be removed from you.
-<p align="center">
- <img src="https://github.com/DeathAruban/Enchant-MCBE/blob/main/img/3.png" loading="eager" />
-</p>
-# Cost Xp
-Instead, if you want to change the price to enchant your items, just go to:
+## Installation
 
-```json5
-Enchant_Table_BP/scripts/enchant_table/config.js
-```
-Open the config file and change the values. Each payment method can be turned on or off with `state`:
-```json5
- items:{ state:true, id:'da:enchant_essence', amount:3 },   // Enchant Essence per enchantment level (or per operation, see below)
- scores:{ state:false, score_name:'money', score_remove:10, refund:0.6 },   // scoreboard cost per enchantment level
- xp:{ state:true, xp_remove:3, refund:0.5 }   // XP levels per enchantment level (or per operation, see below)
+### Phones, tablets and PCs
+
+1. Open the Enchant+ `.mcaddon` file. Minecraft imports two packs: **Enchant+ [ BP ]** (behavior) and **Enchant+ [ RP ]** (resources).
+2. Open the world's settings, go to **Behavior Packs** and activate **Enchant+ [ BP ]**. The resource pack is added with it.
+
+To install by hand instead, copy `Enchant_Table_BP` into the `behavior_packs` folder and `Enchant_Table_RP` into the `resource_packs` folder of the game's `com.mojang` folder:
+
+| Device | `com.mojang` folder |
+| --- | --- |
+| Windows (Minecraft 1.21.120 and newer) | `%APPDATA%\Minecraft Bedrock\Users\Shared\games\com.mojang` |
+| Android | `Android/data/com.mojang.minecraftpe/files/games/com.mojang` |
+| iPhone and iPad | Files app: `On My iPhone/Minecraft/games/com.mojang` |
+
+### Consoles
+
+Xbox, PlayStation and Switch can't import add-on files. Play the add-on on a Realm or server that has the packs, or set up the world on another device and upload it to a Realm.
+
+### Dedicated servers
+
+Copy both pack folders into the server's `behavior_packs` and `resource_packs` folders and add them to the world's `world_behavior_packs.json` and `world_resource_packs.json`:
+
+```json
+[{ "pack_id": "2252a380-edfc-408d-ac4f-118a1128d251", "version": [1, 1, 0] }]
 ```
 
-### Cost scaling (world settings)
-Whether XP and Enchant Essence are paid **per enchantment level** or **once per Enchant/Transfer** is chosen for each world, without editing files: open the world's settings, go to **Behavior Packs**, select **Enchant+ [ BP ]** and press its **Settings** (gear) button, then pick a **Cost scaling** option. It works before you enter the world and while you play, and a change applies to the next Enchant or Transfer.
-
-| Cost scaling | XP cost | Enchant Essence cost |
-| ------- | ------- | ------- |
-| Both XP and essence scale per level (**default**) | `xp_remove` x levels | `amount` x levels |
-| Flat XP cost, essence scales per level | `xp_remove` once | `amount` x levels |
-| XP scales per level, flat essence cost | `xp_remove` x levels | `amount` once |
-| Both at a flat rate | `xp_remove` once | `amount` once |
-
-"Levels" means all the enchantment levels added (Enchant) or moved (Transfer) in one go. Example with the default amounts: Sharpness III + Unbreaking II is 5 levels, so per-level costs take 15 XP levels and 15 Enchant Essence, and flat costs take 3 of each. Disenchanting gives back XP in the same way as the XP cost (per level, or a flat `xp_remove x refund` with a flat XP cost); Enchant Essence is not given back. Scoreboard money, when turned on, is always per level.
-
-# What's new in 1.1.0 (update for Minecraft: Bedrock Edition 26.60+)
-- Updated for the latest stable Minecraft: Bedrock Edition (26.60 / 26.62 / 26.63): manifests now target engine version 1.26.60 and the latest stable Script API (`@minecraft/server` 2.11.0, `@minecraft/server-ui` 2.3.0).
-- Scripts migrated to the Script API 2.x: `runCommandAsync()` (removed by Mojang) was replaced and the menu sliders use the new `slider()` options.
-- Enchant Essence now costs `amount` per enchantment level, like XP (original issue #7). The new **Cost scaling** setting in the world's Behavior Pack settings switches XP and essence between per level and flat (see "Cost scaling" above). The behavior pack manifest moved to format version 3, which pack settings require.
-- The table is now a block with a custom component (`da:enchant_table`, Minecraft 1.21.90+): the game treats it like a vanilla crafting table, so using it opens the menu and a held block is only placed on it while sneaking. Its floating sphere is added and removed together with the block, however the block is placed or destroyed.
-- Custom menus updated for the current server form UI: the button list binding follows vanilla (`#form_button_contents`, used since 1.21.70) and the fallback form layout matches vanilla 26.60.
-- Block, item and entity files moved to the current format versions (block 1.26.60, item 1.26.50, entity 1.26.60), validated against Mojang's official schemas.
-- Menu icons added for the new enchantable items: copper tools and armor, and all spears.
-- The scripts are now readable source code (with type annotations for editors); the menus and messages are unchanged.
-
-### Bug fixes
-- Enchantments that the game refuses to combine (for example Infinity and Mending on a bow, Loyalty or Channeling with Riptide, Depth Strider and Frost Walker) are now listed in chat as not compatible, like Breach and Density, instead of a generic error. The add-on also asks the game directly, so pairs added in future versions are caught too. An enchantment that conflicts with one the item already has is no longer offered, and a transfer is checked against the receiving item's enchantments.
-- The table's glow particles never ended: each table created 20 new particle emitters per second that stayed forever. After a few hours this used up the game's memory, which could make the sphere invisible and scramble block textures. The particles now disappear normally.
-- A table destroyed by an explosion (or in any other way) now removes its floating sphere. Spheres left behind by older versions are removed automatically within a few seconds, and pistons can no longer move the table away from its sphere (like the vanilla enchanting table).
-- Using the table while holding a block no longer shows that block on the table for a moment.
-- Fixed the two menu errors in the content log on the transfer screens (`'image'` could not be resolved, unsolvable layout for `panel_name` / `item_text_scroll`). Long player names now wrap inside the Profile panel instead of running past its edge.
-- The protection against double clicks is now per player, so one player opening the menu no longer blocks other players for half a second.
-- Transferring enchantments to a stack of books with a full inventory crashed after taking the XP/items, the enchantments and a book. The transfer is now refused before anything is taken.
-- Transferring an enchantment onto an item that already had it replaced the existing level instead of adding to it (Sharpness I + II became Sharpness II). Levels now add up as shown on the confirmation screen.
-- If the game refuses an enchantment, nothing is charged any more (the result is prepared before the cost is taken).
-- The golden sword now shows its icon in the menus.
-- The crafting recipe of the table now uses the correct `minecraft:enchanting_table` item id.
-
-# How to install
-
-## 🖥️ Computer
-
-📁.mcaddon version
-- Download the enchant+.mcaddon version
-- click on it to open and it will automatically insert it into the game
-- 
-📦.zip version
-- go to 
- ```bash
-%userprofile%\AppData\Local\Packages\Microsoft.MinecraftUWP_8wekyb3d8bbwe\LocalState\games\com.mojang\
-```
-- pull the texture into the resources folder instead the behavior into the behaviors folder
-
-## 📱 Mobile
-
-📁.mcaddon version
-- Download the enchant+.mcaddon version
-- click on it to open and it will automatically insert it into the game
-
-📦.zip version
-- download or use an application to manage files in the phone, I recommend this [RS Gestore File - Explorer EX](https://play.google.com/store/apps/details?id=com.rs.explorer.filemanager&hl=it&gl=US)
-- (ANDROID & AMAZON FIRE OS) go to 
- ```bash
-/Android/data/com.mojang.minecraftpe/files/games/com.mojang/
+```json
+[{ "pack_id": "edeb2cdc-791e-4edb-b279-0a53f4fae3d5", "version": [1, 1, 0] }]
 ```
 
-- (APPLE IOS ) go to
+The first goes in `world_behavior_packs.json`, the second in `world_resource_packs.json`.
 
- ```bash
-/On My iPhone/Minecraft/games/com.mojang/
+### Updating
+
+Minecraft skips an import when the same pack version is already installed. Delete the old Enchant+ packs first (**Settings → Storage → Behavior Packs / Resource Packs**), then import the new file. Tables and items already in your worlds stay where they are.
+
+## Getting started
+
+**1. Craft Enchant Essence** (6 per craft) at a crafting table:
+
+|  |  |
+| --- | --- |
+| Amethyst Shard | Lapis Lazuli |
+| Glass Bottle |  |
+
+**2. Craft the table:**
+
+|  |  |  |
+| --- | --- | --- |
+|  | Enchant Essence |  |
+| Emerald | Obsidian | Emerald |
+| Obsidian | Enchanting Table | Obsidian |
+
+**3. Place it.** A glowing sphere appears above it.
+
+**4. Use it** with an empty hand, or while holding any item without sneaking. To build on the table instead, sneak while holding a block.
+
+## Using the table
+
+### Select Item
+
+The first screen lists every enchantable item in your inventory with its icon, name, inventory slot and number of enchantments. Type in the search box to filter the list. The profile panel shows your character, your Enchant Essence and XP (and money, if scoreboard payments are on) and your name.
+
+Choose an item to see its details and three actions: **Enchant**, **Disenchant** and **Transfer**. The other items stay in the list, so you can switch without going back.
+
+### Enchant
+
+1. Each slider is one enchantment the item can take. It starts at the current level and goes up to the maximum level.
+2. Enchantments that clash with one the item already has are not offered. If two of your choices clash, chat lists them and nothing is charged.
+3. The recap shows the levels you picked and the total cost. **Confirm** pays and enchants the item.
+
+Enchanting a **book** creates an enchanted book. From a stack of books, one book is used and the enchanted book goes to a free inventory slot.
+
+### Disenchant
+
+- **Remove All** takes every enchantment off the item.
+- **Single** shows one slider per enchantment, set to the level that stays. Move a slider left to remove levels.
+
+The recap shows how much XP you get back. An enchanted book with no enchantments left turns back into a normal book.
+
+### Transfer
+
+1. Choose the item that gives the enchantments and press **Transfer**.
+2. Pick the item that receives them and press **Confirm**.
+3. Each slider shows the level that stays on the first item. Move it left to move levels across.
+4. Check the recap and confirm.
+
+Moved levels are added to the receiving item's own levels, up to the maximum. Enchantments that clash with the receiving item's are refused before the recap. Moving enchantments onto a book creates an enchanted book.
+
+## Prices and the Cost scaling setting
+
+Default prices:
+
+- **3 XP levels** per enchantment level added or moved
+- **3 Enchant Essence** per enchantment level added or moved
+- Disenchanting gives back **half** of the XP. Enchant Essence is never given back.
+- Scoreboard money can be used too, but it is switched off.
+
+How XP and essence grow with the number of levels is chosen per world. Open the world's settings, go to **Behavior Packs**, select **Enchant+ [ BP ]** and press its **gear** button to find **Cost scaling**. It is also available from the pause menu while you play, and a change applies to the next Enchant or Transfer.
+
+| Cost scaling option | XP cost | Essence cost | Sharpness III + Unbreaking II (5 levels) |
+| --- | --- | --- | --- |
+| Both XP and essence scale per level (default) | 3 per level | 3 per level | 15 XP, 15 essence |
+| Flat XP cost, essence scales per level | 3 per operation | 3 per level | 3 XP, 15 essence |
+| XP scales per level, flat essence cost | 3 per level | 3 per operation | 15 XP, 3 essence |
+| Both at a flat rate | 3 per operation | 3 per operation | 3 XP, 3 essence |
+
+An operation is one Enchant or one Transfer, however many levels it adds or moves. The XP given back by Disenchant follows the XP choice: per level, or a single flat amount when the XP cost is flat. This way a cheap flat-rate enchant can never be turned into extra XP. Scoreboard money is always charged per level.
+
+On a dedicated server, the simplest way to choose an option is to change the `default` of the Cost scaling setting in `Enchant_Table_BP/manifest.json`. The option names are `both_per_level`, `flat_xp`, `flat_essence` and `both_flat`.
+
+## Configuration file
+
+The amounts live in `Enchant_Table_BP/scripts/enchant_table/config.js`. Change them before importing the pack, or in the installed copy followed by `/reload` or a world restart.
+
+| Section | Key | Meaning |
+| --- | --- | --- |
+| `items` | `state` | `true` takes Enchant Essence, `false` switches this payment off |
+|  | `id` | Item that is taken (default `da:enchant_essence`) |
+|  | `amount` | Items per enchantment level, or per operation with a flat essence cost |
+|  | `name` | Label on the profile panel |
+| `xp` | `state` | `true` takes XP levels, `false` switches this payment off |
+|  | `xp_remove` | XP levels per enchantment level, or per operation with a flat XP cost |
+|  | `refund` | Share of the XP given back by Disenchant (`0.5` = half) |
+|  | `name` | Label on the profile panel |
+| `scores` | `state` | `true` takes scoreboard money (off by default) |
+|  | `score_name` | Scoreboard objective that holds the money (default `money`) |
+|  | `score_remove` | Money per enchantment level |
+|  | `refund` | Share of the money given back by Disenchant |
+|  | `display_name`, `name` | Names shown on the recap screens and the profile panel |
+
+When scoreboard money is on, create the objective once with `/scoreboard objectives add money dummy` and give players a balance with `/scoreboard players set <player> money <amount>`.
+
+## What changed in 1.1.0
+
+Compared with the original 1.0.5:
+
+- **Runs on Minecraft 26.60 and newer.** New Script API versions, current file formats for blocks, items and entities, and a format 3 behavior pack manifest with a settings screen.
+- **The table is a proper interactive block.** Using it while holding a block no longer flashes that block on the table. Its sphere disappears with it in every case, explosions included. Spheres left behind by older versions are cleaned up within seconds, and pistons can no longer move the table away from its sphere.
+- **Memory leak fixed.** The table's glow effect never ended. After a few hours this filled the game's memory, which could make the sphere invisible and scramble textures.
+- **Clear enchantment rules.** Conflicts the game enforces are listed in chat like all others, enchantments that clash with the item's own are not offered, and transfers check the receiving item.
+- **Fair prices.** Enchant Essence is charged per level by default, with the new Cost scaling setting to change it.
+- **Payments are safe.** Nothing is charged when an operation cannot be completed. A transfer to a stack of books with a full inventory is refused before anything is taken. Moved levels add up as the recap shows.
+- **Menus fixed.** The item list works with the current game interface, two layout errors on the transfer screens are gone, long player names fit in the profile panel, and copper tools and armor, spears and the golden sword have icons.
+- **The table recipe** uses the correct enchanting table item.
+- **Readable source code** with comments and type annotations.
+
+## Known limitations
+
+- Only the game's own enchantments are supported.
+- Items without a flat icon, such as mob heads, show a placeholder icon in the menus.
+- The menus are built with the game's JSON UI. A future game update that changes how forms are drawn could affect them.
+- If the Cost scaling setting does not appear on your device, the default (both per level) is used.
+
+Found a problem? Please open an issue on this repository with your device, game version and what you saw.
+
+## Project layout
+
+```
+Enchant_Table_BP/                     behavior pack
+  manifest.json                       pack info and the Cost scaling setting
+  blocks/enchant_table_plus.json      the table block
+  items/enchant_essence.json          Enchant Essence
+  entities/enchant_sphere.json        the floating sphere
+  recipes/enchant_table/              recipes for the table and the essence
+  functions/                          glow particles around each sphere
+  scripts/load_plugin.js              script entry point
+  scripts/enchant_table/config.js     prices and payment methods
+  scripts/enchant_table/src/
+    inject.js                         table block behavior and sphere clean-up
+    function.js                       main menus and shared helpers
+    costs.js                          price rules and the Cost scaling setting
+    item_list.js                      menu icons, conflict table, payments
+    logic/enchant.js                  Enchant screens
+    logic/disenchant.js               Disenchant screens
+    logic/transfer.js                 Transfer screens
+Enchant_Table_RP/                     resource pack
+  ui/                                 hooks the Enchant+ menus into the game's forms
+  arucube/enchant_table/              menu layouts, images and textures
+  entity/, models/, animations/       the sphere and the table models
+  particles/                          the glow particle
 ```
 
-- pull the texture into the resources folder instead the behavior into the behaviors folder
+## Credits and license
 
-## 🕹️ Console (PS4/PS5/Switch/Xbox and other)
+- **Original add-on:** Enchant+ by **Death_Aruban**, including its artwork, models, textures and menu design. See the [original repository](https://github.com/DeathAruban/Enchant-MCBE).
+- **Version 1.1.0:** update for Minecraft 26.60+, fixes and new features, built on the original.
 
-📦.zip version
-- create dedicated bedrock realm or server
-- pull the texture into the resources folder instead the behavior into the behaviors folder (Realm or Server)
-- enter the realm or the server and you will find your component,remember to enable the settings necessary for operation listed before
-- ⛔you can't put it directly in the console, the manufacturer things don't allow to import external files, it is possible only in case you have made a modification of your console
-
-## For more info visit my discord or watch the video guide on my channel
-- ✉️ Discord Link : [Click](https://discord.gg/NKy9A9RAe8)
-- 💻 Youtube Link :[Click](https://www.youtube.com/watch?v=QoqngsfcNZE&ab_channel=Death_Aruban%E2%84%A2)
-
-## Thank you for choosing this component and to appreciate how it works 😄
+The repository's `LICENSE` file contains CC0 1.0. The pack manifests name CC BY-ND 4.0, and each pack includes the original author's `Terms and Conditions` file. Those texts belong to the original author and are kept unchanged. Read them before sharing or publishing a modified version.
