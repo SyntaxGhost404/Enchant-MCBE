@@ -27,6 +27,7 @@
 import { ActionFormData, ModalFormData } from "@minecraft/server-ui";
 import { EnchantmentTypes, ItemEnchantableComponent, ItemStack } from "@minecraft/server";
 import { buildResourceSummary, getComponent, getItemIcon, translateEnchantmentName, translateItemName } from "../function";
+import { disenchantRefund } from "../costs";
 import { config } from "../../config";
 
 /**
@@ -121,21 +122,21 @@ async function showRemoveEnchantConfirm(player, item, slot, enchantments) {
   const form = new ActionFormData();
   form.title("arucube.enchant.disenchant_confirm");
   let body = "§f---------------------";
-  let xpValue = 0;
-  let scoreValue = 0;
+  let removedLevels = 0;
   enchantments.forEach((enchantment) => {
     const enchantmentName = translateEnchantmentName(enchantment.type.id);
     const level = enchantment.level;
     body += "\n§d- " + enchantmentName + " " + level;
-    xpValue += level * config.xp.xp_remove;
-    scoreValue += level * config.scores.score_remove;
+    removedLevels += level;
   });
+  // Refund for all the levels removed (per level or flat, following the XP cost setting).
+  const refund = disenchantRefund(removedLevels);
   body += "\n§f---------------------";
   if (config.xp.state) {
-    body += "\n§bTotal XP refund: §6" + Math.floor(xpValue * config.xp.refund);
+    body += "\n§bTotal XP refund: §6" + refund.xp;
   }
   if (config.scores.state) {
-    body += "\n§bTotal " + config.scores.display_name + " refund: §6" + Math.floor(scoreValue * config.scores.refund);
+    body += "\n§bTotal " + config.scores.display_name + " refund: §6" + refund.score;
   }
   body += "\n§f---------------------\n§6If you are sure of your choice, click confirm.\n\n§cOtherwise, click cancel.";
   form.body(body);
@@ -159,15 +160,7 @@ async function showRemoveEnchantConfirm(player, item, slot, enchantments) {
           player.sendMessage("\ue0f3 §8>> §aOperation canceled.");
           break;
         case 2: {
-          let xpRefund = 0;
-          let scoreRefund = 0;
-          if (config.xp.state) {
-            xpRefund = Math.floor(xpValue * config.xp.refund);
-          }
-          if (config.scores.state) {
-            scoreRefund = Math.floor(scoreValue * config.scores.refund);
-          }
-          if (!refund_resources(player, xpRefund, scoreRefund)) {
+          if (!refund_resources(player, refund.xp, refund.score)) {
             return;
           }
           const enchantable = item.getComponent("minecraft:enchantable");
@@ -284,15 +277,13 @@ async function showSingleRemoveForm(player, item, slot, enchantments) {
         return;
       }
       const levelsToRemove = {};
-      let xpValue = 0;
-      let scoreValue = 0;
+      let removedLevels = 0;
       response.formValues.forEach((sliderValue, index) => {
         const value = /** @type {number} */ (sliderValue);
         const level = entries[index].level;
         if (value < level) {
           levelsToRemove[entries[index].type] = level - value;
-          xpValue += (level - value) * config.xp.xp_remove;
-          scoreValue += (level - value) * config.scores.score_remove;
+          removedLevels += level - value;
         }
       });
       if (Object.keys(levelsToRemove).length === 0) {
@@ -307,11 +298,13 @@ async function showSingleRemoveForm(player, item, slot, enchantments) {
         const currentLevel = enchantments.find((enchantment) => enchantment.type.id === enchantmentId).level;
         body += "\n§d- " + enchantmentName + " §6 " + currentLevel + " §c-" + levelsToRemove[enchantmentId];
       });
+      // Refund for all the levels removed (per level or flat, following the XP cost setting).
+      const refund = disenchantRefund(removedLevels);
       if (config.xp.state) {
-        body += "\n§bTotal XP refund: §6" + Math.floor(xpValue * config.xp.refund);
+        body += "\n§bTotal XP refund: §6" + refund.xp;
       }
       if (config.scores.state) {
-        body += "\n§bTotal " + config.scores.display_name + " refund: §6" + Math.floor(scoreValue * config.scores.refund);
+        body += "\n§bTotal " + config.scores.display_name + " refund: §6" + refund.score;
       }
       body += "\n§f---------------------\n§6If you are sure of your choice, click confirm.\n\n§cOtherwise, click cancel.";
       confirmForm.body(body);
@@ -337,15 +330,7 @@ async function showSingleRemoveForm(player, item, slot, enchantments) {
               player.sendMessage(itemInfo);
               break;
             case 2: {
-              let xpRefund = 0;
-              let scoreRefund = 0;
-              if (config.xp.state) {
-                xpRefund = Math.floor(xpValue * config.xp.refund);
-              }
-              if (config.scores.state) {
-                scoreRefund = Math.floor(scoreValue * config.scores.refund);
-              }
-              if (!refund_resources(player, xpRefund, scoreRefund)) {
+              if (!refund_resources(player, refund.xp, refund.score)) {
                 return;
               }
               const enchantable = item.getComponent("minecraft:enchantable");

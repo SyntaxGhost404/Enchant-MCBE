@@ -37,6 +37,7 @@ import {
   translateEnchantmentName,
   translateItemName
 } from "../function";
+import { operationCost } from "../costs";
 import { config } from "../../config";
 
 /**
@@ -125,21 +126,14 @@ async function showItemEditor(player, slot, options) {
       /** @type {Record<string, number>} */
       const selectedLevels = {};
       let changed = false;
-      let xpCost = 0;
-      let scoreCost = 0;
+      let addedLevels = 0;
       response.formValues.forEach((sliderValue, index) => {
         const value = /** @type {number} */ (sliderValue);
         const currentLevel = options[index].currentLevel;
         if (value !== currentLevel) {
           selectedLevels[options[index].name] = value;
           changed = true;
-          const addedLevels = value - currentLevel;
-          if (config.xp.state) {
-            xpCost += addedLevels * config.xp.xp_remove;
-          }
-          if (config.scores.state) {
-            scoreCost += addedLevels * config.scores.score_remove;
-          }
+          addedLevels += value - currentLevel;
         }
       });
       if (!changed) {
@@ -154,6 +148,8 @@ async function showItemEditor(player, slot, options) {
         sendIncompatibleMessage(player, conflicts);
         return;
       }
+      // Price for all the levels added (per level or flat, as chosen in the world's pack settings).
+      const { xp: xpCost, score: scoreCost, essence: essenceCost } = operationCost(addedLevels);
       const costItemName = config.items.id
         .split(":")
         .pop()
@@ -198,7 +194,7 @@ async function showItemEditor(player, slot, options) {
         body += "\n§bTotal §6" + config.scores.display_name + "§b cost: §6" + scoreCost;
       }
       if (config.items.state) {
-        body += "\n§bItem §a" + costItemName + " §bcost: §6" + config.items.amount + " ";
+        body += "\n§bItem §a" + costItemName + " §bcost: §6" + essenceCost + " ";
       }
       body += "\n§f---------------------\n§6If you are sure of your choice, click confirm.\n\n§cOtherwise, click cancel.";
       confirmForm.body(body);
@@ -244,7 +240,7 @@ async function showItemEditor(player, slot, options) {
                 container.setItem(slot, item);
                 return;
               }
-              if (!remove_resources(player, xpCost, scoreCost, config.items.amount)) {
+              if (!remove_resources(player, xpCost, scoreCost, essenceCost)) {
                 player.sendMessage("\ue0f3 §8>> §cNot enough resources.");
                 container.setItem(slot, item);
                 return;

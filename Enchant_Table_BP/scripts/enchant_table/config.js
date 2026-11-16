@@ -23,12 +23,17 @@
 * @link [https://discord.com/invite/NKy9A9RAe8]
 */
 
+/**
+ * "Cost scaling" (per level or flat, for XP and Enchant Essence) is chosen per world:
+ * world settings -> Behavior Packs -> Enchant+ -> Settings (gear icon). Default: both per level.
+ */
 export const config = {
     items:{
         /**
          * state : true or false if you want to use to pay with item
          * id : Id Item
-         * amount : cost to enchant
+         * amount : cost to enchant, per enchantment level added or transferred
+         *          (or once per Enchant/Transfer when "Cost scaling" is set to a flat essence cost)
          * name : Name Item
          */
         state:true,
@@ -56,7 +61,8 @@ export const config = {
     xp:{
         /**
          * state: true or false if you want to use to pay XP
-         * xp_remove : cost to enchant
+         * xp_remove : cost to enchant, per enchantment level added or transferred
+         *             (or once per Enchant/Transfer when "Cost scaling" is set to a flat XP cost)
          * refund: in case of disenchantment how much it returns to the player
          * name: name that appears in the ui
          */

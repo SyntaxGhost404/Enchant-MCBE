@@ -1,5 +1,5 @@
 {
-	"format_version": 2,
+	"format_version": 3,
 	"metadata": {
 	  "authors": ["Death_Aruban"],
 	  "generated_with": {"arucube": ["1.0.0"]},
@@ -10,28 +10,45 @@
 	"header": {
 	  "name": "pack.name",
 	  "description": "pack.description",
-	  "min_engine_version": [1,26,60],
+	  "min_engine_version": "1.26.60",
 	  "uuid": "2252a380-edfc-408d-ac4f-118a1128d251",
-	  "version": [1,1,0]
+	  "version": "1.1.0"
 	},
 	"modules": [
 	  {
 		"type": "data",
 		"uuid": "1709e59e-2d42-467e-b963-153b1c7b67a6",
-		"version": [1,0,0]
+		"version": "1.0.0"
 	  },
 	  {
 		"type": "script",
 		"language": "javascript",
 		"uuid": "3c335b30-229a-4f4e-bbff-a1d906c541a3",
 		"entry": "scripts/load_plugin.js",
-		"version": [1,0,0]
+		"version": "1.0.0"
 	  }
 	],
 	"dependencies": [
-	  { "uuid": "edeb2cdc-791e-4edb-b279-0a53f4fae3d5", "version": [1,1,0] },
+	  { "uuid": "edeb2cdc-791e-4edb-b279-0a53f4fae3d5", "version": "1.1.0" },
 	  { "module_name": "@minecraft/server", "version": "2.11.0" },
 	  { "module_name": "@minecraft/server-ui", "version": "2.3.0" }
+	],
+	"settings": [
+	  {
+		"type": "label",
+		"text": "§lEnchant+ costs§r\nPer level: the XP or Enchant Essence cost is paid for every enchantment level you add or transfer.\nFlat: it is paid once per Enchant or Transfer, however many levels.\nWith a flat XP cost, Disenchant gives back a flat amount of XP too."
+	  },
+	  {
+		"type": "dropdown",
+		"name": "da:cost_mode",
+		"text": "Cost scaling",
+		"options": [
+		  { "name": "both_per_level", "text": "Both XP and essence scale per level (default)" },
+		  { "name": "flat_xp", "text": "Flat XP cost, essence scales per level" },
+		  { "name": "flat_essence", "text": "XP scales per level, flat essence cost" },
+		  { "name": "both_flat", "text": "Both at a flat rate" }
+		],
+		"default": "both_per_level"
+	  }
 	]
   }
-  

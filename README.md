@@ -74,19 +74,32 @@ Enchant_Table_BP/scripts/enchant_table/config.js
 ```
 Open the config file and change the values. Each payment method can be turned on or off with `state`:
 ```json5
- items:{ state:true, id:'da:enchant_essence', amount:3 },   // items taken per operation
+ items:{ state:true, id:'da:enchant_essence', amount:3 },   // Enchant Essence per enchantment level (or per operation, see below)
  scores:{ state:false, score_name:'money', score_remove:10, refund:0.6 },   // scoreboard cost per enchantment level
- xp:{ state:true, xp_remove:3, refund:0.5 }   // XP levels per enchantment level
+ xp:{ state:true, xp_remove:3, refund:0.5 }   // XP levels per enchantment level (or per operation, see below)
 ```
+
+### Cost scaling (world settings)
+Whether XP and Enchant Essence are paid **per enchantment level** or **once per Enchant/Transfer** is chosen for each world, without editing files: open the world's settings, go to **Behavior Packs**, select **Enchant+ [ BP ]** and press its **Settings** (gear) button, then pick a **Cost scaling** option. It works before you enter the world and while you play, and a change applies to the next Enchant or Transfer.
+
+| Cost scaling | XP cost | Enchant Essence cost |
+| ------- | ------- | ------- |
+| Both XP and essence scale per level (**default**) | `xp_remove` x levels | `amount` x levels |
+| Flat XP cost, essence scales per level | `xp_remove` once | `amount` x levels |
+| XP scales per level, flat essence cost | `xp_remove` x levels | `amount` once |
+| Both at a flat rate | `xp_remove` once | `amount` once |
+
+"Levels" means all the enchantment levels added (Enchant) or moved (Transfer) in one go. Example with the default amounts: Sharpness III + Unbreaking II is 5 levels, so per-level costs take 15 XP levels and 15 Enchant Essence, and flat costs take 3 of each. Disenchanting gives back XP in the same way as the XP cost (per level, or a flat `xp_remove x refund` with a flat XP cost); Enchant Essence is not given back. Scoreboard money, when turned on, is always per level.
 
 # What's new in 1.1.0 (update for Minecraft: Bedrock Edition 26.60+)
 - Updated for the latest stable Minecraft: Bedrock Edition (26.60 / 26.62 / 26.63): manifests now target engine version 1.26.60 and the latest stable Script API (`@minecraft/server` 2.11.0, `@minecraft/server-ui` 2.3.0).
 - Scripts migrated to the Script API 2.x: `runCommandAsync()` (removed by Mojang) was replaced and the menu sliders use the new `slider()` options.
+- Enchant Essence now costs `amount` per enchantment level, like XP (original issue #7). The new **Cost scaling** setting in the world's Behavior Pack settings switches XP and essence between per level and flat (see "Cost scaling" above). The behavior pack manifest moved to format version 3, which pack settings require.
 - The table is now a block with a custom component (`da:enchant_table`, Minecraft 1.21.90+): the game treats it like a vanilla crafting table, so using it opens the menu and a held block is only placed on it while sneaking. Its floating sphere is added and removed together with the block, however the block is placed or destroyed.
 - Custom menus updated for the current server form UI: the button list binding follows vanilla (`#form_button_contents`, used since 1.21.70) and the fallback form layout matches vanilla 26.60.
 - Block, item and entity files moved to the current format versions (block 1.26.60, item 1.26.50, entity 1.26.60), validated against Mojang's official schemas.
 - Menu icons added for the new enchantable items: copper tools and armor, and all spears.
-- The scripts are now readable source code (with type annotations for editors); the existing gameplay, menus, prices and messages are unchanged.
+- The scripts are now readable source code (with type annotations for editors); the menus and messages are unchanged.
 
 ### Bug fixes
 - Enchantments that the game refuses to combine (for example Infinity and Mending on a bow, Loyalty or Channeling with Riptide, Depth Strider and Frost Walker) are now listed in chat as not compatible, like Breach and Density, instead of a generic error. The add-on also asks the game directly, so pairs added in future versions are caught too. An enchantment that conflicts with one the item already has is no longer offered, and a transfer is checked against the receiving item's enchantments.
