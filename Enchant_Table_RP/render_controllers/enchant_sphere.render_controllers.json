@@ -1,0 +1,16 @@
+// Enchant+ 1.1.0 for Minecraft: Bedrock Edition 26.60+
+// Render controller of the floating sphere: its own model, texture and material. The sphere used to borrow the
+// husk's controller, which other packs (and newer game versions) can change, causing content log errors.
+//
+// Based on Enchant+ by Death_Aruban: https://github.com/DeathAruban/Enchant-MCBE
+
+{
+  "format_version": "1.8.0",
+  "render_controllers": {
+    "controller.render.da_enchant_sphere": {
+      "geometry": "Geometry.default",
+      "materials": [ { "*": "Material.default" } ],
+      "textures": [ "Texture.default" ]
+    }
+  }
+}

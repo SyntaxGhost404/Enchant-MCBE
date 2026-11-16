@@ -223,6 +223,7 @@ Enchant_Table_RP/                     resource pack
   ui/                                 hooks the Enchant+ menus into the game's forms
   arucube/enchant_table/              menu layouts, images and textures
   entity/, models/, animations/       the sphere and the table models
+  render_controllers/                 how the sphere is drawn
   particles/                          the glow particle
 ```
 

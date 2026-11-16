@@ -11,7 +11,7 @@
 			"materials": { "default": "entity_emissive" },
 			"textures": { "default": "arucube/enchant_table/resources/entity/enchant_sphere" },
 			"geometry": { "default": "geometry.enchant_sphere" },
-			"render_controllers": ["controller.render.husk"],
+			"render_controllers": ["controller.render.da_enchant_sphere"],
 			"animations": {
 				"idle": "animation.enchant_sphere.idle",
 				"ctrl": "controller.animation.enchant_sphere"
