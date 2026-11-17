@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="165" height="20" role="img" aria-label="Minecraft Bedrock: 26.60+">
+  <title>Minecraft Bedrock: 26.60+</title>
+  <linearGradient id="shine" x2="0" y2="100%"><stop offset="0" stop-color="#fff" stop-opacity=".12"/><stop offset="1" stop-opacity=".12"/></linearGradient>
+  <clipPath id="round"><rect width="165" height="20" rx="4"/></clipPath>
+  <g clip-path="url(#round)">
+    <rect width="112" height="20" fill="#3b3346"/>
+    <rect x="112" width="53" height="20" fill="#3f8f2f"/>
+    <rect width="165" height="20" fill="url(#shine)"/>
+  </g>
+  <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
+    <text x="56.0" y="15" fill="#000" fill-opacity=".3" textLength="99.8" lengthAdjust="spacingAndGlyphs">Minecraft Bedrock</text>
+    <text x="56.0" y="14" textLength="99.8" lengthAdjust="spacingAndGlyphs">Minecraft Bedrock</text>
+    <text x="138.5" y="15" fill="#000" fill-opacity=".3" textLength="40.7" lengthAdjust="spacingAndGlyphs">26.60+</text>
+    <text x="138.5" y="14" textLength="40.7" lengthAdjust="spacingAndGlyphs">26.60+</text>
+  </g>
+</svg>

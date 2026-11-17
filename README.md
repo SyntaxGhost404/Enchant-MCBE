@@ -4,9 +4,22 @@
   <img src="img/enchant+.png" width="640" alt="Enchant+" />
 </p>
 
+<p align="center">
+  <img src="img/readme/badge-minecraft.svg" alt="Minecraft Bedrock 26.60+" />
+  <img src="img/readme/badge-version.svg" alt="Version 1.1.0" />
+  <img src="img/readme/badge-script-api.svg" alt="Script API 2.11.0" />
+  <img src="img/readme/badge-experiments.svg" alt="Experiments not needed" />
+</p>
+
 Enchant+ is an enchanting table for Minecraft: Bedrock Edition where nothing is left to chance. You choose which enchantments an item gets and at which level, take enchantments off again, and move them from one item to another. Every price is shown before you confirm, and you pay with XP levels and Enchant Essence.
 
 This edition, **1.1.0**, is rebuilt for **Minecraft: Bedrock Edition 26.60 and newer**.
+
+<p align="center">
+  <img src="img/readme/table.gif" width="400" alt="The Enchant+ table turning slowly, with its floating purple sphere and glowing rune particles" />
+  <br />
+  <sub>The Enchant+ table and its floating sphere, rendered from the add-on's own model, textures and animation.</sub>
+</p>
 
 ## Contents
 
@@ -81,20 +94,13 @@ Minecraft skips an import when the same pack version is already installed. Delet
 
 ## Getting started
 
-**1. Craft Enchant Essence** (6 per craft) at a crafting table:
+<p align="center">
+  <img src="img/readme/recipes.png" width="900" alt="Crafting recipes. Enchant Essence: amethyst shard and lapis lazuli on the top row, glass bottle under the shard, makes 6. Enchant Table+: Enchant Essence in the top middle; emerald, obsidian, emerald in the middle row; obsidian, enchanting table, obsidian in the bottom row." />
+</p>
 
-|  |  |
-| --- | --- |
-| Amethyst Shard | Lapis Lazuli |
-| Glass Bottle |  |
+**1. Craft Enchant Essence** at a crafting table: an amethyst shard and lapis lazuli side by side, with a glass bottle under the shard. One craft makes 6.
 
-**2. Craft the table:**
-
-|  |  |  |
-| --- | --- | --- |
-|  | Enchant Essence |  |
-| Emerald | Obsidian | Emerald |
-| Obsidian | Enchanting Table | Obsidian |
+**2. Craft the table:** Enchant Essence in the top middle, then emerald, obsidian, emerald in the middle row and obsidian, enchanting table, obsidian in the bottom row.
 
 **3. Place it.** A glowing sphere appears above it.
 
@@ -104,11 +110,23 @@ Minecraft skips an import when the same pack version is already installed. Delet
 
 ### Select Item
 
+<p align="center">
+  <img src="img/readme/menu-select.png" width="820" alt="Select Item menu: the profile panel with balances and the Enchant, Disenchant and Transfer buttons on the left, the searchable item list in the middle and the selected item's details on the right" />
+</p>
+
 The first screen lists every enchantable item in your inventory with its icon, name, inventory slot and number of enchantments. Type in the search box to filter the list. The profile panel shows your character, your Enchant Essence and XP (and money, if scoreboard payments are on) and your name.
 
 Choose an item to see its details and three actions: **Enchant**, **Disenchant** and **Transfer**. The other items stay in the list, so you can switch without going back.
 
 ### Enchant
+
+<p align="center">
+  <img src="img/readme/menu-enchant.png" width="290" alt="Add Enchant menu: one slider per enchantment, here Sharpness 5, Unbreaking 3 and Mending 1 selected, with a Confirm button" />
+  &nbsp;
+  <img src="img/readme/menu-recap.png" width="520" alt="Menu Recap: the chosen levels, a total of 21 XP and 21 Enchant Essence, and the Cancel and Confirm buttons" />
+  <br />
+  <sub>The menu pictures are drawn from the add-on's own interface layout and textures. In the game the profile panel shows your own character, and the fonts and item icons are the game's.</sub>
+</p>
 
 1. Each slider is one enchantment the item can take. It starts at the current level and goes up to the maximum level.
 2. Enchantments that clash with one the item already has are not offered. If two of your choices clash, chat lists them and nothing is charged.
@@ -236,11 +254,13 @@ Enchant_Table_RP/                     resource pack
   entity/, models/, animations/       the sphere and the table models
   render_controllers/                 how the sphere is drawn
   particles/                          the glow particle
+img/                                  logo and the pictures in this README
 ```
 
 ## Credits and license
 
 - **Original add-on:** Enchant+ by **Death_Aruban**, including its artwork, models, textures and menu design. See the [original repository](https://github.com/DeathAruban/Enchant-MCBE).
 - **Version 1.1.0:** update for Minecraft 26.60+, fixes and new features, built on the original.
+- **README pictures:** the animation and the menu pictures are made from the add-on's own model, textures, animation and interface files. The item icons and the hooded profile figure are new drawings, and the text uses the Pixelify Sans and Inter fonts (SIL Open Font License).
 
 The repository's `LICENSE` file contains CC0 1.0. The pack manifests name CC BY-ND 4.0, and each pack includes the original author's `Terms and Conditions` file. Those texts belong to the original author and are kept unchanged. Read them before sharing or publishing a modified version.
