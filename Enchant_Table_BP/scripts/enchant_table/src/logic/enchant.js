@@ -18,7 +18,7 @@ import {
   translateEnchantmentName,
   translateItemName
 } from "../function";
-import { operationCost } from "../costs";
+import { enchantCost } from "../costs";
 import { config } from "../../config";
 
 /**
@@ -130,7 +130,7 @@ async function showItemEditor(player, slot, options) {
         return;
       }
       // Price for all the levels added (per level or flat, as chosen in the world's pack settings).
-      const { xp: xpCost, score: scoreCost, essence: essenceCost } = operationCost(addedLevels);
+      const { xp: xpCost, score: scoreCost, essence: essenceCost } = enchantCost(addedLevels);
       const costItemName = config.items.id
         .split(":")
         .pop()

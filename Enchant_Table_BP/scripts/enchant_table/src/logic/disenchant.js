@@ -8,7 +8,7 @@
 import { ActionFormData, ModalFormData } from "@minecraft/server-ui";
 import { EnchantmentTypes, ItemEnchantableComponent, ItemStack } from "@minecraft/server";
 import { buildResourceSummary, getComponent, getItemIcon, translateEnchantmentName, translateItemName } from "../function";
-import { disenchantRefund } from "../costs";
+import { disenchantRefund, getCostMode } from "../costs";
 import { config } from "../../config";
 
 /**
@@ -110,8 +110,8 @@ async function showRemoveEnchantConfirm(player, item, slot, enchantments) {
     body += "\n§d- " + enchantmentName + " " + level;
     removedLevels += level;
   });
-  // Refund for all the levels removed (per level or flat, following the XP cost setting).
-  const refund = disenchantRefund(removedLevels);
+  // Refund for all the levels removed (per level or flat, following the XP cost setting); the item ends up empty.
+  const refund = disenchantRefund(removedLevels, true);
   body += "\n§f---------------------";
   if (config.xp.state) {
     body += "\n§bTotal XP refund: §6" + refund.xp;
@@ -280,9 +280,13 @@ async function showSingleRemoveForm(player, item, slot, enchantments) {
         body += "\n§d- " + enchantmentName + " §6 " + currentLevel + " §c-" + levelsToRemove[enchantmentId];
       });
       // Refund for all the levels removed (per level or flat, following the XP cost setting).
-      const refund = disenchantRefund(removedLevels);
+      const emptiesItem = response.formValues.every((sliderValue) => sliderValue === 0);
+      const refund = disenchantRefund(removedLevels, emptiesItem);
       if (config.xp.state) {
         body += "\n§bTotal XP refund: §6" + refund.xp;
+        if (!emptiesItem && !getCostMode().xpPerLevel) {
+          body += "\n§7With a flat XP cost, XP is given back only when every enchantment is removed.";
+        }
       }
       if (config.scores.state) {
         body += "\n§bTotal " + config.scores.display_name + " refund: §6" + refund.score;

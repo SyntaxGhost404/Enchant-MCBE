@@ -18,7 +18,7 @@ import {
   translateItemName
 } from "../function";
 import { config } from "../../config";
-import { operationCost } from "../costs";
+import { transferCost } from "../costs";
 import { remove_resources } from "../item_list";
 
 /**
@@ -350,9 +350,9 @@ async function confirmEnchantmentTransfer(player, firstItem, firstSlot, secondIt
     Object.keys(levelsToTransfer).forEach((enchantmentId) => {
       body += "§6- " + translateEnchantmentName(enchantmentId) + " +" + levelsToTransfer[enchantmentId] + "\n";
     });
-    // Price for all the levels moved (per level or flat, as chosen in the world's pack settings).
+    // Half of the Enchant price of the levels moved (per level or flat, as chosen in the world's pack settings).
     const movedLevels = Object.values(levelsToTransfer).reduce((total, levels) => total + levels, 0);
-    const { xp: xpCost, score: scoreCost, essence: itemCost } = operationCost(movedLevels);
+    const { xp: xpCost, score: scoreCost, essence: itemCost } = transferCost(movedLevels);
     body += "\n§f---------------------";
     if (config.xp.state) {
       body += "\n§bTotal §aXP §bcost: §6" + xpCost;
