@@ -35,7 +35,7 @@
 	"settings": [
 	  {
 		"type": "label",
-		"text": "§lEnchant+ costs§r\nPer level: XP or Enchant Essence is paid for every enchantment level you add or transfer.\nFlat: it is paid once per Enchant or Transfer, however many levels.\nA Transfer costs half of what an Enchant would cost.\nDisenchant gives part of the XP back; with a flat XP cost, only when it removes every enchantment."
+		"text": "§lEnchant+ costs§r\nPer level: XP or Enchant Essence is paid for every enchantment level you add or transfer.\nFlat: it is paid once per Enchant or Transfer, however many levels.\nA Transfer costs half of what an Enchant would cost.\nDisenchant gives part of the XP back; with a flat XP cost, only when it removes every enchantment.\nPrice calculator: syntaxghost404.github.io/Enchant-MCBE/guide/prices"
 	  },
 	  {
 		"type": "dropdown",

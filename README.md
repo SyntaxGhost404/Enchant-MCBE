@@ -11,6 +11,8 @@
   <img src="img/readme/badge-experiments.svg" alt="Experiments not needed" />
 </p>
 
+<p align="center"><strong><a href="https://syntaxghost404.github.io/Enchant-MCBE/">Website</a></strong>: guide, price calculator, downloads and bug reports</p>
+
 Enchant+ is an enchanting table for Minecraft: Bedrock Edition where nothing is left to chance. You choose which enchantments an item gets and at which level, take enchantments off again, and move them from one item to another. Every price is shown before you confirm, and you pay with XP levels and Enchant Essence.
 
 This edition, **1.1.0**, is rebuilt for **Minecraft: Bedrock Edition 26.60 and newer**.
@@ -226,7 +228,7 @@ Compared with the original 1.0.5:
 - The menus are built with the game's JSON UI. A future game update that changes how forms are drawn could affect them.
 - If the Cost scaling setting does not appear on your device, the default (both per level) is used.
 
-Found a problem? Please open an issue on this repository with your device, game version and what you saw.
+Found a problem? The [report page](https://syntaxghost404.github.io/Enchant-MCBE/report/) fills in a GitHub issue for you, or open one on this repository with your device, game version and what you saw.
 
 ## Project layout
 
@@ -255,6 +257,9 @@ Enchant_Table_RP/                     resource pack
   render_controllers/                 how the sphere is drawn
   particles/                          the glow particle
 img/                                  logo and the pictures in this README
+site/                                 the website (SvelteKit), built from the files above
+CHANGELOG.md                          version history, also shown on the website
+.github/                              bug report form and the website's deploy workflow
 ```
 
 ## Credits and license
