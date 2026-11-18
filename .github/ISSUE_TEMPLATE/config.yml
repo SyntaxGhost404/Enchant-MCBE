@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Troubleshooting
+    url: https://syntaxghost404.github.io/Enchant-MCBE/guide/troubleshooting/
+    about: Fixes for the problems players hit most.
+  - name: Guide
+    url: https://syntaxghost404.github.io/Enchant-MCBE/guide/
+    about: How to craft, use and set up the table.

@@ -1,0 +1,59 @@
+name: Bug report
+description: Something in Enchant+ doesn't work as it should.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. The [report page on the website](https://syntaxghost404.github.io/Enchant-MCBE/report/) fills in this form for you.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What did you do, and what went wrong?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to make it happen again
+      placeholder: |
+        1. Place the table
+        2. ...
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+  - type: input
+    id: device
+    attributes:
+      label: Device
+      placeholder: Android, iPhone or iPad, Windows, Xbox, PlayStation, Switch, dedicated server, Realm
+    validations:
+      required: true
+  - type: input
+    id: minecraft-version
+    attributes:
+      label: Minecraft version
+      placeholder: "26.60"
+    validations:
+      required: true
+  - type: input
+    id: addon-version
+    attributes:
+      label: Enchant+ version
+      value: "1.1.0"
+  - type: input
+    id: cost-scaling
+    attributes:
+      label: Cost scaling setting
+  - type: textarea
+    id: other-addons
+    attributes:
+      label: Other add-ons in the world
+  - type: textarea
+    id: content-log
+    attributes:
+      label: Content log
+      description: Turn it on under Settings, Creator, Content Log GUI. Paste the lines that mention Enchant+ or da.
+      render: text

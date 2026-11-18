@@ -1,0 +1,9 @@
+node_modules/
+.svelte-kit/
+build/
+test-results/
+playwright-report/
+# made by scripts/package-addon.mjs from the pack folders
+static/downloads/
+static/licenses.txt
+src/lib/generated/

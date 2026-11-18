@@ -1,0 +1,83 @@
+name: Website
+
+# Builds the website from the add-on's own files, tests it, and publishes it to GitHub Pages.
+# Publishing starts once Pages is turned on: Settings, Pages, Source: GitHub Actions.
+on:
+  push:
+    paths:
+      - 'site/**'
+      - 'Enchant_Table_BP/**'
+      - 'Enchant_Table_RP/**'
+      - 'img/**'
+      - 'CHANGELOG.md'
+      - '.github/workflows/site.yml'
+      - '.github/ISSUE_TEMPLATE/**'
+  pull_request:
+    paths:
+      - 'site/**'
+      - 'Enchant_Table_BP/**'
+      - 'Enchant_Table_RP/**'
+      - 'CHANGELOG.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: website-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # the download is stamped with the last commit that touched the packs
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run check
+      - run: npm run test:unit
+      - run: npx playwright test --trace off
+      - name: Build for GitHub Pages
+        run: npm run build
+        env:
+          BASE_PATH: /${{ github.event.repository.name }}
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site/build
+
+  deploy:
+    needs: build
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check that GitHub Pages is turned on
+        id: pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh api "repos/${{ github.repository }}/pages" --silent; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::GitHub Pages is off. Turn it on under Settings, Pages, Source: GitHub Actions, then run this workflow again."
+          fi
+      - id: deployment
+        if: steps.pages.outputs.enabled == 'true'
+        uses: actions/deploy-pages@v4

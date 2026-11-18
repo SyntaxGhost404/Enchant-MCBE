@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://syntaxghost404.github.io/Enchant-MCBE/sitemap.xml
