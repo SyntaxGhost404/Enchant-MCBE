@@ -125,7 +125,7 @@ Choose an item to see its details and three actions: **Enchant**, **Disenchant**
   &nbsp;
   <img src="img/readme/menu-recap.png" width="520" alt="Menu Recap: the chosen levels, a total of 21 XP and 21 Enchant Essence, and the Cancel and Confirm buttons" />
   <br />
-  <sub>The menu pictures are drawn from the add-on's own interface layout and textures. In the game the profile panel shows your own character, and the fonts and item icons are the game's.</sub>
+  <sub>The menu pictures are rebuilt from the add-on's interface files with the game's own textures. In the game, the profile panel shows your own skin and the text uses the game's font.</sub>
 </p>
 
 1. Each slider is one enchantment the item can take. It starts at the current level and goes up to the maximum level.
@@ -261,6 +261,6 @@ img/                                  logo and the pictures in this README
 
 - **Original add-on:** Enchant+ by **Death_Aruban**, including its artwork, models, textures and menu design. See the [original repository](https://github.com/DeathAruban/Enchant-MCBE).
 - **Version 1.1.0:** update for Minecraft 26.60+, fixes and new features, built on the original.
-- **README pictures:** the animation and the menu pictures are made from the add-on's own model, textures, animation and interface files. The item icons and the hooded profile figure are new drawings, and the text uses the Pixelify Sans and Inter fonts (SIL Open Font License).
+- **README pictures:** made from the add-on's own model, textures, animation and interface files, together with Minecraft's item and block textures and the default Steve skin from Mojang's [sample resource pack](https://github.com/Mojang/bedrock-samples). The text in them uses the Pixelify Sans and Inter fonts (SIL Open Font License).
 
 The repository's `LICENSE` file contains CC0 1.0. The pack manifests name CC BY-ND 4.0, and each pack includes the original author's `Terms and Conditions` file. Those texts belong to the original author and are kept unchanged. Read them before sharing or publishing a modified version.
