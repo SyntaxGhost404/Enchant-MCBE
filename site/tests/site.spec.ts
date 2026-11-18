@@ -146,6 +146,11 @@ test('the download is a real file with the listed size', async ({ page, request 
 });
 
 test('bug report fills the GitHub form and keeps the draft', async ({ page, context }) => {
+	// The test checks the link, not GitHub itself: a stand in page answers instead, so GitHub's login
+	// redirect for visitors who aren't signed in can't change the address.
+	await context.route('https://github.com/**', (route) =>
+		route.fulfill({ status: 200, contentType: 'text/html', body: '<!doctype html><title>GitHub</title>' })
+	);
 	await page.goto('/report/');
 	const open = page.getByRole('button', { name: 'Open on GitHub' });
 	await expect(open).toBeDisabled();
@@ -155,6 +160,7 @@ test('bug report fills the GitHub form and keeps the draft', async ({ page, cont
 	await page.getByLabel(/Minecraft version/).fill('26.60');
 	await expect(open).toBeEnabled();
 	const [popup] = await Promise.all([context.waitForEvent('page'), open.click()]);
+	await popup.waitForURL(/^https:\/\/github\.com\//);
 	const url = new URL(popup.url());
 	expect(url.pathname).toMatch(/\/issues\/new$/);
 	expect(url.searchParams.get('template')).toBe('bug_report.yml');

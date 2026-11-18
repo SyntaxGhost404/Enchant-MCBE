@@ -17,7 +17,10 @@ on:
       - 'site/**'
       - 'Enchant_Table_BP/**'
       - 'Enchant_Table_RP/**'
+      - 'img/**'
       - 'CHANGELOG.md'
+      - '.github/workflows/site.yml'
+      - '.github/ISSUE_TEMPLATE/**'
   workflow_dispatch:
 
 permissions:
@@ -34,11 +37,11 @@ jobs:
       run:
         working-directory: site
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           # the download is stamped with the last commit that touched the packs
           fetch-depth: 0
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: npm
@@ -52,7 +55,7 @@ jobs:
         run: npm run build
         env:
           BASE_PATH: /${{ github.event.repository.name }}
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: site/build
 
@@ -80,4 +83,4 @@ jobs:
           fi
       - id: deployment
         if: steps.pages.outputs.enabled == 'true'
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
