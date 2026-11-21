@@ -1,0 +1,71 @@
+{
+	"format_version": 3,
+	"header": {
+		"name": "Gloamlight",
+		"description": "Warm light, cool air. Shader-era skies, haze, water and glow for Fancy graphics.",
+		"uuid": "d40ea3f5-8088-4cc3-b1c5-4a8c3064aa96",
+		"version": "1.0.0",
+		"min_engine_version": "1.26.60"
+	},
+	"modules": [
+		{
+			"type": "resources",
+			"uuid": "08719ba7-8455-4f7c-a646-374e1ebe0dbd",
+			"version": "1.0.0"
+		}
+	],
+	"metadata": {
+		"authors": [
+			"SyntaxGhost404"
+		],
+		"url": "https://github.com/SyntaxGhost404/Enchant-MCBE/tree/gloamlight"
+	},
+	"subpacks": [
+		{
+			"folder_name": "clear",
+			"name": "Clear air",
+			"memory_performance_tier": 0
+		},
+		{
+			"folder_name": "balanced",
+			"name": "Balanced haze",
+			"memory_performance_tier": 1
+		},
+		{
+			"folder_name": "mist",
+			"name": "Deep mist",
+			"memory_performance_tier": 0
+		},
+		{
+			"folder_name": "golden",
+			"name": "Golden hour skybox (fixed sky)",
+			"memory_performance_tier": 0
+		},
+		{
+			"folder_name": "starlit",
+			"name": "Starlit night skybox (fixed sky)",
+			"memory_performance_tier": 0
+		}
+	],
+	"settings": [
+		{
+			"type": "label",
+			"text": "§6Gloamlight§r: haze and sky presets live on the subpack slider. These two settings control the glow effects."
+		},
+		{
+			"type": "slider",
+			"name": "gloamlight:glow",
+			"text": "Glow around torch and candle flames",
+			"min": 0,
+			"max": 2,
+			"step": 0.25,
+			"default": 1
+		},
+		{
+			"type": "toggle",
+			"name": "gloamlight:fireflies",
+			"text": "Glowing fireflies",
+			"default": true
+		}
+	]
+}
