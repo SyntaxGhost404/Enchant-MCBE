@@ -1,5 +1,5 @@
 /**
- * Enchant+ 1.1.0 for Minecraft: Bedrock Edition 26.60+
+ * Enchant+ 1.1.1 for Minecraft: Bedrock Edition 26.60+
  * Prices and payment methods. Each payment (Enchant Essence, scoreboard money, XP) can be switched
  * on or off with "state". The amounts below are Enchant prices; a Transfer costs half of them (rounded up)
  * and Disenchant gives back the "refund" share of the XP and money (rounded down). Whether XP and

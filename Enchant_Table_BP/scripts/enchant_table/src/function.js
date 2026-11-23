@@ -1,5 +1,5 @@
 /**
- * Enchant+ 1.1.0 for Minecraft: Bedrock Edition 26.60+
+ * Enchant+ 1.1.1 for Minecraft: Bedrock Edition 26.60+
  * Main menu screens and shared helpers: item names and icons, the balance panel and the checks for
  * enchantments that cannot be combined.
  *

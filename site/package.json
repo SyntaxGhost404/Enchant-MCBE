@@ -2,7 +2,7 @@
   "name": "enchant-plus-site",
   "description": "Companion website for the Enchant+ add-on: guide, downloads, price calculator and bug reports. Reads the add-on's own files.",
   "private": true,
-  "version": "1.1.0",
+  "version": "1.1.1",
   "type": "module",
   "engines": {
     "node": ">=20.19"

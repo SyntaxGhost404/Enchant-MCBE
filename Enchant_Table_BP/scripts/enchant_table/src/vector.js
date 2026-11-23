@@ -1,5 +1,5 @@
 /**
- * Enchant+ 1.1.0 for Minecraft: Bedrock Edition 26.60+
+ * Enchant+ 1.1.1 for Minecraft: Bedrock Edition 26.60+
  * Small vector and math helpers.
  *
  * Based on Enchant+ by Death_Aruban: https://github.com/DeathAruban/Enchant-MCBE

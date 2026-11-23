@@ -16,11 +16,11 @@ const MOJANG_IDS = [
 
 describe('add-on files', () => {
 	it('reads the manifests and language files', () => {
-		expect(addon.version).toBe('1.1.0');
+		expect(addon.version).toBe('1.1.1');
 		expect(addon.minGame).toBe('26.60');
 		expect(addon.bp.uuid).toBe('2252a380-edfc-408d-ac4f-118a1128d251');
 		expect(addon.rp.uuid).toBe('edeb2cdc-791e-4edb-b279-0a53f4fae3d5');
-		expect(addon.bp.version).toEqual([1, 1, 0]);
+		expect(addon.bp.version).toEqual([1, 1, 1]);
 		expect(addon.scriptModules).toEqual([
 			{ name: '@minecraft/server', version: '2.11.0' },
 			{ name: '@minecraft/server-ui', version: '2.3.0' }
@@ -104,9 +104,17 @@ describe('site data', () => {
 	});
 
 	it('reads the changelog', () => {
+		// the newest entry matches the packs; its sections vary from release to release
 		expect(releases[0].version).toBe(addon.version);
 		expect(releases[0].facts.Released).toMatch(/2026/);
-		expect(releases[0].groups.map((g) => g.title)).toEqual(['New', 'Fixed', 'Changed']);
+		expect(releases[0].groups.length).toBeGreaterThan(0);
+		for (const r of releases) {
+			// '' is a plain list without a heading, as in 1.0.5
+			for (const g of r.groups) expect(['New', 'Fixed', 'Changed', '']).toContain(g.title);
+		}
+		// a release with every kind of section parses in order
+		const big = releases.find((r) => r.version === '1.1.0');
+		expect(big?.groups.map((g) => g.title)).toEqual(['New', 'Fixed', 'Changed']);
 		expect(releases.at(-1)?.version).toBe('1.0.5');
 	});
 

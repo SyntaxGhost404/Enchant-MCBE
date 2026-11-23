@@ -1,5 +1,5 @@
 /**
- * Enchant+ 1.1.0 for Minecraft: Bedrock Edition 26.60+
+ * Enchant+ 1.1.1 for Minecraft: Bedrock Edition 26.60+
  * Disenchant screens: remove every enchantment or only some levels, and get part of the XP back.
  *
  * Based on Enchant+ by Death_Aruban: https://github.com/DeathAruban/Enchant-MCBE

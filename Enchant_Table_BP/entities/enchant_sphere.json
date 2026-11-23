@@ -1,5 +1,5 @@
 /**
- * Enchant+ 1.1.0 for Minecraft: Bedrock Edition 26.60+
+ * Enchant+ 1.1.1 for Minecraft: Bedrock Edition 26.60+
  * The floating sphere above each table. It cannot be hurt or pushed; the scripts remove it through
  * its "despawn" event.
  *

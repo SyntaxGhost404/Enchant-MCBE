@@ -1,5 +1,5 @@
 /**
- * Enchant+ 1.1.0 for Minecraft: Bedrock Edition 26.60+
+ * Enchant+ 1.1.1 for Minecraft: Bedrock Edition 26.60+
  * Transfer screens: move enchantment levels from one item to another, books included.
  *
  * Based on Enchant+ by Death_Aruban: https://github.com/DeathAruban/Enchant-MCBE

@@ -1,5 +1,5 @@
 /**
- * Enchant+ 1.1.0 for Minecraft: Bedrock Edition 26.60+
+ * Enchant+ 1.1.1 for Minecraft: Bedrock Edition 26.60+
  * What an Enchant, Transfer or Disenchant costs or gives back.
  *
  * The amounts are set in config.js (xp.xp_remove, items.amount, scores.score_remove and the refund shares).

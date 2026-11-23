@@ -1,5 +1,5 @@
 /**
- * Enchant+ 1.1.0 for Minecraft: Bedrock Edition 26.60+
+ * Enchant+ 1.1.1 for Minecraft: Bedrock Edition 26.60+
  * Entry point of the behavior pack's scripts. Loads the Enchant+ table and, when switched on below,
  * tells players how many plugins are loaded when they join.
  *
@@ -25,7 +25,7 @@ const plugin_list = {
     1: {
         name: "Enchant Plus +",
         description: "Enchanting table that lets you choose every enchantment and level, remove enchantments and move them between items.",
-        version: "1.1.0"
+        version: "1.1.1"
     }
 };
 

@@ -136,7 +136,7 @@ test('the download is a real file with the listed size', async ({ page, request 
 	const link = page.getByRole('link', { name: /^Download 1\./ }).first();
 	const href = await link.getAttribute('href');
 	expect(href).toMatch(/\.mcaddon$/);
-	expect(await link.getAttribute('download')).toBe('Enchant+ 1.1.0.mcaddon');
+	expect(await link.getAttribute('download')).toBe('Enchant+ 1.1.1.mcaddon');
 	const res = await request.get(href!);
 	expect(res.ok()).toBe(true);
 	const body = await res.body();

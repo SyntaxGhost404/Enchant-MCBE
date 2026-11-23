@@ -1,5 +1,5 @@
 /**
- * Enchant+ 1.1.0 for Minecraft: Bedrock Edition 26.60+
+ * Enchant+ 1.1.1 for Minecraft: Bedrock Edition 26.60+
  * Menu icons for enchantable items, the table of enchantments that cannot be combined, and taking
  * payment for an operation.
  *

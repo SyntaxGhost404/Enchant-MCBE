@@ -1,5 +1,5 @@
 /**
- * Enchant+ 1.1.0 for Minecraft: Bedrock Edition 26.60+
+ * Enchant+ 1.1.1 for Minecraft: Bedrock Edition 26.60+
  * Enchant screens: pick enchantments and levels for an item or a book, review the price, then pay and apply.
  *
  * Based on Enchant+ by Death_Aruban: https://github.com/DeathAruban/Enchant-MCBE

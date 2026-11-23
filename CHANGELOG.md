@@ -2,6 +2,15 @@
 
 The website's changelog page is built from this file.
 
+## 1.1.1
+
+Released: 23 November 2026
+Needs: Minecraft: Bedrock Edition 26.60 or newer
+
+### Fixed
+
+- The menus no longer trigger the content log warning "Child controls must have unique names". Thirteen parts of the menu layouts shared a name with a neighbor, which Mojang says will stop the file from loading in a future version. Each now has its own name, and nothing changes on screen.
+
 ## 1.1.0
 
 Released: 18 November 2026

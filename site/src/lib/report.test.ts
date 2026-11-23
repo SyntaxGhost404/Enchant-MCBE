@@ -9,7 +9,7 @@ const data: ReportData = {
 	expected: 'A sphere',
 	device: 'Android',
 	game: '26.60',
-	addonVersion: '1.1.0',
+	addonVersion: '1.1.1',
 	costScaling: 'Both XP and essence scale per level (default)',
 	others: '',
 	log: '[Scripting] ok'

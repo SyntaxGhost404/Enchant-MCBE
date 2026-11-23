@@ -1,5 +1,5 @@
 /**
- * Enchant+ 1.1.0 for Minecraft: Bedrock Edition 26.60+
+ * Enchant+ 1.1.1 for Minecraft: Bedrock Edition 26.60+
  * The Enchant+ table block: opens the menu, keeps one floating sphere above each table and removes
  * spheres that no longer have a table.
  *

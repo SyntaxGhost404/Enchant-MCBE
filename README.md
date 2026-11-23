@@ -1,4 +1,4 @@
-# Enchant+ 1.1.0
+# Enchant+ 1.1.1
 
 <p align="center">
   <img src="img/enchant+.png" width="640" alt="Enchant+" />
@@ -6,7 +6,7 @@
 
 <p align="center">
   <img src="img/readme/badge-minecraft.svg" alt="Minecraft Bedrock 26.60+" />
-  <img src="img/readme/badge-version.svg" alt="Version 1.1.0" />
+  <img src="img/readme/badge-version.svg" alt="Version 1.1.1" />
   <img src="img/readme/badge-script-api.svg" alt="Script API 2.11.0" />
   <img src="img/readme/badge-experiments.svg" alt="Experiments not needed" />
 </p>
@@ -15,7 +15,7 @@
 
 Enchant+ is an enchanting table for Minecraft: Bedrock Edition where nothing is left to chance. You choose which enchantments an item gets and at which level, take enchantments off again, and move them from one item to another. Every price is shown before you confirm, and you pay with XP levels and Enchant Essence.
 
-This edition, **1.1.0**, is rebuilt for **Minecraft: Bedrock Edition 26.60 and newer**.
+This edition, **1.1.1**, is rebuilt for **Minecraft: Bedrock Edition 26.60 and newer**.
 
 <p align="center">
   <img src="img/readme/table.gif" width="400" alt="The Enchant+ table turning slowly, with its floating purple sphere and glowing rune particles" />
@@ -81,11 +81,11 @@ Xbox, PlayStation and Switch can't import add-on files. Play the add-on on a Rea
 Copy both pack folders into the server's `behavior_packs` and `resource_packs` folders and add them to the world's `world_behavior_packs.json` and `world_resource_packs.json`:
 
 ```json
-[{ "pack_id": "2252a380-edfc-408d-ac4f-118a1128d251", "version": [1, 1, 0] }]
+[{ "pack_id": "2252a380-edfc-408d-ac4f-118a1128d251", "version": [1, 1, 1] }]
 ```
 
 ```json
-[{ "pack_id": "edeb2cdc-791e-4edb-b279-0a53f4fae3d5", "version": [1, 1, 0] }]
+[{ "pack_id": "edeb2cdc-791e-4edb-b279-0a53f4fae3d5", "version": [1, 1, 1] }]
 ```
 
 The first goes in `world_behavior_packs.json`, the second in `world_resource_packs.json`.
@@ -265,7 +265,7 @@ CHANGELOG.md                          version history, also shown on the website
 ## Credits and license
 
 - **Original add-on:** Enchant+ by **Death_Aruban**, including its artwork, models, textures and menu design. See the [original repository](https://github.com/DeathAruban/Enchant-MCBE).
-- **Version 1.1.0:** update for Minecraft 26.60+, fixes and new features, built on the original.
+- **Versions 1.1.0 and 1.1.1:** update for Minecraft 26.60+, fixes and new features, built on the original.
 - **README pictures:** made from the add-on's own model, textures, animation and interface files, together with Minecraft's item and block textures and the default Steve skin from Mojang's [sample resource pack](https://github.com/Mojang/bedrock-samples). The text in them uses the Pixelify Sans and Inter fonts (SIL Open Font License).
 
 The repository's `LICENSE` file contains CC0 1.0. The pack manifests name CC BY-ND 4.0, and each pack includes the original author's `Terms and Conditions` file. Those texts belong to the original author and are kept unchanged. Read them before sharing or publishing a modified version.

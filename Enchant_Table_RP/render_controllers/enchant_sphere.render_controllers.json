@@ -1,4 +1,4 @@
-// Enchant+ 1.1.0 for Minecraft: Bedrock Edition 26.60+
+// Enchant+ 1.1.1 for Minecraft: Bedrock Edition 26.60+
 // Render controller of the floating sphere: its own model, texture and material. The sphere used to borrow the
 // husk's controller, which other packs (and newer game versions) can change, causing content log errors.
 //
