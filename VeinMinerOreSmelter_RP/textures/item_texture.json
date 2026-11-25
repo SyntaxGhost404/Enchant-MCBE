@@ -1,0 +1,9 @@
+{
+  "resource_pack_name": "vmos",
+  "texture_name": "atlas.items",
+  "texture_data": {
+    "vmos_enchanted_book": {
+      "textures": "textures/items/book_enchanted"
+    }
+  }
+}

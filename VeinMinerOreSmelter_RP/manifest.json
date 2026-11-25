@@ -1,0 +1,28 @@
+{
+  "format_version": 3,
+  "metadata": {
+    "authors": [
+      "SyntaxGhost404"
+    ]
+  },
+  "header": {
+    "name": "Vein Miner & Ore Smelter",
+    "description": "Text and book icons for the Vein Miner & Ore Smelter behavior pack.",
+    "min_engine_version": "1.26.60",
+    "uuid": "9102fdbe-1c62-4503-b087-04cbca59adc4",
+    "version": "1.0.0"
+  },
+  "modules": [
+    {
+      "type": "resources",
+      "uuid": "8a8b0953-5576-43ff-92c2-e3ff8f3f460c",
+      "version": "1.0.0"
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "f1ae17c0-630f-4a06-9b92-7c0901b239b7",
+      "version": "1.0.0"
+    }
+  ]
+}

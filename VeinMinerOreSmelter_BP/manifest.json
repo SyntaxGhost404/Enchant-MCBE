@@ -1,0 +1,58 @@
+{
+  "format_version": 3,
+  "metadata": {
+    "authors": [
+      "SyntaxGhost404"
+    ]
+  },
+  "header": {
+    "name": "Vein Miner & Ore Smelter",
+    "description": "Two pickaxe enchantments found as books in structure chests: Vein Miner mines a whole ore vein, Ore Smelter smelts ore drops. Apply them at an anvil.",
+    "min_engine_version": "1.26.60",
+    "uuid": "f1ae17c0-630f-4a06-9b92-7c0901b239b7",
+    "version": "1.0.0"
+  },
+  "modules": [
+    {
+      "type": "data",
+      "uuid": "bfd46f01-f8e9-475c-8814-cce5649bc969",
+      "version": "1.0.0"
+    },
+    {
+      "type": "script",
+      "language": "javascript",
+      "entry": "scripts/main.js",
+      "uuid": "b5060669-d472-4e9b-9595-f838224ae724",
+      "version": "1.0.0"
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "9102fdbe-1c62-4503-b087-04cbca59adc4",
+      "version": "1.0.0"
+    },
+    {
+      "module_name": "@minecraft/server",
+      "version": "2.11.0"
+    },
+    {
+      "module_name": "@minecraft/server-ui",
+      "version": "2.3.0"
+    }
+  ],
+  "settings": [
+    {
+      "type": "label",
+      "text": "§lVein Miner§r\nHow many ore blocks one vein can mine, counting the block you break. Sneak while mining to break a single block."
+    },
+    {
+      "type": "slider",
+      "name": "vmos:vein_limit",
+      "text": "Vein size limit (blocks)",
+      "min": 8,
+      "max": 128,
+      "step": 8,
+      "default": 64
+    }
+  ]
+}

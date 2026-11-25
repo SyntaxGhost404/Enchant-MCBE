@@ -1,0 +1,156 @@
+{
+  "vanilla_version": "1.26.60.5",
+  "ratio_note": "vanilla:vein_miner:ore_smelter inside each sub-table",
+  "tables": [
+    {
+      "table": "chests/abandoned_mineshaft.json",
+      "structure": "Mineshaft (chest minecarts)",
+      "pool": 0,
+      "entry": 3,
+      "ratio": 10,
+      "vanilla_weight": 10,
+      "vanilla_has_weight": true,
+      "vanilla_sha256": "6c19b28abece23aae407555f2ae456a967440b05f893ef408085019a7cacc1ba"
+    },
+    {
+      "table": "chests/ancient_city.json",
+      "structure": "Ancient city",
+      "pool": 0,
+      "entry": 22,
+      "ratio": 10,
+      "vanilla_weight": 5,
+      "vanilla_has_weight": true,
+      "vanilla_sha256": "d17377aa0866b0e6d2a167f15ff835c9baa36f877e361c308b5a240fa7eaa0ec"
+    },
+    {
+      "table": "chests/bastion_other.json",
+      "structure": "Bastion remnant (generic chests)",
+      "pool": 0,
+      "entry": 10,
+      "ratio": 18,
+      "vanilla_weight": 10,
+      "vanilla_has_weight": true,
+      "vanilla_sha256": "c8e822fe64f24866bfd06c04f900032915f3f3e62618558159ad51f92f47a6d4"
+    },
+    {
+      "table": "chests/desert_pyramid.json",
+      "structure": "Desert pyramid",
+      "pool": 0,
+      "entry": 12,
+      "ratio": 10,
+      "vanilla_weight": 20,
+      "vanilla_has_weight": true,
+      "vanilla_sha256": "80295d704699d0449be41cfc161779d6060260e0fd835da0aca593bea6349bfc"
+    },
+    {
+      "table": "chests/jungle_temple.json",
+      "structure": "Jungle pyramid",
+      "pool": 0,
+      "entry": 12,
+      "ratio": 10,
+      "vanilla_weight": 6,
+      "vanilla_has_weight": true,
+      "vanilla_sha256": "82903f3103f4d0b8e38b4b8224dcc6129cb0eade0ba5556548284a7745f3a42a"
+    },
+    {
+      "table": "chests/monster_room.json",
+      "structure": "Monster room",
+      "pool": 0,
+      "entry": 12,
+      "ratio": 10,
+      "vanilla_weight": 1,
+      "vanilla_has_weight": true,
+      "vanilla_sha256": "3432e53ce18d2b5219bf17bad200cca6408631998bb94d252d8b4d76625e766a"
+    },
+    {
+      "table": "chests/pillager_outpost.json",
+      "structure": "Pillager outpost",
+      "pool": 3,
+      "entry": 5,
+      "ratio": 10,
+      "vanilla_weight": 1,
+      "vanilla_has_weight": false,
+      "vanilla_sha256": "f750e783309a432675e1aa959a8ba427d5db52021914a04aea5d3b1085b173f8"
+    },
+    {
+      "table": "chests/simple_dungeon.json",
+      "structure": "Dungeon",
+      "pool": 0,
+      "entry": 11,
+      "ratio": 10,
+      "vanilla_weight": 10,
+      "vanilla_has_weight": true,
+      "vanilla_sha256": "0af2d402954a5dbd0df46e0825279b43190150a23035e1e9ee7daedc0f3e406b"
+    },
+    {
+      "table": "chests/stronghold_corridor.json",
+      "structure": "Stronghold (corridor)",
+      "pool": 0,
+      "entry": 21,
+      "ratio": 10,
+      "vanilla_weight": 6,
+      "vanilla_has_weight": true,
+      "vanilla_sha256": "34af34400a19dc79476176bcfac98c85f851f77d52804a36d3196b9d9d2ed912"
+    },
+    {
+      "table": "chests/stronghold_crossing.json",
+      "structure": "Stronghold (crossing)",
+      "pool": 0,
+      "entry": 7,
+      "ratio": 10,
+      "vanilla_weight": 6,
+      "vanilla_has_weight": true,
+      "vanilla_sha256": "ffd76c9071b241f3284246971d3e67e4e48456281e00a68f8e1b8d68c32907a7"
+    },
+    {
+      "table": "chests/stronghold_library.json",
+      "structure": "Stronghold (library)",
+      "pool": 0,
+      "entry": 4,
+      "ratio": 10,
+      "vanilla_weight": 60,
+      "vanilla_has_weight": true,
+      "vanilla_sha256": "77fc3d514ec1caf29e83c1388c0dd9b2a98836fab561e49285303f6d50c8ad92"
+    },
+    {
+      "table": "chests/trial_chambers/reward_rare.json",
+      "structure": "Trial chambers (vault, rare pool)",
+      "pool": 0,
+      "entry": 7,
+      "ratio": 10,
+      "vanilla_weight": 2,
+      "vanilla_has_weight": true,
+      "vanilla_sha256": "9aa8958d9301783d3222857e9e2dabbeef3dfcc1da1c8007d4dd2ad1e7835d8b"
+    },
+    {
+      "table": "chests/trial_chambers/reward_ominous_rare.json",
+      "structure": "Trial chambers (ominous vault, rare pool)",
+      "pool": 0,
+      "entry": 6,
+      "ratio": 10,
+      "vanilla_weight": 2,
+      "vanilla_has_weight": true,
+      "vanilla_sha256": "495f6c53b3b484a1a692f1f058a935e8b143f739f4c81038df63b6ee1a3d5a72"
+    },
+    {
+      "table": "chests/underwater_ruin_big.json",
+      "structure": "Ocean ruins (big)",
+      "pool": 1,
+      "entry": 1,
+      "ratio": 10,
+      "vanilla_weight": 5,
+      "vanilla_has_weight": true,
+      "vanilla_sha256": "6e1c8ff3e49b2558e4f6d687e8a3caed5400e4e23ea851f6eb07d5d5d776a277"
+    },
+    {
+      "table": "chests/woodland_mansion.json",
+      "structure": "Woodland mansion",
+      "pool": 0,
+      "entry": 8,
+      "ratio": 10,
+      "vanilla_weight": 60,
+      "vanilla_has_weight": true,
+      "vanilla_sha256": "f30757ff5a3cbb109de580af661fa4fb2d0c5188f1481a4435f88db9e5f7e562"
+    }
+  ]
+}

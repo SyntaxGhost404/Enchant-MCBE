@@ -1,0 +1,45 @@
+## Vein Miner & Ore Smelter
+
+## Lore lines on pickaxes and books (gray, like vanilla enchantment lines)
+vmos.lore.vein_miner=§r§7Vein Miner
+vmos.lore.ore_smelter=§r§7Ore Smelter
+
+## Names in menus and messages
+vmos.enchantment.vein_miner=Vein Miner
+vmos.enchantment.ore_smelter=Ore Smelter
+
+## Messages while mining and at the grindstone
+vmos.notice.tool_low=Vein Miner stopped: your pickaxe is about to break
+vmos.notice.ground_one=The grindstone removed %1$s
+vmos.notice.ground_two=The grindstone removed %1$s and %2$s
+vmos.tip.anvil=§7Tip: to apply Vein Miner or Ore Smelter, hold the book and use the anvil. When two pickaxes are combined in the anvil, only the one on the left keeps them.
+
+## Anvil menu
+vmos.anvil.title=Apply %1$s
+vmos.anvil.about.vein_miner=Mines the whole connected vein of the ore you break. Sneak while mining to break a single block.
+vmos.anvil.about.ore_smelter=Smelts raw iron, raw copper, raw gold and ancient debris as they drop. Silk Touch keeps the ore block instead.
+vmos.anvil.levels=Your levels: %1$s
+vmos.anvil.creative=Creative mode: no level cost.
+vmos.anvil.skipped=Pickaxes that already have %2$s: %1$s
+vmos.anvil.cost=Cost: %1$s levels
+vmos.anvil.durability=Durability left: %1$s
+vmos.anvil.has_one=Has %1$s
+vmos.anvil.has_two=Has %1$s and %2$s
+vmos.anvil.confirm=Apply %1$s to %2$s?
+vmos.anvil.silk_note=§6This pickaxe has Silk Touch. Silk Touch keeps ore blocks whole, so Ore Smelter does nothing while both are on it.
+vmos.anvil.apply=Apply
+vmos.anvil.cancel=Cancel
+vmos.anvil.ok=OK
+vmos.anvil.none=None of your pickaxes can take %1$s. Carry the pickaxe in your inventory and use the anvil again.
+vmos.anvil.none_left=All of your pickaxes already have %1$s.
+vmos.anvil.done=%1$s applied to %2$s
+vmos.anvil.fail.moved=You changed dimension. Nothing was used.
+vmos.anvil.fail.anvil_gone=The anvil is gone. Nothing was used.
+vmos.anvil.fail.too_far=You are too far from the anvil. Nothing was used.
+vmos.anvil.fail.book_moved=Keep the book in the same slot. Nothing was used.
+vmos.anvil.fail.pickaxe_changed=The pickaxe changed. Nothing was used.
+vmos.anvil.fail.already=That pickaxe already has it. Nothing was used.
+vmos.anvil.fail.cost_changed=The cost changed. Use the anvil again.
+vmos.anvil.fail.too_expensive=Too Expensive!
+vmos.anvil.fail.levels=You need %1$s levels. Nothing was used.
+vmos.anvil.fail.write_failed=The pickaxe could not be changed. Nothing was used.
